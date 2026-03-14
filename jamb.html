@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartPrep CBT - Mrs. Adesanya</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1e3a5f;
+            --accent: #e8a020;
+            --success: #16a34a;
+            --danger: #c0392b;
+            --light-bg: #f4f6fb;
+            --card: #ffffff;
+            --border: #dce3ef;
+            --text: #1a2340;
+            --muted: #6b7a99;
+            --shadow: 0 4px 18px rgba(30,58,95,0.10);
+            --radius: 14px;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { background: var(--light-bg); color: var(--text); font-family: 'DM Sans', sans-serif; min-height: 100vh; }
+
+        /* ── HEADER ── */
+        header {
+            background: var(--primary);
+            color: #fff;
+            padding: 0.9rem 2rem;
+            display: flex; justify-content: space-between; align-items: center;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.18);
+            position: sticky; top: 0; z-index: 50;
+        }
+        .logo { display: flex; align-items: center; gap: 10px; }
+        .logo-icon { width: 36px; height: 36px; background: var(--accent); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; }
+        .logo-text { font-family: 'Playfair Display', serif; font-size: 1.25rem; letter-spacing: -0.3px; }
+        .logo-sub { font-size: 0.78rem; font-weight: 400; opacity: 0.75; margin-top: 1px; }
+        .btn-restart { background: rgba(255,255,255,0.12); border: 1.5px solid rgba(255,255,255,0.3); color: white; padding: 7px 18px; border-radius: 8px; font-weight: 600; font-size: 0.8rem; cursor: pointer; letter-spacing: 0.5px; transition: 0.2s; }
+        .btn-restart:hover { background: rgba(255,255,255,0.22); }
+
+        /* ── CONTAINER ── */
+        .container { max-width: 1100px; margin: 0 auto; padding: 30px 16px 60px; }
+
+        /* ── HIDDEN ── */
+        .hidden { display: none !important; }
+
+        /* ── SELECTION PAGE ── */
+        .selection-header { text-align: center; margin-bottom: 40px; }
+        .selection-header h1 { font-family: 'Playfair Display', serif; font-size: 2rem; color: var(--primary); margin-bottom: 8px; }
+        .selection-header p { color: var(--muted); font-size: 1rem; }
+        .subject-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 28px; }
+        .subject-card {
+            background: var(--card);
+            border-radius: var(--radius);
+            padding: 44px 36px;
+            text-align: center;
+            cursor: pointer;
+            border: 2px solid transparent;
+            box-shadow: var(--shadow);
+            transition: all 0.28s ease;
+            position: relative; overflow: hidden;
+        }
+        .subject-card::before { content: ''; position: absolute; inset: 0; background: var(--primary); opacity: 0; transition: 0.28s; border-radius: var(--radius); }
+        .subject-card:hover { border-color: var(--accent); transform: translateY(-6px); box-shadow: 0 12px 32px rgba(30,58,95,0.18); }
+        .subject-card:hover .card-icon { transform: scale(1.15); }
+        .card-icon { font-size: 3rem; margin-bottom: 16px; display: inline-block; transition: 0.3s; position: relative; }
+        .subject-card h2 { font-family: 'Playfair Display', serif; font-size: 1.4rem; color: var(--primary); margin-bottom: 8px; position: relative; }
+        .subject-card p { color: var(--muted); font-size: 0.9rem; position: relative; margin-bottom: 6px; }
+        .card-badge { display: inline-block; background: var(--accent); color: white; font-size: 0.78rem; font-weight: 700; padding: 4px 14px; border-radius: 20px; margin-top: 10px; position: relative; }
+
+        /* ── EXAM PAGE ── */
+        .top-nav { background: var(--card); padding: 14px 20px; border-radius: var(--radius); margin-bottom: 18px; box-shadow: var(--shadow); display: flex; justify-content: space-between; align-items: center; position: sticky; top: 68px; z-index: 20; }
+        .top-nav h3 { font-family: 'Playfair Display', serif; font-size: 1.1rem; color: var(--primary); }
+        .timer { font-size: 1.5rem; font-weight: 700; color: var(--danger); font-variant-numeric: tabular-nums; letter-spacing: 1px; }
+        .timer.warning { animation: pulse 1s infinite; }
+        @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.5} }
+        .btn-finish { background: var(--danger); color: white; border: none; padding: 10px 22px; border-radius: 8px; font-weight: 700; font-size: 0.85rem; cursor: pointer; letter-spacing: 0.5px; transition: 0.2s; }
+        .btn-finish:hover { background: #a93226; }
+
+        .exam-body { display: grid; grid-template-columns: 1fr 310px; gap: 20px; }
+        @media (max-width: 860px) { .exam-body { grid-template-columns: 1fr; } }
+
+        .question-card { background: var(--card); padding: 28px; border-radius: var(--radius); box-shadow: var(--shadow); }
+        .q-topic { display: inline-block; background: #eef2ff; color: var(--primary); font-size: 0.75rem; font-weight: 700; padding: 3px 12px; border-radius: 20px; margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.5px; }
+        .q-number { color: var(--accent); font-weight: 700; font-size: 0.9rem; margin-bottom: 8px; }
+        .q-text { font-size: 1.08rem; line-height: 1.7; margin-bottom: 24px; font-weight: 500; }
+        .q-text u { text-decoration: underline; text-decoration-color: var(--accent); text-underline-offset: 3px; }
+
+        .passage-btn { display: inline-flex; align-items: center; gap: 8px; background: #fff7e6; border: 1.5px solid var(--accent); color: #92400e; padding: 8px 16px; border-radius: 8px; cursor: pointer; font-weight: 600; font-size: 0.88rem; margin-bottom: 18px; transition: 0.2s; }
+        .passage-btn:hover { background: #fef3c7; }
+
+        .option { display: flex; align-items: center; padding: 14px 16px; border: 1.5px solid var(--border); border-radius: 10px; margin-bottom: 10px; cursor: pointer; transition: 0.2s; }
+        .option:hover { background: #f0f4ff; border-color: var(--primary); }
+        .option.selected { background: #eef2ff; border-color: var(--primary); font-weight: 600; }
+        .opt-letter { width: 32px; height: 32px; border-radius: 50%; background: var(--light-bg); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.88rem; margin-right: 14px; flex-shrink: 0; transition: 0.2s; }
+        .option.selected .opt-letter { background: var(--primary); color: white; }
+
+        .nav-btns { margin-top: 28px; display: flex; justify-content: space-between; }
+        .btn-nav { display: flex; align-items: center; gap: 6px; background: var(--primary); color: white; border: none; padding: 11px 24px; border-radius: 8px; font-weight: 600; font-size: 0.9rem; cursor: pointer; transition: 0.2s; }
+        .btn-nav:hover { opacity: 0.88; }
+        .btn-nav.prev { background: var(--muted); }
+
+        /* ── NAVIGATOR ── */
+        .nav-panel { background: var(--card); padding: 18px; border-radius: var(--radius); box-shadow: var(--shadow); }
+        .nav-panel h4 { font-size: 0.9rem; font-weight: 700; color: var(--primary); margin-bottom: 14px; padding-left: 4px; }
+        .nav-legend { display: flex; gap: 14px; margin-bottom: 12px; font-size: 0.75rem; color: var(--muted); flex-wrap: wrap; }
+        .legend-dot { display: inline-block; width: 10px; height: 10px; border-radius: 3px; margin-right: 4px; }
+        .grid-box { display: grid; grid-template-columns: repeat(5, 1fr); gap: 7px; max-height: 420px; overflow-y: auto; }
+        .grid-item { height: 38px; border: 1.5px solid var(--border); border-radius: 7px; display: flex; align-items: center; justify-content: center; font-size: 0.82rem; font-weight: 600; cursor: pointer; background: var(--card); transition: 0.15s; color: var(--text); }
+        .grid-item:hover { border-color: var(--primary); background: #f0f4ff; }
+        .grid-item.answered { background: var(--primary); color: white; border-color: var(--primary); }
+        .grid-item.current { border: 2.5px solid var(--accent); color: var(--primary); font-weight: 800; }
+        .grid-item.answered.current { background: var(--primary); color: white; border-color: var(--accent); }
+
+        /* ── PROGRESS ── */
+        .progress-wrap { margin-top: 16px; border-top: 1px solid var(--border); padding-top: 14px; }
+        .progress-label { font-size: 0.8rem; color: var(--muted); margin-bottom: 6px; display: flex; justify-content: space-between; }
+        .progress-bar { height: 6px; background: var(--border); border-radius: 10px; overflow: hidden; }
+        .progress-fill { height: 100%; background: var(--success); border-radius: 10px; transition: width 0.3s; }
+
+        /* ── MODAL ── */
+        #modal-overlay { position: fixed; inset: 0; background: rgba(20,30,60,0.55); display: none; justify-content: center; align-items: center; z-index: 1000; backdrop-filter: blur(3px); }
+        #modal-overlay.open { display: flex; }
+        .modal-content { background: white; width: 92%; max-width: 740px; max-height: 82vh; border-radius: var(--radius); padding: 32px; overflow-y: auto; position: relative; box-shadow: 0 20px 60px rgba(0,0,0,0.25); }
+        .modal-title { font-family: 'Playfair Display', serif; color: var(--primary); font-size: 1.2rem; margin-bottom: 14px; padding-right: 30px; }
+        .modal-body { font-size: 0.97rem; line-height: 1.9; color: #334155; }
+        .close-modal { position: absolute; top: 16px; right: 18px; font-size: 1.4rem; cursor: pointer; border: none; background: none; color: var(--muted); font-weight: 700; }
+        .close-modal:hover { color: var(--danger); }
+
+        /* ── RESULT PAGE ── */
+        .result-summary { background: var(--card); border-radius: var(--radius); padding: 44px 36px; text-align: center; max-width: 600px; margin: 0 auto 30px; box-shadow: var(--shadow); }
+        .result-summary h1 { font-family: 'Playfair Display', serif; color: var(--primary); font-size: 1.8rem; margin-bottom: 20px; }
+        .score-circle { width: 140px; height: 140px; border-radius: 50%; background: linear-gradient(135deg, var(--primary), #2d6aa8); color: white; display: flex; flex-direction: column; align-items: center; justify-content: center; margin: 0 auto 20px; box-shadow: 0 8px 30px rgba(30,58,95,0.3); }
+        .score-big { font-size: 2.2rem; font-weight: 800; font-family: 'Playfair Display', serif; }
+        .score-denom { font-size: 0.9rem; opacity: 0.8; }
+        .score-percent { font-size: 1.4rem; font-weight: 700; color: var(--primary); margin-bottom: 6px; }
+        .grade-badge { display: inline-block; padding: 6px 20px; border-radius: 20px; font-weight: 700; font-size: 0.95rem; margin-bottom: 16px; }
+        .grade-A { background: #dcfce7; color: #16a34a; }
+        .grade-B { background: #dbeafe; color: #1d4ed8; }
+        .grade-C { background: #fef9c3; color: #a16207; }
+        .grade-F { background: #fee2e2; color: var(--danger); }
+        .stats-row { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; margin: 20px 0; }
+        .stat-box { background: var(--light-bg); border-radius: 10px; padding: 14px 10px; }
+        .stat-val { font-size: 1.3rem; font-weight: 800; color: var(--primary); }
+        .stat-lbl { font-size: 0.75rem; color: var(--muted); margin-top: 2px; }
+        .btn-home { background: var(--primary); color: white; border: none; padding: 14px 36px; border-radius: 10px; font-size: 1rem; font-weight: 700; cursor: pointer; margin-top: 10px; transition: 0.2s; }
+        .btn-home:hover { background: #16305a; }
+
+        .corrections-card { background: var(--card); border-radius: var(--radius); padding: 28px; box-shadow: var(--shadow); }
+        .corrections-card h2 { font-family: 'Playfair Display', serif; color: var(--primary); margin-bottom: 20px; font-size: 1.4rem; }
+        .review-item { border-bottom: 1px solid var(--border); padding: 18px 0; }
+        .review-item:last-child { border-bottom: none; }
+        .review-q { font-weight: 600; margin-bottom: 10px; line-height: 1.5; }
+        .review-your { color: var(--danger); font-size: 0.9rem; margin-bottom: 4px; }
+        .review-correct { color: var(--success); font-size: 0.9rem; font-weight: 700; margin-bottom: 8px; }
+        .explanation-box { background: #f0fdf4; border-left: 4px solid var(--success); padding: 10px 14px; border-radius: 0 8px 8px 0; font-size: 0.88rem; color: #166534; line-height: 1.5; }
+
+        /* scroll */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #f1f5f9; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="logo">
+        <div class="logo-icon">📚</div>
+        <div>
+            <div class="logo-text">SmartPrep CBT</div>
+            <div class="logo-sub">by Mrs. Adesanya</div>
+        </div>
+    </div>
+    <button class="btn-restart" onclick="location.reload()">⟳ RESTART</button>
+</header>
+
+<div class="container">
+
+    <!-- SELECTION PAGE -->
+    <section id="page-selection">
+        <div class="selection-header">
+            <h1>JAMB Practice Centre</h1>
+            <p>Select a subject to begin your timed 30-minute CBT session.</p>
+        </div>
+        <div class="subject-grid">
+            <div class="subject-card" onclick="initExam('english')">
+                <span class="card-icon">📖</span>
+                <h2>English Language</h2>
+                <p>Comprehension · Lexis & Structure</p>
+                <p>Synonyms · Antonyms · Oral English</p>
+                <p>Phonetics · The Lekki Headmaster</p>
+                <div class="card-badge">60 Questions · 30 Mins</div>
+            </div>
+            <div class="subject-card" onclick="initExam('literature')">
+                <span class="card-icon">🎭</span>
+                <h2>Literature in English</h2>
+                <p>Drama · Prose · Literary Devices</p>
+                <p>Themes · Character · Setting · Plot</p>
+                <p>Figures of Speech · Poetry</p>
+                <div class="card-badge">60 Questions · 30 Mins</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- EXAM PAGE -->
+    <section id="page-exam" class="hidden">
+        <div class="top-nav">
+            <h3 id="display-subject">English Language</h3>
+            <div class="timer" id="timer">30:00</div>
+            <button class="btn-finish" onclick="forceSubmit()">FINISH TEST</button>
+        </div>
+        <div class="exam-body">
+            <main>
+                <div class="question-card">
+                    <button id="view-passage-btn" class="passage-btn hidden" onclick="togglePassage()">
+                        📄 Read Passage / Instructions
+                    </button>
+                    <div class="q-topic" id="q-topic">COMPREHENSION</div>
+                    <div class="q-number" id="q-number">Question 1 of 60</div>
+                    <div class="q-text" id="q-text">Loading...</div>
+                    <div id="options-area"></div>
+                    <div class="nav-btns">
+                        <button class="btn-nav prev" onclick="nav(-1)">← Previous</button>
+                        <button class="btn-nav" onclick="nav(1)">Next →</button>
+                    </div>
+                </div>
+            </main>
+            <aside>
+                <div class="nav-panel">
+                    <h4>Question Navigator</h4>
+                    <div class="nav-legend">
+                        <span><span class="legend-dot" style="background:var(--primary)"></span>Answered</span>
+                        <span><span class="legend-dot" style="background:var(--border);border:1.5px solid #aaa"></span>Skipped</span>
+                    </div>
+                    <div class="grid-box" id="nav-grid"></div>
+                    <div class="progress-wrap">
+                        <div class="progress-label"><span>Progress</span><span id="progress-text">0 / 60</span></div>
+                        <div class="progress-bar"><div class="progress-fill" id="progress-fill" style="width:0%"></div></div>
+                    </div>
+                </div>
+            </aside>
+        </div>
+    </section>
+
+    <!-- RESULT PAGE -->
+    <section id="page-result" class="hidden">
+        <div class="result-summary">
+            <h1>Your Result</h1>
+            <div class="score-circle">
+                <div class="score-big" id="res-score">0</div>
+                <div class="score-denom">out of 60</div>
+            </div>
+            <div class="score-percent" id="res-percent">0%</div>
+            <div class="grade-badge" id="grade-badge">—</div>
+            <div class="stats-row">
+                <div class="stat-box"><div class="stat-val" id="stat-correct">0</div><div class="stat-lbl">Correct</div></div>
+                <div class="stat-box"><div class="stat-val" id="stat-wrong">0</div><div class="stat-lbl">Wrong</div></div>
+                <div class="stat-box"><div class="stat-val" id="stat-time">0m</div><div class="stat-lbl">Time Used</div></div>
+            </div>
+            <button class="btn-home" onclick="location.reload()">Back to Home</button>
+        </div>
+        <div class="corrections-card">
+            <h2>Full Corrections & Explanations</h2>
+            <div id="review-area"></div>
+        </div>
+    </section>
+
+</div><!-- /container -->
+
+<!-- MODAL -->
+<div id="modal-overlay" onclick="handleOverlayClick(event)">
+    <div class="modal-content">
+        <button class="close-modal" onclick="togglePassage()">×</button>
+        <div class="modal-title" id="modal-title">Reading Passage</div>
+        <div class="modal-body" id="passage-text"></div>
+    </div>
+</div>
+
+<script>
+// =====================================================================
+// PASSAGES
+// =====================================================================
+const passages = {
+    COMP1: {
+        title: "Comprehension Passage 1 — Digital Age & Mental Health",
+        text: `The digital age has brought a significant shift in how we communicate. While social media platforms offer instant connectivity, they also present serious challenges to personal privacy and mental health. Studies conducted in over twenty countries show that excessive screen time is strongly linked to increased anxiety and depression among teenagers. Experts and psychologists suggest that setting firm boundaries for digital consumption is essential for maintaining a healthy psychological balance in today's world.
+
+However, the convenience of digital tools cannot be entirely dismissed. They facilitate global trade, long-distance education, and cross-cultural communication on an unprecedented scale. The key lies in achieving a balance — leveraging the benefits while consciously managing the adverse effects. Parents, schools, and policymakers all have roles to play in guiding the young generation towards a healthier relationship with technology.`
+    },
+    COMP2: {
+        title: "Comprehension Passage 2 — Corruption in Public Sector",
+        text: `Corruption in the public sector remains a major obstacle for developing nations seeking sustainable growth. It siphons off resources that ought to be channelled into infrastructure, healthcare, and education. Transparency International has repeatedly called for stricter legislative frameworks and better judicial oversight to curb this widespread menace. Whistleblower protection laws, independent anti-corruption commissions, and regular public audits are among the recommended tools.
+
+In many cases, it is the common citizen who bears the heaviest brunt of systemic failure. Schools crumble for want of funds, hospitals lack basic equipment, and roads remain unmotorable — yet public accounts show billions appropriated for development. The resultant erosion of public trust in government institutions can have profound long-term consequences for national cohesion and democratic stability.`
+    },
+    COMP3: {
+        title: "Comprehension Passage 3 — Air Pollution",
+        text: `Air pollution is a silent killer in many urban centres across the world. Industries and vehicles emit carbon monoxide, sulphur dioxide, and other toxic gases into the atmosphere on a daily basis. This environmental degradation has led to a sharp rise in respiratory diseases such as asthma, bronchitis, and even lung cancer in heavily polluted cities. Children and the elderly are especially vulnerable to these health effects.
+
+To combat this growing crisis, governments are encouraging a transition towards renewable energy sources such as solar and wind power. The adoption of electric vehicles and the imposition of stricter emission standards on factories are also being promoted. Urban planners are redesigning cities to include more green spaces, which absorb pollutants and improve air quality. Environmental education in schools is seen as a long-term strategy to foster a culture of sustainability among future generations.`
+    },
+    COMP4: {
+        title: "Comprehension Passage 4 — Women in Modern Society",
+        text: `The role of women in modern society has evolved tremendously over the past century. Gone are the days when women were largely confined to domestic responsibilities. Today, women lead multinational corporations, govern nations, and are at the cutting edge of scientific discovery and technological innovation. This transformation is a direct result of decades of determined advocacy for equal rights, expanded access to quality education, and landmark legislative changes.
+
+Yet despite this impressive progress, gender inequality persists in many societies. Women continue to earn less than their male counterparts for equivalent work, and they remain underrepresented in political leadership and senior corporate positions. Cultural stereotypes and ingrained biases continue to limit the ambitions of many young girls. True gender equality will require not only policy changes but a fundamental shift in social attitudes and institutional structures.`
+    },
+    COMP5: {
+        title: "Comprehension Passage 5 — The Importance of Reading",
+        text: `Reading is one of the most valuable habits that a young person can cultivate. It broadens the mind, enriches vocabulary, and develops the capacity for critical thinking. Unlike passive forms of entertainment, reading demands active mental engagement — the reader must decode language, construct meaning, and evaluate arguments. These cognitive skills are transferable to virtually every academic discipline and professional field.
+
+Research consistently shows that students who read widely outperform their peers in standardised examinations. They demonstrate superior writing skills, wider general knowledge, and greater ability to comprehend complex information. Libraries and reading clubs, particularly in schools, play a crucial role in nurturing this habit. In an age dominated by digital screens, encouraging young Nigerians to pick up books remains both a cultural and an educational priority.`
+    },
+    CLOZE1: {
+        title: "Cloze Test — Technology and Society",
+        text: `Technology has __1__ revolutionised the way we live. Today, it is nearly __2__ to imagine a world without smartphones. These devices allow us to __3__ with anyone across the globe instantly. However, we must be __4__ of the time we spend online, as it can negatively __5__ our productivity and social life.
+
+Fill each numbered gap with the most appropriate option from the choices provided in each question.`
+    },
+    LEKKI1: {
+        title: "Novel: The Lekki Headmaster — Background",
+        text: `"The Lekki Headmaster" is the compulsory novel for JAMB Use of English. It tells the story of Mr. Biodun Soyemi, a dedicated headmaster of a primary school in the Lekki area of Lagos. The novel explores themes of integrity, moral leadership, the decay of the Nigerian educational system, corruption among civil servants, the resilience of dedicated teachers, and the conflict between traditional values and modern pressures.
+
+Key characters include: Mr. Biodun Soyemi (the headmaster), Mrs. Soyemi (his wife), Mr. Adewale (the school inspector), and various pupils and community members. The setting is a primary school in Lagos, and the novel portrays the everyday struggles of those who work in Nigeria's public education sector.`
+    }
+};
+
+// =====================================================================
+// ENGLISH LANGUAGE QUESTIONS — 60 QUESTIONS
+// =====================================================================
+const englishQuestionsRaw = [
+    // ─── PASSAGE 1: Digital Age (Q1–5) ───────────────────────────────
+    { pid:'COMP1', topic:'COMPREHENSION', q:"According to the passage, what is a major challenge brought by the digital age?", opts:["Lack of internet access","Threats to personal privacy and mental health","Absence of social media","Expensive smartphones"], ans:1, exp:"The passage explicitly mentions challenges to personal privacy and mental health as major issues of the digital age." },
+    { pid:'COMP1', topic:'COMPREHENSION', q:"According to the passage, what do experts recommend for psychological balance?", opts:["Avoiding technology completely","Using only educational apps","Setting boundaries for digital consumption","Exercising every morning"], ans:2, exp:"The passage says 'setting firm boundaries for digital consumption is essential for maintaining a healthy psychological balance'." },
+    { pid:'COMP1', topic:'COMPREHENSION', q:"The word 'facilitate' as used in the passage is closest in meaning to ___", opts:["Hinder","Make easier","Regulate","Eliminate"], ans:1, exp:"To facilitate means to make a process or action easier." },
+    { pid:'COMP1', topic:'COMPREHENSION', q:"The word 'unprecedented' in the passage means ___", opts:["Very common","Quite ordinary","Never seen before","Well documented"], ans:2, exp:"Unprecedented means never done or known before; without precedent." },
+    { pid:'COMP1', topic:'COMPREHENSION', q:"Which of the following BEST states the main idea of the passage?", opts:["Technology should be banned for teenagers","Digital tools are entirely beneficial to society","Technology offers benefits but must be balanced with mindful use","Mental health is the only challenge of the digital age"], ans:2, exp:"The passage weighs both benefits and challenges and concludes that balance is the key." },
+
+    // ─── PASSAGE 2: Corruption (Q6–10) ───────────────────────────────
+    { pid:'COMP2', topic:'COMPREHENSION', q:"According to the passage, corruption 'siphons off resources' meant for ___", opts:["Military defence","Infrastructure, health, and education","Foreign investment","Tourism"], ans:1, exp:"The passage states corruption diverts resources from infrastructure, healthcare, and education." },
+    { pid:'COMP2', topic:'COMPREHENSION', q:"Transparency International has recommended all of the following EXCEPT ___", opts:["Whistleblower protection laws","Independent anti-corruption commissions","Regular public audits","Abolishing all government ministries"], ans:3, exp:"The passage lists the first three as recommendations. Abolishing ministries is not mentioned." },
+    { pid:'COMP2', topic:'COMPREHENSION', q:"The word 'brunt' as used in 'bears the heaviest brunt' means ___", opts:["Benefit","Main force or impact","Side effect","Complaint"], ans:1, exp:"The brunt of something is the main force or full burden of it." },
+    { pid:'COMP2', topic:'COMPREHENSION', q:"What does the author imply about public trust in government?", opts:["It is growing stronger","It is at an all-time high","It is being eroded by systemic corruption","It is unaffected by corruption"], ans:2, exp:"The passage states corruption causes 'erosion of public trust in government institutions'." },
+    { pid:'COMP2', topic:'COMPREHENSION', q:"The word 'profound' in the passage most nearly means ___", opts:["Shallow","Slight","Very deep and significant","Temporary"], ans:2, exp:"Profound means very great or intense; far-reaching." },
+
+    // ─── PASSAGE 3: Air Pollution (Q11–13) ───────────────────────────
+    { pid:'COMP3', topic:'COMPREHENSION', q:"Which of the following is NOT mentioned in the passage as a cause of air pollution?", opts:["Industrial emissions","Vehicle exhaust fumes","Agricultural burning","Carbon monoxide from factories"], ans:2, exp:"Agricultural burning is not mentioned in the passage. Industries and vehicles are cited." },
+    { pid:'COMP3', topic:'COMPREHENSION', q:"According to the passage, who is MOST vulnerable to the effects of air pollution?", opts:["Young adults","Middle-aged men","Children and the elderly","Athletes"], ans:2, exp:"The passage explicitly states 'Children and the elderly are especially vulnerable'." },
+    { pid:'COMP3', topic:'COMPREHENSION', q:"What is the author's MAIN purpose in the last paragraph?", opts:["To describe the causes of pollution","To present solutions to air pollution","To compare cities","To criticise factories"], ans:1, exp:"The last paragraph focuses entirely on solutions: renewable energy, EVs, green spaces, and education." },
+
+    // ─── PASSAGE 4: Women (Q14–15) ───────────────────────────────────
+    { pid:'COMP4', topic:'COMPREHENSION', q:"According to the passage, women's advancement in society is a result of ___", opts:["Luck and circumstance","Advocacy, education, and legislation","Technological innovation alone","Government charity"], ans:1, exp:"The passage credits 'decades of determined advocacy for equal rights, expanded access to education, and landmark legislative changes'." },
+    { pid:'COMP4', topic:'COMPREHENSION', q:"The phrase 'gender inequality persists' means ___", opts:["Gender inequality has ended","Gender inequality is growing worse","Gender inequality still continues to exist","Gender inequality is a myth"], ans:2, exp:"'Persists' means continues to exist or endure." },
+
+    // ─── PASSAGE 5: Reading (Q16–18) ─────────────────────────────────
+    { pid:'COMP5', topic:'COMPREHENSION', q:"According to the passage, how is reading different from passive entertainment?", opts:["Reading is faster","Reading requires active mental engagement","Reading requires no effort","They are identical"], ans:1, exp:"The passage contrasts reading with passive entertainment, noting reading demands decoding, meaning-making, and evaluation." },
+    { pid:'COMP5', topic:'COMPREHENSION', q:"Research shows that students who read widely ___", opts:["Perform worse in exams","Are usually anti-social","Outperform peers in standardised examinations","Prefer science over arts"], ans:2, exp:"The passage states: 'students who read widely outperform their peers in standardised examinations'." },
+    { pid:'COMP5', topic:'COMPREHENSION', q:"The word 'cultivate' as used in the passage means ___", opts:["Abandon","Develop and nurture over time","Criticise","Inherit"], ans:1, exp:"To cultivate a habit means to develop and nurture it over time." },
+
+    // ─── CLOZE TEST (Q19–23) ─────────────────────────────────────────
+    { pid:'CLOZE1', topic:'CLOZE TEST', q:"Choose the most appropriate word for gap __1__: Technology has ___ revolutionised the way we live.", opts:["Scarcely","Barely","Entirely","Rarely"], ans:2, exp:"'Entirely' (completely) fits the context of how thoroughly technology has changed our lives." },
+    { pid:'CLOZE1', topic:'CLOZE TEST', q:"Choose the most appropriate word for gap __2__: Today, it is nearly ___ to imagine a world without smartphones.", opts:["Possible","Common","Simple","Impossible"], ans:3, exp:"'Impossible' fits the context — it is nearly impossible to imagine life without smartphones." },
+    { pid:'CLOZE1', topic:'CLOZE TEST', q:"Choose the most appropriate word for gap __3__: These devices allow us to ___ with anyone across the globe instantly.", opts:["Communicate","Fight","Travel","Compete"], ans:0, exp:"'Communicate' is the only option that logically fits — devices allow communication." },
+    { pid:'CLOZE1', topic:'CLOZE TEST', q:"Choose the most appropriate word for gap __4__: We must be ___ of the time we spend online.", opts:["Ignorant","Careless","Mindful","Afraid"], ans:2, exp:"'Mindful' (conscious and aware) fits — we should be conscious of our screen time." },
+    { pid:'CLOZE1', topic:'CLOZE TEST', q:"Choose the most appropriate word for gap __5__: Online time can negatively ___ our productivity.", opts:["Improve","Affect","Increase","Boost"], ans:1, exp:"'Affect' (negatively impact) is the correct choice in this context." },
+
+    // ─── LEXIS & STRUCTURE — ANTONYMS (Q24–28) ───────────────────────
+    { topic:'ANTONYMS', q:"Choose the option OPPOSITE in meaning to the underlined word: The manager was very EVASIVE during the inquiry.", opts:["Secretive","Deceptive","Frank","Cunning"], ans:2, exp:"Evasive means deliberately vague or ambiguous; Frank means open, honest, and direct — the opposite." },
+    { topic:'ANTONYMS', q:"Choose the option OPPOSITE in meaning: The senator's comments were quite AMBIGUOUS.", opts:["Unclear","Explicit and direct","Misleading","Short"], ans:1, exp:"Ambiguous means open to more than one interpretation; Explicit means clear and unambiguous." },
+    { topic:'ANTONYMS', q:"Choose the option OPPOSITE in meaning: The victory was quite EPHEMERAL.", opts:["Short-lived","Sudden","Permanent","Joyful"], ans:2, exp:"Ephemeral means lasting for a very short time; Permanent is the direct antonym." },
+    { topic:'ANTONYMS', q:"Choose the option OPPOSITE in meaning to TACITURN.", opts:["Silent","Reserved","Loquacious","Bitter"], ans:2, exp:"Taciturn means habitually silent; Loquacious means very talkative — the opposite." },
+    { topic:'ANTONYMS', q:"Choose the option OPPOSITE in meaning to BENEVOLENT.", opts:["Kind","Generous","Malevolent","Giving"], ans:2, exp:"Benevolent means kind and generous; Malevolent means wishing to do evil — its antonym." },
+
+    // ─── SYNONYMS (Q29–33) ───────────────────────────────────────────
+    { topic:'SYNONYMS', q:"Choose the option NEAREST in meaning: The student's argument was COGENT.", opts:["Weak","Convincing","False","Lengthy"], ans:1, exp:"Cogent means clear, logical, and convincing." },
+    { topic:'SYNONYMS', q:"Choose the option NEAREST in meaning: He was an ADROIT negotiator.", opts:["Skillful","Aggressive","Nervous","Inexperienced"], ans:0, exp:"Adroit means clever or skilful, especially in using one's hands or mind." },
+    { topic:'SYNONYMS', q:"Choose the option NEAREST in meaning to INDIGENT.", opts:["Native","Angry","Very poor","Famous"], ans:2, exp:"Indigent means very poor and needy; not to be confused with 'indigenous'." },
+    { topic:'SYNONYMS', q:"Choose the option NEAREST in meaning to AMELIORATE.", opts:["Worsen","Improve","Ignore","Describe"], ans:1, exp:"To ameliorate means to make something bad or unsatisfactory better." },
+    { topic:'SYNONYMS', q:"Choose the option NEAREST in meaning to OSTENTATIOUS.", opts:["Simple","Modest","Showy and pretentious","Intelligent"], ans:2, exp:"Ostentatious means displaying wealth or knowledge to impress; showy." },
+
+    // ─── SENTENCE INTERPRETATION (Q34–37) ────────────────────────────
+    { topic:'SENTENCE INTERPRETATION', q:"The sentence 'If I had known, I would have helped her' means ___", opts:["I knew and I helped","I knew but refused to help","I didn't know, so I didn't help","I am going to help her"], ans:2, exp:"The third conditional ('If I had known...') implies the condition was not met — I did not know, therefore I did not help." },
+    { topic:'SENTENCE INTERPRETATION', q:"The statement 'The strike was nipped in the bud' means ___", opts:["The strike lasted for a long time","The strike became violent","The strike was stopped at an early stage","The strike succeeded"], ans:2, exp:"'Nip in the bud' is an idiom meaning to stop something harmful before it develops." },
+    { topic:'SENTENCE INTERPRETATION', q:"'He is a wet blanket at every party' means he ___", opts:["Brings cold drinks","Dampens people's enthusiasm","Is always late","Brings a blanket"], ans:1, exp:"A 'wet blanket' is an idiomatic expression for someone who spoils others' fun or enthusiasm." },
+    { topic:'SENTENCE INTERPRETATION', q:"'She let the cat out of the bag' means she ___", opts:["Bought a cat","Accidentally revealed a secret","Lost her bag","Ran away quickly"], ans:1, exp:"'Let the cat out of the bag' means to accidentally reveal a secret." },
+
+    // ─── GRAMMAR / LEXIS & STRUCTURE (Q38–47) ────────────────────────
+    { topic:'GRAMMAR', q:"The teacher, as well as the students, ___ present at the assembly.", opts:["were","are","is","have been"], ans:2, exp:"With 'as well as', the verb agrees with the first (singular) subject: 'The teacher...is'." },
+    { topic:'GRAMMAR', q:"He has been living in Abuja ___ 1990.", opts:["for","from","at","since"], ans:3, exp:"'Since' is used with a specific point in time (1990). 'For' is used with a period of time." },
+    { topic:'GRAMMAR', q:"I look forward to ___ from you soon.", opts:["hear","heard","hearing","be hearing"], ans:2, exp:"'Look forward to' is a phrasal verb followed by a gerund (-ing form)." },
+    { topic:'GRAMMAR', q:"Neither the students nor the teacher ___ aware of the change.", opts:["were","are","is","have been"], ans:2, exp:"With 'neither...nor', the verb agrees with the nearer subject. 'The teacher' is singular → 'is'." },
+    { topic:'GRAMMAR', q:"The plural of 'phenomenon' is ___", opts:["phenomenons","phenomenas","phenomena","phenomenes"], ans:2, exp:"Phenomenon is a Greek-derived word; its correct plural is phenomena." },
+    { topic:'GRAMMAR', q:"Choose the grammatically correct sentence:", opts:["Each of the boys have paid their fees.","Each of the boys has paid his fees.","Each of the boys have paid his fees.","Each of the boys has paid their fees."], ans:1, exp:"'Each' is singular and takes a singular verb 'has' and singular pronoun 'his'." },
+    { topic:'GRAMMAR', q:"The president ___ the contract before the minister arrived.", opts:["has signed","signed","will sign","is signing"], ans:1, exp:"The simple past 'signed' is correct for an action completed before another past action (arrived)." },
+    { topic:'GRAMMAR', q:"He had no sooner arrived ___ the fight broke out.", opts:["when","than","after","before"], ans:1, exp:"'No sooner...than' is the correct correlative conjunction pair." },
+    { topic:'GRAMMAR', q:"The word INDEFATIGABLE means ___", opts:["Easily tired","Incapable of being fatigued","Without direction","Completely lost"], ans:1, exp:"Indefatigable means persisting tirelessly; literally 'incapable of being fatigued'." },
+    { topic:'GRAMMAR', q:"Choose the correct spelling:", opts:["Accomodation","Accommodation","Acommodation","Accommodaton"], ans:1, exp:"The correct spelling is Accommodation — double 'c' and double 'm'." },
+
+    // ─── FILL IN THE GAP (Q48–51) ─────────────────────────────────────
+    { topic:'FILL-IN-THE-GAP', q:"Despite the warning, they ___ proceed with the plan.", opts:["decided to","decided","decided at","decide to"], ans:0, exp:"'Decided to proceed' is the grammatically correct structure." },
+    { topic:'FILL-IN-THE-GAP', q:"The fire ___ out before the firefighters arrived.", opts:["burned","had burned","has burned","burns"], ans:1, exp:"The past perfect 'had burned out' is correct as it occurred before another past event." },
+    { topic:'FILL-IN-THE-GAP', q:"She is one of those people who ___ always late.", opts:["is","are","was","has been"], ans:1, exp:"The relative clause 'who are' refers to 'those people' (plural), requiring 'are'." },
+    { topic:'FILL-IN-THE-GAP', q:"It is high time we ___ our independence from fossil fuels.", opts:["achieve","achieved","achieving","have achieved"], ans:1, exp:"'It is high time + past subjunctive' — 'It is high time we achieved' is correct." },
+
+    // ─── ORAL ENGLISH — VOWEL SOUNDS (Q52–54) ────────────────────────
+    { topic:'ORAL ENGLISH — VOWELS', q:"Which of the following words contains the SHORT vowel /ɪ/?", opts:["Seat /siːt/","Bit /bɪt/","Bite /baɪt/","Beat /biːt/"], ans:1, exp:"The word 'Bit' contains the short vowel sound /ɪ/. The others have long /iː/ or diphthong /aɪ/." },
+    { topic:'ORAL ENGLISH — VOWELS', q:"The vowel sound in the word CAT is represented as ___", opts:["/ɒ/ as in 'pot'","/æ/ as in 'man'","/e/ as in 'bed'","/ʌ/ as in 'cut'"], ans:1, exp:"The vowel in CAT is /æ/, a front open vowel sound as in 'man', 'hat', 'bat'." },
+    { topic:'ORAL ENGLISH — VOWELS', q:"Which of the following words contains a DIPHTHONG?", opts:["Sit","Pot","Boy","Bed"], ans:2, exp:"'Boy' contains the diphthong /ɔɪ/. The others contain pure monophthong vowels." },
+
+    // ─── ORAL ENGLISH — CONSONANTS (Q55–56) ──────────────────────────
+    { topic:'ORAL ENGLISH — CONSONANTS', q:"The consonant sound /ʃ/ is found in which of the following words?", opts:["Ship","Chip","Tip","Sip"], ans:0, exp:"'Ship' /ʃɪp/ starts with the voiceless palato-alveolar fricative /ʃ/." },
+    { topic:'ORAL ENGLISH — CONSONANTS', q:"How many consonant sounds are there in standard British English?", opts:["20","22","24","26"], ans:2, exp:"Standard British English has 24 consonant phonemes." },
+
+    // ─── ORAL ENGLISH — STRESS PATTERNS (Q57–59) ─────────────────────
+    { topic:'ORAL ENGLISH — STRESS', q:"Choose the word with a DIFFERENT stress pattern from the others:", opts:["Prepare","Table","Teacher","Window"], ans:0, exp:"'Pre-PARE' carries stress on the 2nd syllable; 'TAble', 'TEAcher', and 'WINdow' are all stressed on the 1st syllable." },
+    { topic:'ORAL ENGLISH — STRESS', q:"The correct primary stress for the word INTERPRET is ___", opts:["IN-ter-pret","in-TER-pret","in-ter-PRET","in-TER-PRET"], ans:1, exp:"The word 'interpret' is stressed on the second syllable: in-TER-pret." },
+    { topic:'ORAL ENGLISH — STRESS', q:"In the sentence 'She BOUGHT the book, not borrowed it', the emphatic stress falls on BOUGHT because ___", opts:["Bought is the subject","The speaker is correcting a previous statement","Bought is an adjective","The sentence is a question"], ans:1, exp:"Emphatic stress is used to correct or contradict a previous statement or assumption." },
+
+    // ─── LEKKI HEADMASTER (Q60) ───────────────────────────────────────
+    { pid:'LEKKI1', topic:'THE LEKKI HEADMASTER', q:"In 'The Lekki Headmaster', the central theme of the novel is best described as ___", opts:["The importance of sports in school","Integrity and moral leadership in the face of corruption","The romance between two teachers","The history of Lekki Island"], ans:1, exp:"The novel's central preoccupation is the headmaster's struggle to maintain integrity and moral leadership within a corrupt educational system." },
+
+    // ─── LEKKI HEADMASTER EXTRAS (to reach 60 — Q were specified as 10 from novel) ──
+    { pid:'LEKKI1', topic:'THE LEKKI HEADMASTER', q:"The setting of 'The Lekki Headmaster' is ___", opts:["A secondary school in Abuja","A university in Ibadan","A primary school in the Lekki area of Lagos","A village school in Anambra"], ans:2, exp:"The novel is set in a primary school in the Lekki area of Lagos State." },
+    { pid:'LEKKI1', topic:'THE LEKKI HEADMASTER', q:"The protagonist of 'The Lekki Headmaster' is ___", opts:["Mr. Adewale","Mr. Biodun Soyemi","Mrs. Soyemi","The School Inspector"], ans:1, exp:"Mr. Biodun Soyemi is the headmaster and the novel's central protagonist." },
+    { pid:'LEKKI1', topic:'THE LEKKI HEADMASTER', q:"Which of the following BEST describes the character of the headmaster in the novel?", opts:["Corrupt and self-serving","Lazy and uncommitted","Dedicated, principled, and incorruptible","Easily intimidated and dishonest"], ans:2, exp:"The headmaster is portrayed throughout as a man of strong moral principles who resists pressure to compromise his integrity." },
+    { pid:'LEKKI1', topic:'THE LEKKI HEADMASTER', q:"One of the major social issues explored in 'The Lekki Headmaster' is ___", opts:["Urban transportation","Decay and underfunding in the Nigerian public education sector","International migration","The oil industry in the Niger Delta"], ans:1, exp:"The novel closely examines the neglect, underfunding, and moral decay within Nigeria's public education system." },
+    { pid:'LEKKI1', topic:'THE LEKKI HEADMASTER', q:"The conflict in 'The Lekki Headmaster' is primarily between ___", opts:["Two teachers fighting over promotion","The headmaster's integrity and a system of corruption","Pupils and their parents","Teachers and the government"], ans:1, exp:"The central conflict pits the headmaster's personal integrity against institutional corruption and social pressure." },
+    { pid:'LEKKI1', topic:'THE LEKKI HEADMASTER', q:"What does the character of Mr. Soyemi represent in 'The Lekki Headmaster'?", opts:["The corrupt civil servant","The indifferent politician","The ideal of principled public service","The modern Nigerian youth"], ans:2, exp:"Mr. Soyemi symbolises principled, selfless public service — a beacon of hope in a corrupt system." },
+    { pid:'LEKKI1', topic:'THE LEKKI HEADMASTER', q:"The role of the school inspector in 'The Lekki Headmaster' serves to ___", opts:["Reward the headmaster generously","Introduce corruption into the school system","Support the headmaster's reforms","Train new teachers"], ans:1, exp:"The school inspector is a vehicle through which institutional corruption exerts pressure on the headmaster." },
+    { pid:'LEKKI1', topic:'THE LEKKI HEADMASTER', q:"Which of the following themes is NOT featured in 'The Lekki Headmaster'?", opts:["Integrity","Corruption","Resilience","Inter-tribal warfare"], ans:3, exp:"Inter-tribal warfare is not a theme in the novel. The major themes are integrity, corruption, and resilience." },
+    { pid:'LEKKI1', topic:'THE LEKKI HEADMASTER', q:"'The Lekki Headmaster' can best be classified as ___", opts:["A historical novel","A social realist novel","A science fiction novel","A fantasy novel"], ans:1, exp:"The novel is firmly in the social realist tradition, depicting contemporary Nigerian social issues with authenticity." },
+];
+
+// =====================================================================
+// LITERATURE IN ENGLISH QUESTIONS — 60 QUESTIONS
+// =====================================================================
+const literatureQuestionsRaw = [
+    // ─── LITERARY DEVICES & TERMS (Q1–20) ────────────────────────────
+    { topic:'LITERARY DEVICES', q:"Which literary device involves giving human qualities to non-human things?", opts:["Metaphor","Personification","Irony","Hyperbole"], ans:1, exp:"Personification attributes human qualities, feelings, or actions to inanimate objects or abstract concepts." },
+    { topic:'LITERARY DEVICES', q:"A direct comparison that does NOT use 'like' or 'as' is called ___", opts:["Simile","Personification","Metaphor","Allusion"], ans:2, exp:"A metaphor makes a direct comparison by stating one thing IS another, without 'like' or 'as'." },
+    { topic:'LITERARY DEVICES', q:"A comparison using 'like' or 'as' is called a ___", opts:["Metaphor","Oxymoron","Simile","Synecdoche"], ans:2, exp:"A simile uses 'like' or 'as' to draw a comparison e.g. 'brave as a lion'." },
+    { topic:'LITERARY DEVICES', q:"The figure of speech in 'Parting is such sweet sorrow' is ___", opts:["Hyperbole","Oxymoron","Irony","Paradox"], ans:1, exp:"An oxymoron places two contradictory terms together: 'sweet' and 'sorrow' are opposites." },
+    { topic:'LITERARY DEVICES', q:"'The pen is mightier than the sword' is an example of ___", opts:["Simile","Synecdoche","Metaphor","Irony"], ans:2, exp:"This is a metaphor comparing writing's power to the sword's power, without 'like' or 'as'." },
+    { topic:'LITERARY DEVICES', q:"A deliberate exaggeration for emphasis is called ___", opts:["Litotes","Hyperbole","Irony","Allusion"], ans:1, exp:"Hyperbole is extreme exaggeration used for effect e.g. 'I've told you a million times'." },
+    { topic:'LITERARY DEVICES', q:"The repetition of the same consonant sound at the beginning of closely connected words is ___", opts:["Assonance","Onomatopoeia","Alliteration","Rhyme"], ans:2, exp:"Alliteration is the repetition of initial consonant sounds, e.g. 'Peter Piper picked a peck'." },
+    { topic:'LITERARY DEVICES', q:"Words that imitate the sounds they describe are examples of ___", opts:["Alliteration","Onomatopoeia","Assonance","Repetition"], ans:1, exp:"Onomatopoeia refers to words that phonetically imitate sounds, e.g. 'buzz', 'hiss', 'splash'." },
+    { topic:'LITERARY DEVICES', q:"A reference within a text to a person, place, event, or another literary work is an ___", opts:["Allusion","Allegory","Analogy","Apostrophe"], ans:0, exp:"An allusion is an indirect or brief reference to a well-known person, event, or work." },
+    { topic:'LITERARY DEVICES', q:"The use of an object to represent a deeper, abstract idea is ___", opts:["Imagery","Diction","Symbolism","Syntax"], ans:2, exp:"Symbolism uses a concrete object to stand for an abstract concept, e.g. a dove symbolising peace." },
+    { topic:'LITERARY DEVICES', q:"A story in which characters and events represent abstract moral qualities is called ___", opts:["Allegory","Autobiography","Fable","Parody"], ans:0, exp:"An allegory is a narrative in which characters and events are symbols for deeper moral, political, or spiritual truths." },
+    { topic:'LITERARY DEVICES', q:"'The wind whistled through the empty streets' is an example of ___", opts:["Metaphor","Simile","Personification","Hyperbole"], ans:2, exp:"Whistling is a human action being attributed to the wind — this is personification." },
+    { topic:'LITERARY DEVICES', q:"In the expression 'Rage is chief', the poetic device used is ___", opts:["Simile","Irony","Metaphor","Alliteration"], ans:2, exp:"'Rage is chief' directly equates rage with a position of leadership — this is a metaphor." },
+    { topic:'LITERARY DEVICES', q:"The repetition of the first part of a sentence for artistic effect is called ___", opts:["Epistrophe","Anaphora","Assonance","Hyperbole"], ans:1, exp:"Anaphora is the repetition of a word or phrase at the beginning of successive clauses, e.g. 'We shall fight...We shall never surrender'." },
+    { topic:'LITERARY DEVICES', q:"A statement that seems self-contradictory but reveals a deeper truth is a ___", opts:["Oxymoron","Paradox","Irony","Synecdoche"], ans:1, exp:"A paradox is a statement that appears contradictory but contains a truth, e.g. 'The more you know, the more you realise you know nothing'." },
+    { topic:'LITERARY DEVICES', q:"Using a part to represent the whole (e.g. 'All hands on deck') is ___", opts:["Metonymy","Synecdoche","Metaphor","Personification"], ans:1, exp:"Synecdoche uses a part to represent the whole. 'Hands' represents the sailors/crew." },
+    { topic:'LITERARY DEVICES', q:"When something unpleasant is expressed in a milder, indirect way, it is called ___", opts:["Irony","Sarcasm","Euphemism","Understatement"], ans:2, exp:"Euphemism is the substitution of a mild or indirect expression for an unpleasant one, e.g. 'passed away' for 'died'." },
+    { topic:'LITERARY DEVICES', q:"The literary device that creates a mental image through descriptive language is ___", opts:["Imagery","Irony","Tone","Rhyme"], ans:0, exp:"Imagery uses vivid, descriptive language to appeal to the senses and create mental pictures." },
+    { topic:'LITERARY DEVICES', q:"Dramatic irony occurs when ___", opts:["The audience knows something the characters don't","The character says the opposite of what they mean","Two events happen at the same time","A character speaks to the audience alone"], ans:0, exp:"Dramatic irony is when the audience possesses information that the characters on stage do not have." },
+    { topic:'LITERARY DEVICES', q:"The narrator who knows the thoughts and feelings of ALL characters is ___", opts:["First-person narrator","Limited third-person narrator","Omniscient narrator","Unreliable narrator"], ans:2, exp:"The omniscient (all-knowing) narrator has access to the inner thoughts and feelings of all characters." },
+
+    // ─── DRAMA (Q21–34) ───────────────────────────────────────────────
+    { topic:'DRAMA', q:"A speech delivered alone on stage, revealing a character's inner thoughts, is called a ___", opts:["Aside","Monologue","Soliloquy","Prologue"], ans:2, exp:"A soliloquy is a dramatic device where a character speaks their thoughts aloud while alone on stage." },
+    { topic:'DRAMA', q:"A short comment spoken aside by a character, heard only by the audience, is called an ___", opts:["Aside","Soliloquy","Epilogue","Monologue"], ans:0, exp:"An aside is directed to the audience and is not intended to be heard by other characters on stage." },
+    { topic:'DRAMA', q:"The list of characters in a play is known as ___", opts:["Synopsis","Stage directions","Dramatis personae","Epilogue"], ans:2, exp:"'Dramatis personae' is a Latin term meaning 'persons of the drama' — the cast list of a play." },
+    { topic:'DRAMA', q:"A play that ends in the death or downfall of the main character is a ___", opts:["Comedy","Farce","Tragedy","Tragi-comedy"], ans:2, exp:"A tragedy is a dramatic work ending in the protagonist's downfall, often through a fatal flaw (hamartia)." },
+    { topic:'DRAMA', q:"A play that ends happily, usually with a celebration or marriage, is a ___", opts:["Tragedy","Farce","Tragi-comedy","Comedy"], ans:3, exp:"Classical comedy resolves with joy and often concludes with a marriage or celebration." },
+    { topic:'DRAMA', q:"In drama, the Greek term 'Hubris' refers to ___", opts:["Excessive pride or arrogance","The hero's tragic fall","A comic subplot","The chorus's commentary"], ans:0, exp:"Hubris is the excessive pride or overconfidence that typically leads to a tragic hero's downfall." },
+    { topic:'DRAMA', q:"The character who opposes the protagonist is called the ___", opts:["Foil","Antagonist","Round character","Narrator"], ans:1, exp:"The antagonist is the character who works against the protagonist or hero." },
+    { topic:'DRAMA', q:"A 'Foil' character in drama is one who ___", opts:["Kills the protagonist","Provides comic relief","Contrasts with the protagonist to highlight their qualities","Narrates the story"], ans:2, exp:"A foil contrasts with another character (usually the hero) to highlight their distinctive qualities." },
+    { topic:'DRAMA', q:"The point of highest tension or turning point in a play is the ___", opts:["Exposition","Prologue","Climax","Denouement"], ans:2, exp:"The climax is the most exciting and decisive moment of a drama, after which events move toward resolution." },
+    { topic:'DRAMA', q:"The final resolution of the plot in a play is the ___", opts:["Climax","Denouement","Exposition","Prologue"], ans:1, exp:"The denouement (French for 'unknotting') is the final part where the plot's complications are resolved." },
+    { topic:'DRAMA', q:"The introductory section of a play that provides background information is the ___", opts:["Epilogue","Denouement","Climax","Exposition"], ans:3, exp:"The exposition establishes the setting, introduces characters, and provides context for the action." },
+    { topic:'DRAMA', q:"A type of drama characterised by physical humour and absurd situations is ___", opts:["Tragedy","Farce","Epic drama","Melodrama"], ans:1, exp:"Farce relies on exaggerated physical comedy, improbable situations, and rapid action." },
+    { topic:'DRAMA', q:"In Wole Soyinka's 'The Beautification of Area Boy', the literary devices in the barber's speech include ___", opts:["Alliteration and rhyme","Hyperbole and allusion","Metaphor and irony","Simile and personification"], ans:1, exp:"The barber's claim to shave a battalion between coups uses hyperbole (exaggeration) and allusion (reference to coups)." },
+    { topic:'DRAMA', q:"A play that is primarily designed to be presented on stage through words and actions is distinct from prose because ___", opts:["It has no characters","It is always comic","It is meant for performance, not just reading","It cannot be published"], ans:2, exp:"Drama is defined by its performative nature — it is written to be enacted on a stage, not merely read." },
+
+    // ─── PROSE (Q35–47) ───────────────────────────────────────────────
+    { topic:'PROSE', q:"The 'Setting' of a novel refers to ___", opts:["The moral lesson of the story","The list of characters","The time and place in which the action occurs","The writing style of the author"], ans:2, exp:"Setting covers the when (temporal) and where (spatial) of the story's action." },
+    { topic:'PROSE', q:"A character who undergoes significant change during a story is called a ___ character.", opts:["Static","Flat","Dynamic","Round"], ans:2, exp:"A dynamic character changes significantly as a result of events in the story." },
+    { topic:'PROSE', q:"A character who does NOT change throughout the story is called a ___ character.", opts:["Dynamic","Round","Static","Major"], ans:2, exp:"A static character remains essentially the same throughout the narrative." },
+    { topic:'PROSE', q:"A 'Round' character in fiction is one who ___", opts:["Is always good","Is physically large","Is fully developed with complex traits","Has no role in the main plot"], ans:2, exp:"A round character is fully developed, complex, and realistic — they have multiple dimensions and qualities." },
+    { topic:'PROSE', q:"The series of events that make up a story is called ___", opts:["Theme","Setting","Characterisation","Plot"], ans:3, exp:"The plot is the sequence of events that form the narrative of a story." },
+    { topic:'PROSE', q:"The central message or underlying idea of a literary work is its ___", opts:["Plot","Tone","Theme","Diction"], ans:2, exp:"The theme is the central insight or message that the author conveys through the narrative." },
+    { topic:'PROSE', q:"A narrative technique where a story goes back in time to reveal earlier events is called ___", opts:["Flash-forward","In medias res","Flashback","Stream of consciousness"], ans:2, exp:"A flashback (also called analepsis) is a scene set earlier than the main narrative." },
+    { topic:'PROSE', q:"In Chinua Achebe's 'Things Fall Apart', the setting is located in ___", opts:["Lagos","Umuofia","Ibadan","Enugu"], ans:1, exp:"'Things Fall Apart' is set in Umuofia, a fictional Igbo village in pre-colonial Nigeria." },
+    { topic:'PROSE', q:"The protagonist of 'Things Fall Apart' is ___", opts:["Obierika","Nwoye","Ikemefuna","Okonkwo"], ans:3, exp:"Okonkwo is the central hero-figure and protagonist of Achebe's 'Things Fall Apart'." },
+    { topic:'PROSE', q:"The dominant theme in 'Things Fall Apart' is ___", opts:["True love conquers all","The betrayal of tradition by colonialism","Science versus religion","The triumph of youth over age"], ans:1, exp:"The novel's primary theme is the collision between Igbo tradition and the disruptive force of British colonialism." },
+    { topic:'PROSE', q:"'In medias res' is a narrative technique that means ___", opts:["Starting at the very beginning","Starting in the middle of events","Ending abruptly","Using a first-person narrator"], ans:1, exp:"In medias res is Latin for 'in the middle of things' — the story begins in the middle of the action." },
+    { topic:'PROSE', q:"A series of three closely related novels, plays, or films is called a ___", opts:["Trilogy","Anthology","Duology","Saga"], ans:0, exp:"A trilogy is a group of three works that are closely connected in theme, character, or narrative." },
+    { topic:'PROSE', q:"The mood or emotional atmosphere of a literary work is called its ___", opts:["Tone","Theme","Style","Mood"], ans:3, exp:"Mood refers to the emotional atmosphere a work creates for the reader; tone refers to the author's attitude." },
+
+    // ─── POETRY (Q48–55) ──────────────────────────────────────────────
+    { topic:'POETRY', q:"A 14-line poem with a fixed rhyme scheme is called a ___", opts:["Ballad","Elegy","Sonnet","Ode"], ans:2, exp:"A sonnet is a 14-line lyric poem, traditionally dealing with love or other elevated themes." },
+    { topic:'POETRY', q:"A poem written to mourn or lament the dead is an ___", opts:["Elegy","Ode","Epic","Ballad"], ans:0, exp:"An elegy is a poem of lamentation, often written in memory of someone who has died." },
+    { topic:'POETRY', q:"A long narrative poem about the deeds of a heroic figure is called an ___", opts:["Elegy","Ode","Epic","Sonnet"], ans:2, exp:"An epic is a long narrative poem celebrating heroic deeds, e.g. Homer's 'Iliad'." },
+    { topic:'POETRY', q:"Poetry that does not follow a fixed rhyme scheme or regular metre is called ___", opts:["Blank verse","Heroic couplet","Free verse","Ballad"], ans:2, exp:"Free verse has no regular metre, rhyme scheme, or fixed line length." },
+    { topic:'POETRY', q:"The repetition of similar vowel sounds within closely placed words is ___", opts:["Alliteration","Assonance","Onomatopoeia","Consonance"], ans:1, exp:"Assonance is the repetition of vowel sounds in nearby words, e.g. 'the rain in Spain'." },
+    { topic:'POETRY', q:"A poem that tells a story, often of adventure or romance, in a song-like form is a ___", opts:["Sonnet","Elegy","Ballad","Ode"], ans:2, exp:"A ballad is a narrative poem/song with a simple metre, often with refrains, telling a story." },
+    { topic:'POETRY', q:"The measurement of syllables and stresses in a line of poetry is called ___", opts:["Rhythm","Rhyme","Metre","Diction"], ans:2, exp:"Metre (meter) is the pattern of stressed and unstressed syllables in a line of poetry." },
+    { topic:'POETRY', q:"A stanza of four lines is called a ___", opts:["Couplet","Tercet","Quatrain","Sestet"], ans:2, exp:"A quatrain is a stanza of four lines. A couplet = 2 lines; a tercet = 3 lines; a sestet = 6 lines." },
+
+    // ─── GENERAL LITERARY KNOWLEDGE (Q56–60) ─────────────────────────
+    { topic:'GENERAL LITERATURE', q:"Literature is best described as ___", opts:["Scientific writing and records","Imaginative and creative expression in language","Historical documentation","Political commentary"], ans:1, exp:"Literature is broadly defined as imaginative and creative writing — works of the human imagination expressed in language." },
+    { topic:'GENERAL LITERATURE', q:"The three main genres of literature are ___", opts:["Fiction, biography, autobiography","Tragedy, comedy, farce","Drama, prose, and poetry","Novel, short story, essay"], ans:2, exp:"The three major literary genres are Drama, Prose (fiction and non-fiction), and Poetry." },
+    { topic:'GENERAL LITERATURE', q:"The overall attitude of the author toward their subject matter is called ___", opts:["Mood","Tone","Theme","Setting"], ans:1, exp:"Tone reflects the author's attitude toward the subject, which differs from mood (the reader's emotional response)." },
+    { topic:'GENERAL LITERATURE', q:"Copyright in literature refers to ___", opts:["The right to perform a play publicly","The exclusive legal rights granted to a creator over their work","The moral of the story","The author's biography"], ans:1, exp:"Copyright is the legal protection that gives creators exclusive rights to reproduce, publish, and sell their work." },
+    { topic:'GENERAL LITERATURE', q:"An 'anti-hero' in literature is a protagonist who ___", opts:["Is always the villain","Lacks conventional heroic qualities but is still central to the story","Never speaks in the story","Only appears in comedies"], ans:1, exp:"An anti-hero is a central character who lacks traditional heroic virtues but remains the protagonist, often used to critique society." },
+];
+
+// =====================================================================
+// APP STATE
+// =====================================================================
+let currentQuestions = [];
+let userAnswers = {};
+let currentIndex = 0;
+let timerVal = 1800;
+let timerInt;
+
+// =====================================================================
+// INIT EXAM
+// =====================================================================
+function initExam(subject) {
+    let pool = (subject === 'english') ? [...englishQuestionsRaw] : [...literatureQuestionsRaw];
+    // Shuffle
+    pool = pool.sort(() => Math.random() - 0.5);
+    currentQuestions = pool.slice(0, 60);
+
+    document.getElementById('display-subject').innerText = (subject === 'english') ? 'English Language' : 'Literature in English';
+    document.getElementById('page-selection').classList.add('hidden');
+    document.getElementById('page-exam').classList.remove('hidden');
+
+    renderGrid();
+    loadQuestion(0);
+    startTimer();
+}
+
+// =====================================================================
+// RENDER NAVIGATOR GRID
+// =====================================================================
+function renderGrid() {
+    const grid = document.getElementById('nav-grid');
+    grid.innerHTML = '';
+    currentQuestions.forEach((_, i) => {
+        const div = document.createElement('div');
+        div.className = 'grid-item';
+        div.id = `nav-${i}`;
+        div.innerText = i + 1;
+        div.onclick = () => loadQuestion(i);
+        grid.appendChild(div);
+    });
+}
+
+// =====================================================================
+// LOAD QUESTION
+// =====================================================================
+function loadQuestion(index) {
+    currentIndex = index;
+    const q = currentQuestions[index];
+
+    // Update navigator
+    document.querySelectorAll('.grid-item').forEach(el => {
+        el.classList.remove('current');
+    });
+    const navItem = document.getElementById(`nav-${index}`);
+    if (navItem) navItem.classList.add('current');
+
+    // Passage button
+    const pBtn = document.getElementById('view-passage-btn');
+    if (q.pid) {
+        pBtn.classList.remove('hidden');
+        const p = passages[q.pid];
+        document.getElementById('passage-text').innerText = p.text;
+        document.getElementById('modal-title').innerText = p.title;
+    } else {
+        pBtn.classList.add('hidden');
+    }
+
+    // Topic badge
+    document.getElementById('q-topic').innerText = q.topic || '';
+    document.getElementById('q-number').innerText = `Question ${index + 1} of 60`;
+    document.getElementById('q-text').innerHTML = q.q;
+
+    // Options
+    const optArea = document.getElementById('options-area');
+    optArea.innerHTML = '';
+    q.opts.forEach((opt, i) => {
+        const div = document.createElement('div');
+        div.className = `option${userAnswers[index] === i ? ' selected' : ''}`;
+        div.onclick = () => selectAnswer(index, i);
+        div.innerHTML = `<div class="opt-letter">${String.fromCharCode(65+i)}</div><span>${opt}</span>`;
+        optArea.appendChild(div);
+    });
+
+    // Update progress
+    updateProgress();
+}
+
+function selectAnswer(qIndex, optIndex) {
+    userAnswers[qIndex] = optIndex;
+    const navItem = document.getElementById(`nav-${qIndex}`);
+    if (navItem) navItem.classList.add('answered');
+    loadQuestion(qIndex);
+}
+
+function nav(step) {
+    const n = currentIndex + step;
+    if (n >= 0 && n < currentQuestions.length) loadQuestion(n);
+}
+
+function updateProgress() {
+    const answered = Object.keys(userAnswers).length;
+    document.getElementById('progress-text').innerText = `${answered} / 60`;
+    document.getElementById('progress-fill').style.width = `${(answered / 60) * 100}%`;
+}
+
+// =====================================================================
+// TIMER
+// =====================================================================
+function startTimer() {
+    timerInt = setInterval(() => {
+        timerVal--;
+        const m = Math.floor(timerVal / 60);
+        const s = timerVal % 60;
+        const el = document.getElementById('timer');
+        el.innerText = `${m}:${s < 10 ? '0' + s : s}`;
+        if (timerVal <= 300) el.classList.add('warning');
+        if (timerVal <= 0) forceSubmit(true);
+    }, 1000);
+}
+
+// =====================================================================
+// SUBMIT
+// =====================================================================
+function forceSubmit(auto = false) {
+    if (!auto && !confirm("Are you sure you want to end the test? You cannot go back.")) return;
+    clearInterval(timerInt);
+
+    let score = 0;
+    let reviewHtml = '';
+
+    currentQuestions.forEach((q, i) => {
+        const userAns = userAnswers[i];
+        const isCorrect = userAns === q.ans;
+        if (isCorrect) score++;
+
+        const userText = userAns !== undefined ? q.opts[userAns] : 'Skipped';
+        const correctText = q.opts[q.ans];
+
+        reviewHtml += `
+        <div class="review-item">
+            <div class="review-q">Q${i + 1} [${q.topic}]: ${q.q}</div>
+            <div class="review-your">Your answer: ${userText} ${isCorrect ? '✓' : '✗'}</div>
+            ${!isCorrect ? `<div class="review-correct">Correct answer: ${correctText}</div>` : ''}
+            <div class="explanation-box"><strong>Explanation:</strong> ${q.exp}</div>
+        </div>`;
+    });
+
+    const percent = Math.round((score / 60) * 100);
+    const timeTaken = Math.round((1800 - timerVal) / 60);
+
+    // Grade
+    let grade, gradeClass;
+    if (percent >= 70) { grade = 'A — Excellent'; gradeClass = 'grade-A'; }
+    else if (percent >= 60) { grade = 'B — Good'; gradeClass = 'grade-B'; }
+    else if (percent >= 50) { grade = 'C — Average'; gradeClass = 'grade-C'; }
+    else { grade = 'F — Below Average'; gradeClass = 'grade-F'; }
+
+    document.getElementById('res-score').innerText = score;
+    document.getElementById('res-percent').innerText = `${percent}%`;
+    document.getElementById('stat-correct').innerText = score;
+    document.getElementById('stat-wrong').innerText = 60 - score;
+    document.getElementById('stat-time').innerText = `${timeTaken}m`;
+    const badge = document.getElementById('grade-badge');
+    badge.innerText = grade;
+    badge.className = `grade-badge ${gradeClass}`;
+
+    document.getElementById('review-area').innerHTML = reviewHtml;
+    document.getElementById('page-exam').classList.add('hidden');
+    document.getElementById('page-result').classList.remove('hidden');
+    window.scrollTo(0, 0);
+}
+
+// =====================================================================
+// MODAL
+// =====================================================================
+function togglePassage() {
+    const overlay = document.getElementById('modal-overlay');
+    overlay.classList.toggle('open');
+}
+function handleOverlayClick(e) {
+    if (e.target === document.getElementById('modal-overlay')) togglePassage();
+}
+</script>
+</body>
+</html>
