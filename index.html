@@ -317,12 +317,7 @@ Research consistently shows that students who read widely outperform their peers
 
 Fill each numbered gap with the most appropriate option from the choices provided in each question.`
     },
-    LEKKI1: {
-        title: "Novel: The Lekki Headmaster — Background",
-        text: `"The Lekki Headmaster" is the compulsory novel for JAMB Use of English. It tells the story of Mr. Biodun Soyemi, a dedicated headmaster of a primary school in the Lekki area of Lagos. The novel explores themes of integrity, moral leadership, the decay of the Nigerian educational system, corruption among civil servants, the resilience of dedicated teachers, and the conflict between traditional values and modern pressures.
-
-Key characters include: Mr. Biodun Soyemi (the headmaster), Mrs. Soyemi (his wife), Mr. Adewale (the school inspector), and various pupils and community members. The setting is a primary school in Lagos, and the novel portrays the everyday struggles of those who work in Nigeria's public education sector.`
-    }
+    LEKKI1: null
 };
 
 // =====================================================================
@@ -416,19 +411,21 @@ const englishQuestionsRaw = [
     { topic:'ORAL ENGLISH — STRESS', q:"The correct primary stress for the word INTERPRET is ___", opts:["IN-ter-pret","in-TER-pret","in-ter-PRET","in-TER-PRET"], ans:1, exp:"The word 'interpret' is stressed on the second syllable: in-TER-pret." },
     { topic:'ORAL ENGLISH — STRESS', q:"In the sentence 'She BOUGHT the book, not borrowed it', the emphatic stress falls on BOUGHT because ___", opts:["Bought is the subject","The speaker is correcting a previous statement","Bought is an adjective","The sentence is a question"], ans:1, exp:"Emphatic stress is used to correct or contradict a previous statement or assumption." },
 
-    // ─── LEKKI HEADMASTER (Q60) ───────────────────────────────────────
-    { pid:'LEKKI1', topic:'THE LEKKI HEADMASTER', q:"In 'The Lekki Headmaster', the central theme of the novel is best described as ___", opts:["The importance of sports in school","Integrity and moral leadership in the face of corruption","The romance between two teachers","The history of Lekki Island"], ans:1, exp:"The novel's central preoccupation is the headmaster's struggle to maintain integrity and moral leadership within a corrupt educational system." },
+    // ─── ORAL ENGLISH — EXTRA SOUND QUESTIONS (Q60–61) ───────────────
+    { topic:'ORAL ENGLISH — SOUNDS', q:"Which of the following pairs of words are MINIMAL PAIRS (differ by only one sound)?", opts:["Bat / Bad","Bat / Cat","Ship / Sheep","Thin / Think"], ans:0, exp:"'Bat /bæt/' and 'Bad /bæd/' differ only in the final consonant (/t/ vs /d/), making them a minimal pair." },
+    { topic:'ORAL ENGLISH — SOUNDS', q:"The sound /θ/ as in the word THINK is classified as ___", opts:["A voiced bilabial fricative","A voiceless dental fricative","A voiced velar stop","A voiceless alveolar stop"], ans:1, exp:"/θ/ is a voiceless dental fricative — produced with the tongue between the teeth and no vocal cord vibration." },
 
-    // ─── LEKKI HEADMASTER EXTRAS (to reach 60 — Q were specified as 10 from novel) ──
-    { pid:'LEKKI1', topic:'THE LEKKI HEADMASTER', q:"The setting of 'The Lekki Headmaster' is ___", opts:["A secondary school in Abuja","A university in Ibadan","A primary school in the Lekki area of Lagos","A village school in Anambra"], ans:2, exp:"The novel is set in a primary school in the Lekki area of Lagos State." },
-    { pid:'LEKKI1', topic:'THE LEKKI HEADMASTER', q:"The protagonist of 'The Lekki Headmaster' is ___", opts:["Mr. Adewale","Mr. Biodun Soyemi","Mrs. Soyemi","The School Inspector"], ans:1, exp:"Mr. Biodun Soyemi is the headmaster and the novel's central protagonist." },
-    { pid:'LEKKI1', topic:'THE LEKKI HEADMASTER', q:"Which of the following BEST describes the character of the headmaster in the novel?", opts:["Corrupt and self-serving","Lazy and uncommitted","Dedicated, principled, and incorruptible","Easily intimidated and dishonest"], ans:2, exp:"The headmaster is portrayed throughout as a man of strong moral principles who resists pressure to compromise his integrity." },
-    { pid:'LEKKI1', topic:'THE LEKKI HEADMASTER', q:"One of the major social issues explored in 'The Lekki Headmaster' is ___", opts:["Urban transportation","Decay and underfunding in the Nigerian public education sector","International migration","The oil industry in the Niger Delta"], ans:1, exp:"The novel closely examines the neglect, underfunding, and moral decay within Nigeria's public education system." },
-    { pid:'LEKKI1', topic:'THE LEKKI HEADMASTER', q:"The conflict in 'The Lekki Headmaster' is primarily between ___", opts:["Two teachers fighting over promotion","The headmaster's integrity and a system of corruption","Pupils and their parents","Teachers and the government"], ans:1, exp:"The central conflict pits the headmaster's personal integrity against institutional corruption and social pressure." },
-    { pid:'LEKKI1', topic:'THE LEKKI HEADMASTER', q:"What does the character of Mr. Soyemi represent in 'The Lekki Headmaster'?", opts:["The corrupt civil servant","The indifferent politician","The ideal of principled public service","The modern Nigerian youth"], ans:2, exp:"Mr. Soyemi symbolises principled, selfless public service — a beacon of hope in a corrupt system." },
-    { pid:'LEKKI1', topic:'THE LEKKI HEADMASTER', q:"The role of the school inspector in 'The Lekki Headmaster' serves to ___", opts:["Reward the headmaster generously","Introduce corruption into the school system","Support the headmaster's reforms","Train new teachers"], ans:1, exp:"The school inspector is a vehicle through which institutional corruption exerts pressure on the headmaster." },
-    { pid:'LEKKI1', topic:'THE LEKKI HEADMASTER', q:"Which of the following themes is NOT featured in 'The Lekki Headmaster'?", opts:["Integrity","Corruption","Resilience","Inter-tribal warfare"], ans:3, exp:"Inter-tribal warfare is not a theme in the novel. The major themes are integrity, corruption, and resilience." },
-    { pid:'LEKKI1', topic:'THE LEKKI HEADMASTER', q:"'The Lekki Headmaster' can best be classified as ___", opts:["A historical novel","A social realist novel","A science fiction novel","A fantasy novel"], ans:1, exp:"The novel is firmly in the social realist tradition, depicting contemporary Nigerian social issues with authenticity." },
+    // ─── THE LEKKI HEADMASTER — 10 QUESTIONS (no passage; direct novel content) ──
+    { topic:'THE LEKKI HEADMASTER', q:"What is the name of the principal of Stardom Schools in 'The Lekki Headmaster'?", opts:["Mr. Soyemi","Mr. Adewale","Mr. Bepo","Mr. Biodun"], ans:2, exp:"The principal of Stardom Schools is Mr. Bepo, the central character of the novel." },
+    { topic:'THE LEKKI HEADMASTER', q:"What nickname was given to Mr. Bepo during his time at Stardom Schools?", opts:["The Lagos Legend","The Strict Headmaster","The Lekki Headmaster","The Kind Principal"], ans:2, exp:"Mr. Bepo was nicknamed 'The Lekki Headmaster' — a name that stuck with him because of his approach to conflict resolution." },
+    { topic:'THE LEKKI HEADMASTER', q:"Why was Mr. Bepo considering relocation from Nigeria?", opts:["He was offered a better school","He was dismissed from his position","Family pressure and the need to join his wife and children in the UK","The government transferred him abroad"], ans:2, exp:"Mr. Bepo was considering relocating due to family pressure and the need to join his wife and children in the UK." },
+    { topic:'THE LEKKI HEADMASTER', q:"How long did Mr. Bepo serve as Headmaster at Stardom Kiddies?", opts:["Two years","Three years","Four years","Five years"], ans:2, exp:"Mr. Bepo served as Headmaster at Stardom Kiddies for four years." },
+    { topic:'THE LEKKI HEADMASTER', q:"What was the outcome of the legal case involving a student who was asked to write on the marker board?", opts:["The school was closed down","The parent lost the case","The matter was settled out of court with the student receiving one tuition-free term and the teacher suspended","The teacher was fired permanently"], ans:2, exp:"The matter was settled out of court: the student received one tuition-free term and the teacher was suspended without pay for three months." },
+    { topic:'THE LEKKI HEADMASTER', q:"How much did Stardom Schools charge for the intent forms for the position of Head Girl?", opts:["N10,000","N25,000","N50,000","N100,000"], ans:2, exp:"The intent forms for the position of Head Girl cost N50,000." },
+    { topic:'THE LEKKI HEADMASTER', q:"What financial measure did Stardom Schools introduce to reduce student lateness?", opts:["A fine system for late students","Lowering boarding fees from N250,000 to N165,000","Providing free school buses","Extending school hours"], ans:1, exp:"The school lowered its boarding fees from N250,000 to N165,000, which encouraged over 80% of parents to move their children to the boarding house, improving punctuality." },
+    { topic:'THE LEKKI HEADMASTER', q:"What unique teaching method did Mr. Bepo introduce at Fruitful Future School?", opts:["Group debates every morning","Pupils teaching each other in class","Encouraging pupils to teach their parents a topic they learned during the school day","Using television for all lessons"], ans:2, exp:"Bepo encouraged pupils to teach their parents a topic they learned that day — this reassured parents about teaching quality and became popular." },
+    { topic:'THE LEKKI HEADMASTER', q:"What was the total amount in the cooperative's account as mentioned in 'The Lekki Headmaster'?", opts:["N50 million","N75 million","N95 million","N120 million"], ans:2, exp:"The cooperative had N95 million, with over N50 million already loaned out, raising concerns about financial stability." },
+    { topic:'THE LEKKI HEADMASTER', q:"Which cultural dances were performed during the school's cultural event in 'The Lekki Headmaster'?", opts:["Atilogwu and Bongo","Bata, Atilogwu, Koroso, and Canoe dances","Egungun and Igbo masquerade","Sharo and Sango dances"], ans:1, exp:"The dances performed included the Bata, Atilogwu, Koroso, and Canoe dances, showcasing the richness of Nigerian cultural heritage." },
 ];
 
 // =====================================================================
@@ -565,7 +562,7 @@ function loadQuestion(index) {
 
     // Passage button
     const pBtn = document.getElementById('view-passage-btn');
-    if (q.pid) {
+    if (q.pid && passages[q.pid]) {
         pBtn.classList.remove('hidden');
         const p = passages[q.pid];
         document.getElementById('passage-text').innerText = p.text;
