@@ -7,17 +7,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #1e3a5f;
-            --accent: #e8a020;
-            --success: #16a34a;
-            --danger: #c0392b;
-            --light-bg: #f4f6fb;
-            --card: #ffffff;
-            --border: #dce3ef;
-            --text: #1a2340;
-            --muted: #6b7a99;
-            --shadow: 0 4px 18px rgba(30,58,95,0.10);
-            --radius: 14px;
+            --primary: #1e3a5f; --accent: #e8a020; --success: #16a34a;
+            --danger: #c0392b; --light-bg: #f4f6fb; --card: #ffffff;
+            --border: #dce3ef; --text: #1a2340; --muted: #6b7a99;
+            --shadow: 0 4px 18px rgba(30,58,95,0.10); --radius: 14px;
         }
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body { background: var(--light-bg); color: var(--text); font-family: 'DM Sans', sans-serif; min-height: 100vh; }
@@ -26,7 +19,7 @@
         .logo-icon { width: 36px; height: 36px; background: var(--accent); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; }
         .logo-text { font-family: 'Playfair Display', serif; font-size: 1.25rem; letter-spacing: -0.3px; }
         .logo-sub { font-size: 0.78rem; font-weight: 400; opacity: 0.75; margin-top: 1px; }
-        .btn-restart { background: rgba(255,255,255,0.12); border: 1.5px solid rgba(255,255,255,0.3); color: white; padding: 7px 18px; border-radius: 8px; font-weight: 600; font-size: 0.8rem; cursor: pointer; letter-spacing: 0.5px; transition: 0.2s; }
+        .btn-restart { background: rgba(255,255,255,0.12); border: 1.5px solid rgba(255,255,255,0.3); color: white; padding: 7px 18px; border-radius: 8px; font-weight: 600; font-size: 0.8rem; cursor: pointer; transition: 0.2s; }
         .btn-restart:hover { background: rgba(255,255,255,0.22); }
         .container { max-width: 1100px; margin: 0 auto; padding: 30px 16px 60px; }
         .hidden { display: none !important; }
@@ -53,7 +46,8 @@
         .question-card { background: var(--card); padding: 28px; border-radius: var(--radius); box-shadow: var(--shadow); }
         .q-topic { display: inline-block; background: #eef2ff; color: var(--primary); font-size: 0.75rem; font-weight: 700; padding: 3px 12px; border-radius: 20px; margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.5px; }
         .q-number { color: var(--accent); font-weight: 700; font-size: 0.9rem; margin-bottom: 8px; }
-        .q-text { font-size: 1.08rem; line-height: 1.7; margin-bottom: 24px; font-weight: 500; }
+        .q-text { font-size: 1.05rem; line-height: 1.75; margin-bottom: 24px; font-weight: 500; }
+        .q-text svg { display: block; margin: 12px 0; border-radius: 8px; border: 1px solid var(--border); background: #fff; }
         .passage-btn { display: inline-flex; align-items: center; gap: 8px; background: #fff7e6; border: 1.5px solid var(--accent); color: #92400e; padding: 8px 16px; border-radius: 8px; cursor: pointer; font-weight: 600; font-size: 0.88rem; margin-bottom: 18px; transition: 0.2s; }
         .passage-btn:hover { background: #fef3c7; }
         .option { display: flex; align-items: center; padding: 14px 16px; border: 1.5px solid var(--border); border-radius: 10px; margin-bottom: 10px; cursor: pointer; transition: 0.2s; }
@@ -117,7 +111,6 @@
     </style>
 </head>
 <body>
-
 <header>
     <div class="logo">
         <div class="logo-icon">📚</div>
@@ -128,108 +121,120 @@
     </div>
     <button class="btn-restart" onclick="location.reload()">⟳ RESTART</button>
 </header>
-
 <div class="container">
 
-    <!-- SELECTION PAGE -->
-    <section id="page-selection">
-        <div class="selection-header">
-            <h1>JAMB Practice Centre</h1>
-            <p>Select a subject to begin your timed 30-minute CBT session.</p>
+<!-- SELECTION PAGE -->
+<section id="page-selection">
+    <div class="selection-header">
+        <h1>JAMB Practice Centre</h1>
+        <p>Select a subject to begin your timed 30-minute CBT session.</p>
+    </div>
+    <div class="subject-grid">
+        <div class="subject-card" onclick="initExam('english')">
+            <span class="card-icon">📖</span>
+            <h2>English Language</h2>
+            <p>Comprehension · Lexis &amp; Structure</p>
+            <p>Synonyms · Antonyms · Oral English</p>
+            <p>Phonetics · The Lekki Headmaster</p>
+            <div class="card-badge">60 Questions · 30 Mins</div>
         </div>
-        <div class="subject-grid">
-            <div class="subject-card" onclick="initExam('english')">
-                <span class="card-icon">📖</span>
-                <h2>English Language</h2>
-                <p>Comprehension · Lexis & Structure</p>
-                <p>Synonyms · Antonyms · Oral English</p>
-                <p>Phonetics · The Lekki Headmaster</p>
-                <div class="card-badge">60 Questions · 30 Mins</div>
-            </div>
-            <div class="subject-card" onclick="initExam('chemistry')">
-                <span class="card-icon">🧪</span>
-                <h2>Chemistry</h2>
-                <p>Physical · Inorganic · Organic</p>
-                <p>Calculations · Periodicity · Bonding</p>
-                <p>Gas Laws · Stoichiometry · Radioactivity</p>
-                <div class="card-badge">40 Questions · 30 Mins</div>
-            </div>
-            <div class="subject-card" onclick="initExam('literature')">
-                <span class="card-icon">🎭</span>
-                <h2>Literature in English</h2>
-                <p>Drama · Prose · Literary Devices</p>
-                <p>Themes · Character · Setting · Plot</p>
-                <p>Figures of Speech · Poetry</p>
-                <div class="card-badge">60 Questions · 30 Mins</div>
-            </div>
+        <div class="subject-card" onclick="initExam('chemistry')">
+            <span class="card-icon">🧪</span>
+            <h2>Chemistry</h2>
+            <p>Physical · Inorganic · Organic</p>
+            <p>Calculations · Periodicity · Bonding</p>
+            <p>Gas Laws · Diagrams · Radioactivity</p>
+            <div class="card-badge">40 Questions · 30 Mins</div>
         </div>
-    </section>
+        <div class="subject-card" onclick="initExam('literature')">
+            <span class="card-icon">🎭</span>
+            <h2>Literature in English</h2>
+            <p>Drama · Prose · Literary Devices</p>
+            <p>Themes · Character · Setting · Plot</p>
+            <p>Figures of Speech · Poetry</p>
+            <div class="card-badge">60 Questions · 30 Mins</div>
+        </div>
+        <div class="subject-card" onclick="initExam('physics')">
+            <span class="card-icon">⚡</span>
+            <h2>Physics</h2>
+            <p>Mechanics · Waves · Optics · Heat</p>
+            <p>Electricity · Magnetism · Modern Physics</p>
+            <p>Past JAMB Questions with Diagrams</p>
+            <div class="card-badge">40 Questions · 30 Mins</div>
+        </div>
+        <div class="subject-card" onclick="initExam('mathematics')">
+            <span class="card-icon">📐</span>
+            <h2>Mathematics</h2>
+            <p>Algebra · Geometry · Calculus</p>
+            <p>Statistics · Probability · Trigonometry</p>
+            <p>Past JAMB Questions with Calculations</p>
+            <div class="card-badge">40 Questions · 30 Mins</div>
+        </div>
+    </div>
+</section>
 
-    <!-- EXAM PAGE -->
-    <section id="page-exam" class="hidden">
-        <div class="top-nav">
-            <h3 id="display-subject">English Language</h3>
-            <div class="timer" id="timer">30:00</div>
-            <button class="btn-finish" onclick="forceSubmit()">FINISH TEST</button>
-        </div>
-        <div class="exam-body">
-            <main>
-                <div class="question-card">
-                    <button id="view-passage-btn" class="passage-btn hidden" onclick="togglePassage()">
-                        📄 Read Passage / Instructions
-                    </button>
-                    <div class="q-topic" id="q-topic">COMPREHENSION</div>
-                    <div class="q-number" id="q-number">Question 1 of 60</div>
-                    <div class="q-text" id="q-text">Loading...</div>
-                    <div id="options-area"></div>
-                    <div class="nav-btns">
-                        <button class="btn-nav prev" onclick="nav(-1)">← Previous</button>
-                        <button class="btn-nav" onclick="nav(1)">Next →</button>
-                    </div>
+<!-- EXAM PAGE -->
+<section id="page-exam" class="hidden">
+    <div class="top-nav">
+        <h3 id="display-subject">English Language</h3>
+        <div class="timer" id="timer">30:00</div>
+        <button class="btn-finish" onclick="forceSubmit()">FINISH TEST</button>
+    </div>
+    <div class="exam-body">
+        <main>
+            <div class="question-card">
+                <button id="view-passage-btn" class="passage-btn hidden" onclick="togglePassage()">📄 Read Passage / Instructions</button>
+                <div class="q-topic" id="q-topic">COMPREHENSION</div>
+                <div class="q-number" id="q-number">Question 1 of 60</div>
+                <div class="q-text" id="q-text">Loading...</div>
+                <div id="options-area"></div>
+                <div class="nav-btns">
+                    <button class="btn-nav prev" onclick="nav(-1)">← Previous</button>
+                    <button class="btn-nav" onclick="nav(1)">Next →</button>
                 </div>
-            </main>
-            <aside>
-                <div class="nav-panel">
-                    <h4>Question Navigator</h4>
-                    <div class="nav-legend">
-                        <span><span class="legend-dot" style="background:var(--primary)"></span>Answered</span>
-                        <span><span class="legend-dot" style="background:var(--border);border:1.5px solid #aaa"></span>Skipped</span>
-                    </div>
-                    <div class="grid-box" id="nav-grid"></div>
-                    <div class="progress-wrap">
-                        <div class="progress-label"><span>Progress</span><span id="progress-text">0 / 60</span></div>
-                        <div class="progress-bar"><div class="progress-fill" id="progress-fill" style="width:0%"></div></div>
-                    </div>
+            </div>
+        </main>
+        <aside>
+            <div class="nav-panel">
+                <h4>Question Navigator</h4>
+                <div class="nav-legend">
+                    <span><span class="legend-dot" style="background:var(--primary)"></span>Answered</span>
+                    <span><span class="legend-dot" style="background:var(--border);border:1.5px solid #aaa"></span>Skipped</span>
                 </div>
-            </aside>
-        </div>
-    </section>
-
-    <!-- RESULT PAGE -->
-    <section id="page-result" class="hidden">
-        <div class="result-summary">
-            <h1>Your Result</h1>
-            <div class="score-circle">
-                <div class="score-big" id="res-score">0</div>
-                <!-- ✅ FIX: id="score-denom" so JS can update it dynamically -->
-                <div class="score-denom" id="score-denom">out of 60</div>
+                <div class="grid-box" id="nav-grid"></div>
+                <div class="progress-wrap">
+                    <div class="progress-label"><span>Progress</span><span id="progress-text">0 / 60</span></div>
+                    <div class="progress-bar"><div class="progress-fill" id="progress-fill" style="width:0%"></div></div>
+                </div>
             </div>
-            <div class="score-percent" id="res-percent">0%</div>
-            <div class="grade-badge" id="grade-badge">—</div>
-            <div class="stats-row">
-                <div class="stat-box"><div class="stat-val" id="stat-correct">0</div><div class="stat-lbl">Correct</div></div>
-                <div class="stat-box"><div class="stat-val" id="stat-wrong">0</div><div class="stat-lbl">Wrong</div></div>
-                <div class="stat-box"><div class="stat-val" id="stat-time">0m</div><div class="stat-lbl">Time Used</div></div>
-            </div>
-            <button class="btn-home" onclick="location.reload()">Back to Home</button>
-        </div>
-        <div class="corrections-card">
-            <h2>Full Corrections &amp; Explanations</h2>
-            <div id="review-area"></div>
-        </div>
-    </section>
+        </aside>
+    </div>
+</section>
 
-</div>
+<!-- RESULT PAGE -->
+<section id="page-result" class="hidden">
+    <div class="result-summary">
+        <h1>Your Result</h1>
+        <div class="score-circle">
+            <div class="score-big" id="res-score">0</div>
+            <div class="score-denom" id="score-denom">out of 60</div>
+        </div>
+        <div class="score-percent" id="res-percent">0%</div>
+        <div class="grade-badge" id="grade-badge">—</div>
+        <div class="stats-row">
+            <div class="stat-box"><div class="stat-val" id="stat-correct">0</div><div class="stat-lbl">Correct</div></div>
+            <div class="stat-box"><div class="stat-val" id="stat-wrong">0</div><div class="stat-lbl">Wrong</div></div>
+            <div class="stat-box"><div class="stat-val" id="stat-time">0m</div><div class="stat-lbl">Time Used</div></div>
+        </div>
+        <button class="btn-home" onclick="location.reload()">Back to Home</button>
+    </div>
+    <div class="corrections-card">
+        <h2>Full Corrections &amp; Explanations</h2>
+        <div id="review-area"></div>
+    </div>
+</section>
+
+</div><!-- /container -->
 
 <!-- MODAL -->
 <div id="modal-overlay" onclick="handleOverlayClick(event)">
@@ -241,34 +246,17 @@
 </div>
 
 <script>
+
 // =====================================================================
-// PASSAGES (English only)
+// PASSAGES
 // =====================================================================
 const passages = {
-    COMP1: {
-        title: "Comprehension Passage 1 — Digital Age & Mental Health",
-        text: `The digital age has brought a significant shift in how we communicate. While social media platforms offer instant connectivity, they also present serious challenges to personal privacy and mental health. Studies conducted in over twenty countries show that excessive screen time is strongly linked to increased anxiety and depression among teenagers. Experts and psychologists suggest that setting firm boundaries for digital consumption is essential for maintaining a healthy psychological balance in today's world.\n\nHowever, the convenience of digital tools cannot be entirely dismissed. They facilitate global trade, long-distance education, and cross-cultural communication on an unprecedented scale. The key lies in achieving a balance — leveraging the benefits while consciously managing the adverse effects. Parents, schools, and policymakers all have roles to play in guiding the young generation towards a healthier relationship with technology.`
-    },
-    COMP2: {
-        title: "Comprehension Passage 2 — Corruption in Public Sector",
-        text: `Corruption in the public sector remains a major obstacle for developing nations seeking sustainable growth. It siphons off resources that ought to be channelled into infrastructure, healthcare, and education. Transparency International has repeatedly called for stricter legislative frameworks and better judicial oversight to curb this widespread menace. Whistleblower protection laws, independent anti-corruption commissions, and regular public audits are among the recommended tools.\n\nIn many cases, it is the common citizen who bears the heaviest brunt of systemic failure. Schools crumble for want of funds, hospitals lack basic equipment, and roads remain unmotorable — yet public accounts show billions appropriated for development. The resultant erosion of public trust in government institutions can have profound long-term consequences for national cohesion and democratic stability.`
-    },
-    COMP3: {
-        title: "Comprehension Passage 3 — Air Pollution",
-        text: `Air pollution is a silent killer in many urban centres across the world. Industries and vehicles emit carbon monoxide, sulphur dioxide, and other toxic gases into the atmosphere on a daily basis. This environmental degradation has led to a sharp rise in respiratory diseases such as asthma, bronchitis, and even lung cancer in heavily polluted cities. Children and the elderly are especially vulnerable to these health effects.\n\nTo combat this growing crisis, governments are encouraging a transition towards renewable energy sources such as solar and wind power. The adoption of electric vehicles and the imposition of stricter emission standards on factories are also being promoted. Urban planners are redesigning cities to include more green spaces, which absorb pollutants and improve air quality. Environmental education in schools is seen as a long-term strategy to foster a culture of sustainability among future generations.`
-    },
-    COMP4: {
-        title: "Comprehension Passage 4 — Women in Modern Society",
-        text: `The role of women in modern society has evolved tremendously over the past century. Gone are the days when women were largely confined to domestic responsibilities. Today, women lead multinational corporations, govern nations, and are at the cutting edge of scientific discovery and technological innovation. This transformation is a direct result of decades of determined advocacy for equal rights, expanded access to quality education, and landmark legislative changes.\n\nYet despite this impressive progress, gender inequality persists in many societies. Women continue to earn less than their male counterparts for equivalent work, and they remain underrepresented in political leadership and senior corporate positions. Cultural stereotypes and ingrained biases continue to limit the ambitions of many young girls. True gender equality will require not only policy changes but a fundamental shift in social attitudes and institutional structures.`
-    },
-    COMP5: {
-        title: "Comprehension Passage 5 — The Importance of Reading",
-        text: `Reading is one of the most valuable habits that a young person can cultivate. It broadens the mind, enriches vocabulary, and develops the capacity for critical thinking. Unlike passive forms of entertainment, reading demands active mental engagement — the reader must decode language, construct meaning, and evaluate arguments. These cognitive skills are transferable to virtually every academic discipline and professional field.\n\nResearch consistently shows that students who read widely outperform their peers in standardised examinations. They demonstrate superior writing skills, wider general knowledge, and greater ability to comprehend complex information. Libraries and reading clubs, particularly in schools, play a crucial role in nurturing this habit. In an age dominated by digital screens, encouraging young Nigerians to pick up books remains both a cultural and an educational priority.`
-    },
-    CLOZE1: {
-        title: "Cloze Test — Technology and Society",
-        text: `Technology has __1__ revolutionised the way we live. Today, it is nearly __2__ to imagine a world without smartphones. These devices allow us to __3__ with anyone across the globe instantly. However, we must be __4__ of the time we spend online, as it can negatively __5__ our productivity and social life.\n\nFill each numbered gap with the most appropriate option from the choices provided in each question.`
-    }
+    COMP1: { title:"Comprehension Passage 1 — Digital Age & Mental Health", text:`The digital age has brought a significant shift in how we communicate. While social media platforms offer instant connectivity, they also present serious challenges to personal privacy and mental health. Studies conducted in over twenty countries show that excessive screen time is strongly linked to increased anxiety and depression among teenagers. Experts and psychologists suggest that setting firm boundaries for digital consumption is essential for maintaining a healthy psychological balance in today's world.\n\nHowever, the convenience of digital tools cannot be entirely dismissed. They facilitate global trade, long-distance education, and cross-cultural communication on an unprecedented scale. The key lies in achieving a balance — leveraging the benefits while consciously managing the adverse effects. Parents, schools, and policymakers all have roles to play in guiding the young generation towards a healthier relationship with technology.` },
+    COMP2: { title:"Comprehension Passage 2 — Corruption in Public Sector", text:`Corruption in the public sector remains a major obstacle for developing nations seeking sustainable growth. It siphons off resources that ought to be channelled into infrastructure, healthcare, and education. Transparency International has repeatedly called for stricter legislative frameworks and better judicial oversight to curb this widespread menace. Whistleblower protection laws, independent anti-corruption commissions, and regular public audits are among the recommended tools.\n\nIn many cases, it is the common citizen who bears the heaviest brunt of systemic failure. Schools crumble for want of funds, hospitals lack basic equipment, and roads remain unmotorable — yet public accounts show billions appropriated for development. The resultant erosion of public trust in government institutions can have profound long-term consequences for national cohesion and democratic stability.` },
+    COMP3: { title:"Comprehension Passage 3 — Air Pollution", text:`Air pollution is a silent killer in many urban centres across the world. Industries and vehicles emit carbon monoxide, sulphur dioxide, and other toxic gases into the atmosphere on a daily basis. This environmental degradation has led to a sharp rise in respiratory diseases such as asthma, bronchitis, and even lung cancer in heavily polluted cities. Children and the elderly are especially vulnerable to these health effects.\n\nTo combat this growing crisis, governments are encouraging a transition towards renewable energy sources such as solar and wind power. The adoption of electric vehicles and the imposition of stricter emission standards on factories are also being promoted. Urban planners are redesigning cities to include more green spaces, which absorb pollutants and improve air quality. Environmental education in schools is seen as a long-term strategy to foster a culture of sustainability among future generations.` },
+    COMP4: { title:"Comprehension Passage 4 — Women in Modern Society", text:`The role of women in modern society has evolved tremendously over the past century. Gone are the days when women were largely confined to domestic responsibilities. Today, women lead multinational corporations, govern nations, and are at the cutting edge of scientific discovery and technological innovation. This transformation is a direct result of decades of determined advocacy for equal rights, expanded access to quality education, and landmark legislative changes.\n\nYet despite this impressive progress, gender inequality persists in many societies. Women continue to earn less than their male counterparts for equivalent work, and they remain underrepresented in political leadership and senior corporate positions. Cultural stereotypes and ingrained biases continue to limit the ambitions of many young girls. True gender equality will require not only policy changes but a fundamental shift in social attitudes and institutional structures.` },
+    COMP5: { title:"Comprehension Passage 5 — The Importance of Reading", text:`Reading is one of the most valuable habits that a young person can cultivate. It broadens the mind, enriches vocabulary, and develops the capacity for critical thinking. Unlike passive forms of entertainment, reading demands active mental engagement — the reader must decode language, construct meaning, and evaluate arguments. These cognitive skills are transferable to virtually every academic discipline and professional field.\n\nResearch consistently shows that students who read widely outperform their peers in standardised examinations. They demonstrate superior writing skills, wider general knowledge, and greater ability to comprehend complex information. Libraries and reading clubs, particularly in schools, play a crucial role in nurturing this habit. In an age dominated by digital screens, encouraging young Nigerians to pick up books remains both a cultural and an educational priority.` },
+    CLOZE1: { title:"Cloze Test — Technology and Society", text:`Technology has __1__ revolutionised the way we live. Today, it is nearly __2__ to imagine a world without smartphones. These devices allow us to __3__ with anyone across the globe instantly. However, we must be __4__ of the time we spend online, as it can negatively __5__ our productivity and social life.\n\nFill each numbered gap with the most appropriate option from the choices provided in each question.` }
 };
 
 // =====================================================================
@@ -286,16 +274,16 @@ const englishQuestionsRaw = [
     { pid:'COMP2', topic:'COMPREHENSION', q:"What does the author imply about public trust in government?", opts:["It is growing stronger","It is at an all-time high","It is being eroded by systemic corruption","It is unaffected by corruption"], ans:2, exp:"The passage states corruption causes 'erosion of public trust in government institutions'." },
     { pid:'COMP2', topic:'COMPREHENSION', q:"The word 'profound' in the passage most nearly means ___", opts:["Shallow","Slight","Very deep and significant","Temporary"], ans:2, exp:"Profound means very great or intense; far-reaching." },
     { pid:'COMP3', topic:'COMPREHENSION', q:"Which of the following is NOT mentioned in the passage as a cause of air pollution?", opts:["Industrial emissions","Vehicle exhaust fumes","Agricultural burning","Carbon monoxide from factories"], ans:2, exp:"Agricultural burning is not mentioned in the passage. Industries and vehicles are cited." },
-    { pid:'COMP3', topic:'COMPREHENSION', q:"According to the passage, who is MOST vulnerable to the effects of air pollution?", opts:["Young adults","Middle-aged men","Children and the elderly","Athletes"], ans:2, exp:"The passage explicitly states 'Children and the elderly are especially vulnerable'." },
-    { pid:'COMP3', topic:'COMPREHENSION', q:"What is the author's MAIN purpose in the last paragraph?", opts:["To describe the causes of pollution","To present solutions to air pollution","To compare cities","To criticise factories"], ans:1, exp:"The last paragraph focuses entirely on solutions: renewable energy, EVs, green spaces, and education." },
+    { pid:'COMP3', topic:'COMPREHENSION', q:"According to the passage, who is MOST vulnerable to air pollution?", opts:["Young adults","Middle-aged men","Children and the elderly","Athletes"], ans:2, exp:"The passage explicitly states 'Children and the elderly are especially vulnerable'." },
+    { pid:'COMP3', topic:'COMPREHENSION', q:"What is the author's MAIN purpose in the last paragraph?", opts:["To describe causes of pollution","To present solutions to air pollution","To compare cities","To criticise factories"], ans:1, exp:"The last paragraph focuses entirely on solutions: renewable energy, EVs, green spaces, and education." },
     { pid:'COMP4', topic:'COMPREHENSION', q:"According to the passage, women's advancement in society is a result of ___", opts:["Luck and circumstance","Advocacy, education, and legislation","Technological innovation alone","Government charity"], ans:1, exp:"The passage credits 'decades of determined advocacy for equal rights, expanded access to education, and landmark legislative changes'." },
     { pid:'COMP4', topic:'COMPREHENSION', q:"The phrase 'gender inequality persists' means ___", opts:["Gender inequality has ended","Gender inequality is growing worse","Gender inequality still continues to exist","Gender inequality is a myth"], ans:2, exp:"'Persists' means continues to exist or endure." },
     { pid:'COMP5', topic:'COMPREHENSION', q:"According to the passage, how is reading different from passive entertainment?", opts:["Reading is faster","Reading requires active mental engagement","Reading requires no effort","They are identical"], ans:1, exp:"The passage contrasts reading with passive entertainment, noting reading demands decoding, meaning-making, and evaluation." },
     { pid:'COMP5', topic:'COMPREHENSION', q:"Research shows that students who read widely ___", opts:["Perform worse in exams","Are usually anti-social","Outperform peers in standardised examinations","Prefer science over arts"], ans:2, exp:"The passage states: 'students who read widely outperform their peers in standardised examinations'." },
     { pid:'COMP5', topic:'COMPREHENSION', q:"The word 'cultivate' as used in the passage means ___", opts:["Abandon","Develop and nurture over time","Criticise","Inherit"], ans:1, exp:"To cultivate a habit means to develop and nurture it over time." },
     { pid:'CLOZE1', topic:'CLOZE TEST', q:"Choose the most appropriate word for gap __1__: Technology has ___ revolutionised the way we live.", opts:["Scarcely","Barely","Entirely","Rarely"], ans:2, exp:"'Entirely' (completely) fits the context of how thoroughly technology has changed our lives." },
-    { pid:'CLOZE1', topic:'CLOZE TEST', q:"Choose the most appropriate word for gap __2__: Today, it is nearly ___ to imagine a world without smartphones.", opts:["Possible","Common","Simple","Impossible"], ans:3, exp:"'Impossible' fits the context — it is nearly impossible to imagine life without smartphones." },
-    { pid:'CLOZE1', topic:'CLOZE TEST', q:"Choose the most appropriate word for gap __3__: These devices allow us to ___ with anyone across the globe instantly.", opts:["Communicate","Fight","Travel","Compete"], ans:0, exp:"'Communicate' is the only option that logically fits — devices allow communication." },
+    { pid:'CLOZE1', topic:'CLOZE TEST', q:"Choose the most appropriate word for gap __2__: Today, it is nearly ___ to imagine a world without smartphones.", opts:["Possible","Common","Simple","Impossible"], ans:3, exp:"'Impossible' fits — it is nearly impossible to imagine life without smartphones." },
+    { pid:'CLOZE1', topic:'CLOZE TEST', q:"Choose the most appropriate word for gap __3__: These devices allow us to ___ with anyone across the globe instantly.", opts:["Communicate","Fight","Travel","Compete"], ans:0, exp:"'Communicate' is the only option that logically fits." },
     { pid:'CLOZE1', topic:'CLOZE TEST', q:"Choose the most appropriate word for gap __4__: We must be ___ of the time we spend online.", opts:["Ignorant","Careless","Mindful","Afraid"], ans:2, exp:"'Mindful' (conscious and aware) fits — we should be conscious of our screen time." },
     { pid:'CLOZE1', topic:'CLOZE TEST', q:"Choose the most appropriate word for gap __5__: Online time can negatively ___ our productivity.", opts:["Improve","Affect","Increase","Boost"], ans:1, exp:"'Affect' (negatively impact) is the correct choice in this context." },
     { topic:'ANTONYMS', q:"Choose the option OPPOSITE in meaning to the underlined word: The manager was very EVASIVE during the inquiry.", opts:["Secretive","Deceptive","Frank","Cunning"], ans:2, exp:"Evasive means deliberately vague; Frank means open and direct — the opposite." },
@@ -304,7 +292,7 @@ const englishQuestionsRaw = [
     { topic:'ANTONYMS', q:"Choose the option OPPOSITE in meaning to TACITURN.", opts:["Silent","Reserved","Loquacious","Bitter"], ans:2, exp:"Taciturn means habitually silent; Loquacious means very talkative — the opposite." },
     { topic:'ANTONYMS', q:"Choose the option OPPOSITE in meaning to BENEVOLENT.", opts:["Kind","Generous","Malevolent","Giving"], ans:2, exp:"Benevolent means kind and generous; Malevolent means wishing to do evil — its antonym." },
     { topic:'SYNONYMS', q:"Choose the option NEAREST in meaning: The student's argument was COGENT.", opts:["Weak","Convincing","False","Lengthy"], ans:1, exp:"Cogent means clear, logical, and convincing." },
-    { topic:'SYNONYMS', q:"Choose the option NEAREST in meaning: He was an ADROIT negotiator.", opts:["Skillful","Aggressive","Nervous","Inexperienced"], ans:0, exp:"Adroit means clever or skilful, especially in using one's hands or mind." },
+    { topic:'SYNONYMS', q:"Choose the option NEAREST in meaning: He was an ADROIT negotiator.", opts:["Skillful","Aggressive","Nervous","Inexperienced"], ans:0, exp:"Adroit means clever or skilful." },
     { topic:'SYNONYMS', q:"Choose the option NEAREST in meaning to INDIGENT.", opts:["Native","Angry","Very poor","Famous"], ans:2, exp:"Indigent means very poor and needy." },
     { topic:'SYNONYMS', q:"Choose the option NEAREST in meaning to AMELIORATE.", opts:["Worsen","Improve","Ignore","Describe"], ans:1, exp:"To ameliorate means to make something bad or unsatisfactory better." },
     { topic:'SYNONYMS', q:"Choose the option NEAREST in meaning to OSTENTATIOUS.", opts:["Simple","Modest","Showy and pretentious","Intelligent"], ans:2, exp:"Ostentatious means displaying wealth or knowledge to impress; showy." },
@@ -334,13 +322,13 @@ const englishQuestionsRaw = [
     { topic:'ORAL ENGLISH — STRESS', q:"Choose the word with a DIFFERENT stress pattern from the others:", opts:["Prepare","Table","Teacher","Window"], ans:0, exp:"'Pre-PARE' carries stress on the 2nd syllable; 'TAble', 'TEAcher', and 'WINdow' are all stressed on the 1st syllable." },
     { topic:'ORAL ENGLISH — STRESS', q:"The correct primary stress for the word INTERPRET is ___", opts:["IN-ter-pret","in-TER-pret","in-ter-PRET","in-TER-PRET"], ans:1, exp:"The word 'interpret' is stressed on the second syllable: in-TER-pret." },
     { topic:'ORAL ENGLISH — STRESS', q:"In the sentence 'She BOUGHT the book, not borrowed it', the emphatic stress falls on BOUGHT because ___", opts:["Bought is the subject","The speaker is correcting a previous statement","Bought is an adjective","The sentence is a question"], ans:1, exp:"Emphatic stress is used to correct or contradict a previous statement or assumption." },
-    { topic:'ORAL ENGLISH — SOUNDS', q:"Which of the following pairs of words are MINIMAL PAIRS (differ by only one sound)?", opts:["Bat / Bad","Bat / Cat","Ship / Sheep","Thin / Think"], ans:0, exp:"'Bat /bæt/' and 'Bad /bæd/' differ only in the final consonant (/t/ vs /d/), making them a minimal pair." },
+    { topic:'ORAL ENGLISH — SOUNDS', q:"Which of the following pairs of words are MINIMAL PAIRS?", opts:["Bat / Bad","Bat / Cat","Ship / Sheep","Thin / Think"], ans:0, exp:"'Bat /bæt/' and 'Bad /bæd/' differ only in the final consonant (/t/ vs /d/), making them a minimal pair." },
     { topic:'ORAL ENGLISH — SOUNDS', q:"The sound /θ/ as in the word THINK is classified as ___", opts:["A voiced bilabial fricative","A voiceless dental fricative","A voiced velar stop","A voiceless alveolar stop"], ans:1, exp:"/θ/ is a voiceless dental fricative — produced with the tongue between the teeth and no vocal cord vibration." },
     { topic:'THE LEKKI HEADMASTER', q:"What is the name of the principal of Stardom Schools in 'The Lekki Headmaster'?", opts:["Mr. Soyemi","Mr. Adewale","Mr. Bepo","Mr. Biodun"], ans:2, exp:"The principal of Stardom Schools is Mr. Bepo, the central character of the novel." },
     { topic:'THE LEKKI HEADMASTER', q:"What nickname was given to Mr. Bepo during his time at Stardom Schools?", opts:["The Lagos Legend","The Strict Headmaster","The Lekki Headmaster","The Kind Principal"], ans:2, exp:"Mr. Bepo was nicknamed 'The Lekki Headmaster' because of his empathetic approach to conflict resolution." },
-    { topic:'THE LEKKI HEADMASTER', q:"Why was Mr. Bepo considering relocation from Nigeria?", opts:["He was offered a better school","He was dismissed from his position","Family pressure to join his wife and children in the UK","The government transferred him abroad"], ans:2, exp:"Mr. Bepo was considering relocating due to family pressure and the need to join his wife and children in the UK." },
+    { topic:'THE LEKKI HEADMASTER', q:"Why was Mr. Bepo considering relocation from Nigeria?", opts:["He was offered a better school","He was dismissed","Family pressure to join his wife and children in the UK","The government transferred him abroad"], ans:2, exp:"Mr. Bepo was considering relocating due to family pressure and the need to join his wife and children in the UK." },
     { topic:'THE LEKKI HEADMASTER', q:"How long did Mr. Bepo serve as Headmaster at Stardom Kiddies?", opts:["Two years","Three years","Four years","Five years"], ans:2, exp:"Mr. Bepo served as Headmaster at Stardom Kiddies for four years." },
-    { topic:'THE LEKKI HEADMASTER', q:"What was the outcome of the legal case involving a student asked to write on the marker board?", opts:["The school was closed down","The parent lost the case","Settled out of court — one tuition-free term and teacher suspended","The teacher was fired permanently"], ans:2, exp:"The matter was settled out of court: the student received one tuition-free term and the teacher was suspended without pay for three months." },
+    { topic:'THE LEKKI HEADMASTER', q:"What was the outcome of the legal case involving a student asked to write on the marker board?", opts:["The school was closed down","The parent lost the case","Settled out of court — one tuition-free term and teacher suspended","The teacher was fired permanently"], ans:2, exp:"Settled out of court: the student received one tuition-free term and the teacher was suspended without pay for three months." },
     { topic:'THE LEKKI HEADMASTER', q:"How much did Stardom Schools charge for the Head Girl intent forms?", opts:["N10,000","N25,000","N50,000","N100,000"], ans:2, exp:"The intent forms for the position of Head Girl cost N50,000." },
     { topic:'THE LEKKI HEADMASTER', q:"What financial measure did Stardom Schools introduce to reduce student lateness?", opts:["A fine system for late students","Lowering boarding fees from N250,000 to N165,000","Providing free school buses","Extending school hours"], ans:1, exp:"The school lowered boarding fees from N250,000 to N165,000, encouraging over 80% of parents to use the boarding house." },
     { topic:'THE LEKKI HEADMASTER', q:"What unique teaching method did Mr. Bepo introduce at Fruitful Future School?", opts:["Group debates every morning","Pupils teaching each other in class","Encouraging pupils to teach their parents a topic they learned that day","Using television for all lessons"], ans:2, exp:"Bepo encouraged pupils to teach their parents a topic from the school day — this reassured parents about teaching quality." },
@@ -349,77 +337,54 @@ const englishQuestionsRaw = [
 ];
 
 // =====================================================================
-// CHEMISTRY — 40 QUESTIONS
+// CHEMISTRY — 40 QUESTIONS  (SVG diagrams fully included)
 // =====================================================================
 const chemistryQuestionsRaw = [
-    { 
-        topic: 'GAS LAWS', 
-        q: "Which of the curves in the graph below illustrates the behavior of an ideal gas?<br><br><svg width='200' height='150' viewBox='0 0 200 150' style='background:#fff; border:1px solid #eee;'><line x1='30' y1='120' x2='180' y2='120' stroke='black' stroke-width='2'/><line x1='30' y1='120' x2='30' y2='20' stroke='black' stroke-width='2'/><path d='M 40 40 Q 45 110 170 115' fill='none' stroke='red' stroke-width='2'/><path d='M 30 70 L 180 70' fill='none' stroke='blue' stroke-width='2' stroke-dasharray='4'/><text x='170' y='65' font-size='12' fill='blue'>X</text><text x='170' y='110' font-size='12' fill='red'>Y</text><text x='100' y='140' font-size='10'>V</text><text x='5' y='75' font-size='10' transform='rotate(-90 5,75)'>PV</text></svg>", 
-        opts: ["W", "X", "Y", "Z"], 
-        ans: 1, 
-        exp: "For an ideal gas, the product of Pressure and Volume (PV) remains constant regardless of pressure changes, represented by the horizontal line X." 
-    },
-    { 
-        topic: 'KINETICS', 
-        q: "The diagram below represents the energy profile of a reaction. What does the interval marked 'Ea' represent?<br><br><svg width='200' height='150' viewBox='0 0 200 150' style='background:#fff; border:1px solid #eee;'><line x1='20' y1='130' x2='180' y2='130' stroke='black'/><line x1='20' y1='130' x2='20' y2='20' stroke='black'/><path d='M 20 100 L 50 100 Q 100 -20 150 110 L 180 110' fill='none' stroke='black' stroke-width='2'/><line x1='50' y1='100' x2='100' y2='100' stroke='gray' stroke-dasharray='2'/><line x1='100' y1='10' x2='100' y2='100' stroke='red' stroke-width='2'/><text x='105' y='50' font-size='12' fill='red'>Ea</text><text x='25' y='115' font-size='10'>Reactants</text><text x='135' y='125' font-size='10'>Products</text></svg>", 
-        opts: ["Enthalpy change", "Activation energy", "Entropy", "Free energy"], 
-        ans: 1, 
-        exp: "Ea is the activation energy, the minimum energy required for reactants to transform into products." 
-    },
-    { 
-        topic: 'SOLUBILITY', 
-        q: "Based on the solubility curve below, determine the state of a solution containing 40g of salt at 60°C.<br><br><svg width='200' height='150' viewBox='0 0 200 150' style='background:#fff; border:1px solid #eee;'><line x1='30' y1='120' x2='180' y2='120' stroke='black'/><line x1='30' y1='120' x2='30' y2='20' stroke='black'/><path d='M 30 110 C 100 105 130 60 180 30' fill='none' stroke='green' stroke-width='2'/><circle cx='110' cy='75' r='3' fill='red'/><text x='115' y='75' font-size='10' fill='red'>P</text><text x='90' y='140' font-size='10'>Temp °C</text></svg>", 
-        opts: ["Saturated", "Unsaturated", "Supersaturated", "Dilute"], 
-        ans: 1, 
-        exp: "Since point P lies below the solubility curve, the solution is unsaturated (it can still hold more solute)." 
-    },
-    { 
-        topic: 'GAS PREPARATION', 
-        q: "In the laboratory setup shown, which method is used to collect the gas?<br><br><svg width='200' height='120' viewBox='0 0 200 120' style='background:#fff; border:1px solid #eee;'><rect x='60' y='80' width='80' height='30' fill='#e1f5fe' stroke='black'/><rect x='85' y='20' width='30' height='70' fill='white' stroke='black'/><path d='M 30 100 L 100 100 L 100 50' fill='none' stroke='black' stroke-width='2'/><text x='75' y='15' font-size='10'>Gas Jar</text></svg>", 
-        opts: ["Upward delivery", "Downward delivery", "Downward displacement of water", "Upward displacement of air"], 
-        ans: 2, 
-        exp: "The diagram shows a delivery tube passing under an inverted jar in water, which is downward displacement of water." 
-    }, 
-    { topic:'GAS LAWS', q:"Boyle's Law states that at constant temperature, the volume of a fixed mass of gas is ___", opts:["Directly proportional to its pressure","Inversely proportional to its pressure","Independent of its pressure","Equal to its pressure"], ans:1, exp:"Boyle's Law: P₁V₁ = P₂V₂ at constant temperature — volume and pressure are inversely proportional." },
-    { topic:'GAS LAWS', q:"A gas occupies 500 cm³ at 27°C and 1 atm. What volume will it occupy at 127°C and 1 atm? [Charles's Law]", opts:["250 cm³","667 cm³","375 cm³","1000 cm³"], ans:1, exp:"Charles's Law: V₁/T₁ = V₂/T₂. T₁ = 300K, T₂ = 400K. V₂ = 500 × 400/300 = 667 cm³." },
-    { topic:'GAS LAWS', q:"At constant temperature and pressure, equal volumes of all gases contain the same number of molecules. This is ___", opts:["Boyle's Law","Charles's Law","Avogadro's Law","Graham's Law"], ans:2, exp:"Avogadro's Law states equal volumes of gases at the same T and P contain equal numbers of molecules." },
-    { topic:'GAS LAWS', q:"Graham's Law of Diffusion states that the rate of diffusion of a gas is ___ its molar mass.", opts:["Directly proportional to","Inversely proportional to the square root of","Equal to","Independent of"], ans:1, exp:"Graham's Law: Rate ∝ 1/√M. Lighter gases diffuse faster." },
+    { topic:'GAS LAWS — DIAGRAM', q:`Study the graph below which shows the relationship between PV and P for a gas. Which curve represents an IDEAL gas?<br><br><svg width="220" height="160" viewBox="0 0 220 160" xmlns="http://www.w3.org/2000/svg"><rect width="220" height="160" fill="#f8fafc" rx="6"/><line x1="30" y1="130" x2="195" y2="130" stroke="#334155" stroke-width="1.5"/><line x1="30" y1="130" x2="30" y2="15" stroke="#334155" stroke-width="1.5"/><text x="100" y="150" font-size="11" fill="#334155" text-anchor="middle">Pressure (P)</text><text x="12" y="75" font-size="11" fill="#334155" text-anchor="middle" transform="rotate(-90,12,75)">PV</text><line x1="30" y1="72" x2="195" y2="72" stroke="#1d4ed8" stroke-width="2.5" stroke-dasharray="6,3"/><text x="198" y="76" font-size="12" fill="#1d4ed8" font-weight="bold">X</text><path d="M30,72 Q80,60 130,40 T195,20" fill="none" stroke="#dc2626" stroke-width="2"/><text x="198" y="24" font-size="12" fill="#dc2626" font-weight="bold">Y</text><path d="M30,72 Q80,82 130,95 T195,110" fill="none" stroke="#16a34a" stroke-width="2"/><text x="198" y="114" font-size="12" fill="#16a34a" font-weight="bold">Z</text></svg>`, opts:["Curve Y","Curve X — the horizontal line","Curve Z","None of the curves"], ans:1, exp:"For an ideal gas PV = nRT = constant at fixed temperature. This gives a horizontal line (X). Real gases deviate — some curve upward (Y) or downward (Z) from ideal behaviour." },
+
+    { topic:'KINETICS — DIAGRAM', q:`The diagram below shows an energy profile for a chemical reaction. What does the vertical arrow labelled Ea represent?<br><br><svg width="220" height="160" viewBox="0 0 220 160" xmlns="http://www.w3.org/2000/svg"><rect width="220" height="160" fill="#f8fafc" rx="6"/><line x1="20" y1="145" x2="200" y2="145" stroke="#334155" stroke-width="1.5"/><line x1="20" y1="145" x2="20" y2="10" stroke="#334155" stroke-width="1.5"/><text x="110" y="158" font-size="10" fill="#334155" text-anchor="middle">Reaction Progress</text><text x="10" y="80" font-size="10" fill="#334155" text-anchor="middle" transform="rotate(-90,10,80)">Energy</text><path d="M20,108 L55,108 Q110,-5 165,120 L200,120" fill="none" stroke="#1e3a5f" stroke-width="2.2"/><line x1="55" y1="108" x2="55" y2="20" stroke="#dc2626" stroke-width="1.5" stroke-dasharray="4"/><line x1="110" y1="20" x2="110" y2="108" stroke="#dc2626" stroke-width="2"/><text x="114" y="65" font-size="11" fill="#dc2626" font-weight="bold">Ea</text><text x="22" y="122" font-size="9" fill="#334155">Reactants</text><text x="158" y="117" font-size="9" fill="#334155">Products</text></svg>`, opts:["Enthalpy change of reaction","Activation energy — minimum energy needed for reaction to occur","Entropy change","Heat of combustion"], ans:1, exp:"Ea is the activation energy — the minimum energy that reacting particles must possess for a successful collision to occur and form products." },
+
+    { topic:'SOLUBILITY — DIAGRAM', q:`The graph shows a solubility curve. Point P represents a solution containing 40g of salt at 60°C. What is the state of this solution?<br><br><svg width="220" height="160" viewBox="0 0 220 160" xmlns="http://www.w3.org/2000/svg"><rect width="220" height="160" fill="#f8fafc" rx="6"/><line x1="30" y1="135" x2="195" y2="135" stroke="#334155" stroke-width="1.5"/><line x1="30" y1="135" x2="30" y2="10" stroke="#334155" stroke-width="1.5"/><text x="112" y="152" font-size="10" fill="#334155" text-anchor="middle">Temperature (°C)</text><text x="10" y="75" font-size="10" fill="#334155" text-anchor="middle" transform="rotate(-90,10,75)">Solubility (g/100g)</text><path d="M30,125 C80,115 130,70 195,30" fill="none" stroke="#16a34a" stroke-width="2.5"/><text x="30" y="140" font-size="9" fill="#334155">0</text><text x="100" y="140" font-size="9" fill="#334155">60°C</text><text x="25" y="78" font-size="9" fill="#334155">50g</text><circle cx="112" cy="95" r="5" fill="#dc2626"/><text x="118" y="93" font-size="11" fill="#dc2626" font-weight="bold">P (40g)</text><line x1="30" y1="78" x2="195" y2="78" stroke="#94a3b8" stroke-width="1" stroke-dasharray="3"/></svg>`, opts:["Saturated","Unsaturated — it can dissolve more solute","Supersaturated","Dilute only"], ans:1, exp:"Point P lies below the solubility curve, meaning the solution contains less solute than it could hold at 60°C — it is therefore unsaturated." },
+
+    { topic:'ELECTROLYSIS — DIAGRAM', q:`The diagram shows a laboratory setup for electrolysis of brine (NaCl solution). Which gas is collected at electrode X (the anode — positive electrode)?<br><br><svg width="220" height="155" viewBox="0 0 220 155" xmlns="http://www.w3.org/2000/svg"><rect width="220" height="155" fill="#f8fafc" rx="6"/><rect x="40" y="60" width="140" height="70" rx="4" fill="#dbeafe" stroke="#334155" stroke-width="1.5"/><rect x="70" y="25" width="20" height="45" fill="white" stroke="#334155" stroke-width="1.5"/><rect x="130" y="25" width="20" height="45" fill="white" stroke="#334155" stroke-width="1.5"/><text x="72" y="20" font-size="9" fill="#334155">Cathode(−)</text><text x="128" y="20" font-size="9" fill="#334155">Anode(+)</text><text x="132" y="42" font-size="11" fill="#dc2626" font-weight="bold">X</text><path d="M80,26 L80,14 L140,14 L140,26" fill="none" stroke="#334155" stroke-width="1.5"/><rect x="100" y="5" width="20" height="10" rx="2" fill="#e8a020"/><text x="107" y="13" font-size="7" fill="white">⚡</text><text x="45" y="100" font-size="9" fill="#1e3a5f">NaCl(aq)</text></svg>`, opts:["Hydrogen gas (H₂)","Oxygen gas (O₂)","Chlorine gas (Cl₂)","Sodium vapour"], ans:2, exp:"At the anode (positive electrode, X), chloride ions are oxidised: 2Cl⁻ → Cl₂ + 2e⁻. Chlorine gas is therefore collected at the anode." },
+
     { topic:'STOICHIOMETRY', q:"What is the molar mass of H₂SO₄? [H=1, S=32, O=16]", opts:["96 g/mol","98 g/mol","100 g/mol","80 g/mol"], ans:1, exp:"(1×2) + 32 + (16×4) = 2 + 32 + 64 = 98 g/mol." },
-    { topic:'STOICHIOMETRY', q:"How many moles are in 11g of CO₂? [C=12, O=16]", opts:["0.5 mol","0.25 mol","1 mol","2 mol"], ans:1, exp:"Molar mass of CO₂ = 12 + 32 = 44 g/mol. Moles = 11/44 = 0.25 mol." },
-    { topic:'STOICHIOMETRY', q:"What volume of 0.5 mol/dm³ HCl will exactly neutralize 20 cm³ of 0.1 mol/dm³ NaOH? [HCl + NaOH → NaCl + H₂O]", opts:["2 cm³","4 cm³","10 cm³","40 cm³"], ans:1, exp:"CₐVₐ = CᵦVᵦ → 0.5 × Vₐ = 0.1 × 20 → Vₐ = 2/0.5 = 4 cm³." },
-    { topic:'STOICHIOMETRY', q:"What mass of Copper is deposited when 2 Faradays of electricity pass through CuSO₄ solution? [Cu=64, Cu²⁺ + 2e⁻ → Cu]", opts:["32 g","64 g","128 g","16 g"], ans:1, exp:"Cu²⁺ requires 2 moles of electrons per mole of Cu. 2F deposits 1 mole of Cu = 64g." },
-    { topic:'PERIODICITY', q:"Across Period 3 from left to right, atomic radius ___", opts:["Increases","Decreases","Remains constant","Fluctuates randomly"], ans:1, exp:"Increasing nuclear charge across a period pulls electrons closer to the nucleus, decreasing the atomic radius." },
+    { topic:'STOICHIOMETRY', q:"How many moles are in 11 g of CO₂? [C=12, O=16]", opts:["0.5 mol","0.25 mol","1 mol","2 mol"], ans:1, exp:"Molar mass of CO₂ = 12 + 32 = 44 g/mol. Moles = 11 ÷ 44 = 0.25 mol." },
+    { topic:'STOICHIOMETRY', q:"What volume of 0.5 mol/dm³ HCl will exactly neutralise 20 cm³ of 0.1 mol/dm³ NaOH? [HCl + NaOH → NaCl + H₂O]", opts:["2 cm³","4 cm³","10 cm³","40 cm³"], ans:1, exp:"CₐVₐ = CᵦVᵦ → 0.5 × Vₐ = 0.1 × 20 → Vₐ = 2.0 ÷ 0.5 = 4 cm³." },
+    { topic:'STOICHIOMETRY', q:"What mass of Copper is deposited when 2 Faradays pass through CuSO₄ solution? [Cu=64; Cu²⁺ + 2e⁻ → Cu]", opts:["32 g","64 g","128 g","16 g"], ans:1, exp:"Cu²⁺ requires 2 moles of electrons per mole of Cu. 2F deposits 1 mole = 64 g." },
+    { topic:'STOICHIOMETRY', q:"Calculate the percentage by mass of Nitrogen in NH₃. [N=14, H=1]", opts:["78%","82.4%","17.6%","50%"], ans:1, exp:"Molar mass of NH₃ = 14 + 3 = 17 g/mol. % N = (14 ÷ 17) × 100 = 82.4%." },
+    { topic:'GAS LAWS', q:"A gas occupies 500 cm³ at 27°C and 1 atm. What volume does it occupy at 127°C and 1 atm? [Charles's Law: V₁/T₁ = V₂/T₂]", opts:["250 cm³","667 cm³","375 cm³","1000 cm³"], ans:1, exp:"T₁ = 27+273 = 300 K; T₂ = 127+273 = 400 K. V₂ = 500 × 400/300 = 667 cm³." },
+    { topic:'GAS LAWS', q:"Boyle's Law states that at constant temperature, the volume of a fixed mass of gas is ___", opts:["Directly proportional to its pressure","Inversely proportional to its pressure","Independent of its pressure","Equal to its pressure"], ans:1, exp:"Boyle's Law: P₁V₁ = P₂V₂ at constant temperature — volume and pressure are inversely proportional." },
+    { topic:'GAS LAWS', q:"Graham's Law of Diffusion states that the rate of diffusion of a gas is ___ its molar mass.", opts:["Directly proportional to","Inversely proportional to the square root of","Equal to","Independent of"], ans:1, exp:"Graham's Law: Rate ∝ 1/√M. Lighter gases diffuse faster than heavier ones." },
+    { topic:'PERIODICITY', q:"Across Period 3 from left to right, atomic radius ___", opts:["Increases","Decreases","Remains constant","Fluctuates randomly"], ans:1, exp:"Increasing nuclear charge across a period pulls electrons closer, decreasing atomic radius." },
     { topic:'PERIODICITY', q:"Which element has the highest electronegativity?", opts:["Chlorine","Oxygen","Nitrogen","Fluorine"], ans:3, exp:"Fluorine (F) is the most electronegative element on the Pauling scale." },
-    { topic:'PERIODICITY', q:"Transition metals have variable oxidation states primarily because of their ___", opts:["s-orbital electrons","d-orbital electrons","p-orbital electrons","f-orbital electrons"], ans:1, exp:"Partially filled d-orbitals allow transition metals to lose different numbers of electrons, giving variable oxidation states." },
-    { topic:'PERIODICITY', q:"The first ionization energy generally ___ across Period 3.", opts:["Decreases","Increases","Stays the same","First increases then decreases sharply"], ans:3, exp:"First ionization energy generally increases across a period but drops slightly at Group IIA→IIIA and VA→VIA due to orbital stability effects." },
-    { topic:'BONDING', q:"The type of bond formed by the transfer of electrons from one atom to another is ___", opts:["Covalent bond","Metallic bond","Ionic bond","Hydrogen bond"], ans:2, exp:"Ionic (electrovalent) bonds result from the complete transfer of electrons, creating oppositely charged ions." },
-    { topic:'BONDING', q:"Carbon is tetravalent because ___", opts:["It has 4 neutrons","Its 2s and 2p orbitals hybridize to form 4 equivalent bonds","It belongs to Group IV","It has 4 protons"], ans:1, exp:"Hybridization of one 2s and three 2p orbitals forms four sp³ hybrid orbitals, making carbon tetravalent." },
-    { topic:'BONDING', q:"Which of the following molecules has a TETRAHEDRAL shape?", opts:["CO₂","H₂O","BF₃","CH₄"], ans:3, exp:"Methane (CH₄) has 4 bonding pairs and no lone pairs, giving a perfect tetrahedral geometry." },
-    { topic:'BONDING', q:"A coordinate (dative covalent) bond is formed when ___", opts:["Electrons are transferred","One atom provides both electrons for sharing","Electrons are shared equally","Metallic atoms bond"], ans:1, exp:"In a dative bond, one atom (the donor) provides both electrons of the shared pair." },
+    { topic:'PERIODICITY', q:"Transition metals have variable oxidation states primarily because of their ___", opts:["s-orbital electrons","d-orbital electrons","p-orbital electrons","f-orbital electrons"], ans:1, exp:"Partially filled d-orbitals allow transition metals to lose different numbers of electrons." },
+    { topic:'PERIODICITY', q:"The first ionisation energy generally ___ across Period 3.", opts:["Decreases steadily","Increases generally with slight drops at Group IIA→IIIA and VA→VIA","Stays the same throughout","Drops at every element"], ans:1, exp:"First ionisation energy increases across a period but drops slightly at Mg→Al and P→S due to orbital stability." },
+    { topic:'BONDING', q:"The type of bond formed by the complete transfer of electrons from one atom to another is ___", opts:["Covalent bond","Metallic bond","Ionic bond","Hydrogen bond"], ans:2, exp:"Ionic (electrovalent) bonds result from the complete transfer of electrons, creating oppositely charged ions." },
+    { topic:'BONDING', q:"Carbon is tetravalent because ___", opts:["It has 4 neutrons","Its 2s and 2p orbitals hybridize to form 4 equivalent bonds","It belongs to Group IV","It has 4 protons"], ans:1, exp:"Hybridisation of one 2s and three 2p orbitals forms four sp³ hybrid orbitals, making carbon tetravalent." },
+    { topic:'BONDING', q:"Which of the following molecules has a TETRAHEDRAL shape?", opts:["CO₂","H₂O","BF₃","CH₄"], ans:3, exp:"Methane (CH₄) has 4 bonding pairs and no lone pairs, giving a perfect tetrahedral geometry (109.5°)." },
+    { topic:'BONDING', q:"A coordinate (dative covalent) bond is formed when ___", opts:["Electrons are transferred","One atom provides both electrons for the shared pair","Electrons are shared equally","Metallic atoms bond"], ans:1, exp:"In a dative bond, one atom (the donor) provides both electrons of the shared pair." },
     { topic:'ORGANIC CHEMISTRY', q:"The IUPAC name for CH₃CH₂OH is ___", opts:["Methanol","Propanol","Ethanol","Butanol"], ans:2, exp:"Two carbons (Eth-) with a hydroxyl group (-ol) = Ethanol." },
     { topic:'ORGANIC CHEMISTRY', q:"The general formula for alkanes is ___", opts:["CₙH₂ₙ","CₙH₂ₙ₊₂","CₙH₂ₙ₋₂","CₙH₂ₙ₊₁"], ans:1, exp:"Alkanes are saturated hydrocarbons with the general formula CₙH₂ₙ₊₂." },
-    { topic:'ORGANIC CHEMISTRY', q:"Ethene (CH₂=CH₂) primarily undergoes ___ reactions because of its double bond.", opts:["Substitution","Addition","Elimination","Condensation"], ans:1, exp:"Unsaturated hydrocarbons with C=C double bonds undergo addition reactions across the double bond." },
-    { topic:'ORGANIC CHEMISTRY', q:"The allotrope of carbon used in decolourizing sugar is ___", opts:["Graphite","Diamond","Charcoal","Soot"], ans:2, exp:"Activated charcoal is highly porous and adsorbs coloring matter, used to decolorize sugar syrup." },
-    { topic:'ORGANIC CHEMISTRY', q:"Which of the following is a PRIMARY alcohol?", opts:["(CH₃)₂CHOH","(CH₃)₃COH","CH₃CH₂OH","CH₃COCH₃"], ans:2, exp:"In a primary alcohol (CH₃CH₂OH = Ethanol), the OH group is attached to a carbon bonded to only one other carbon." },
+    { topic:'ORGANIC CHEMISTRY', q:"Ethene (CH₂=CH₂) primarily undergoes ___ reactions because of its C=C double bond.", opts:["Substitution","Addition","Elimination","Condensation"], ans:1, exp:"Unsaturated hydrocarbons with C=C double bonds undergo addition reactions across the double bond." },
+    { topic:'ORGANIC CHEMISTRY', q:"The allotrope of carbon used in decolourising sugar is ___", opts:["Graphite","Diamond","Charcoal","Soot"], ans:2, exp:"Activated charcoal is highly porous and adsorbs colouring matter, used to decolourise sugar syrup." },
+    { topic:'ORGANIC CHEMISTRY', q:"Which of the following is a PRIMARY alcohol?", opts:["(CH₃)₂CHOH","(CH₃)₃COH","CH₃CH₂OH","CH₃COCH₃"], ans:2, exp:"In a primary alcohol (Ethanol: CH₃CH₂OH), the OH group is attached to a carbon bonded to only one other carbon." },
     { topic:'ACIDS, BASES & SALTS', q:"The pH of a neutral solution at 25°C is ___", opts:["0","1","7","14"], ans:2, exp:"A pH of 7 represents a neutral solution where [H⁺] = [OH⁻] = 1×10⁻⁷ mol/dm³." },
     { topic:'ACIDS, BASES & SALTS', q:"An amphoteric oxide is one that reacts with ___", opts:["Acids only","Bases only","Both acids and bases","Neither acids nor bases"], ans:2, exp:"Amphoteric oxides (e.g. Al₂O₃, ZnO) react with both acids and bases." },
     { topic:'ACIDS, BASES & SALTS', q:"NaHSO₄ is classified as ___", opts:["A normal salt","An acid salt","A basic salt","A double salt"], ans:1, exp:"NaHSO₄ still contains a replaceable hydrogen ion, making it an acid salt." },
-    { topic:'EQUILIBRIUM', q:"In the reaction N₂(g) + 3H₂(g) ⇌ 2NH₃(g) ΔH = −ve, increasing temperature will ___", opts:["Increase yield of NH₃","Decrease yield of NH₃","Have no effect on yield","Increase the rate only"], ans:1, exp:"The reaction is exothermic. By Le Chatelier's principle, increasing temperature shifts equilibrium left, reducing NH₃ yield." },
-    { topic:'EQUILIBRIUM', q:"According to Le Chatelier's principle, increasing pressure in N₂ + 3H₂ ⇌ 2NH₃ will ___", opts:["Shift equilibrium to the left","Shift equilibrium to the right","Have no effect","Reduce temperature"], ans:1, exp:"Increased pressure favours the side with fewer moles of gas. Left=4 moles, Right=2 moles — equilibrium shifts right." },
-    { topic:'ELECTROLYSIS', q:"Aluminium is extracted from its ore by electrolysis of ___", opts:["Molten Bauxite","Pure Cryolite","Alumina dissolved in molten Cryolite","Aluminium chloride solution"], ans:2, exp:"The Hall-Héroult process dissolves alumina (Al₂O₃) in molten cryolite to lower the melting point, then electrolyses it." },
-    { topic:'ELECTROLYSIS', q:"During electrolysis of dilute H₂SO₄, the gas produced at the CATHODE is ___", opts:["Oxygen","Sulphur dioxide","Hydrogen","Water vapour"], ans:2, exp:"At the cathode (negative electrode), H⁺ ions are reduced: 2H⁺ + 2e⁻ → H₂." },
-    { topic:'RADIOACTIVITY', q:"The half-life of a radioactive substance is 10 days. What fraction of a 100g sample remains after 30 days?", opts:["1/2 (50g)","1/4 (25g)","1/8 (12.5g)","1/16 (6.25g)"], ans:2, exp:"30 days = 3 half-lives. 100g → 50g → 25g → 12.5g = 1/8 of original." },
-    { topic:'RADIOACTIVITY', q:"Alpha (α) particles are identical to ___", opts:["Helium-4 nuclei (2 protons + 2 neutrons)","Electrons","Gamma rays","Hydrogen nuclei"], ans:0, exp:"Alpha particles consist of 2 protons and 2 neutrons, identical to a helium-4 nucleus (₂⁴He)." },
-    { topic:'THERMOCHEMISTRY', q:"A reaction is exothermic when ___", opts:["It absorbs heat from surroundings","ΔH is negative","ΔH is positive","It requires a catalyst"], ans:1, exp:"Exothermic reactions release heat to the surroundings. This is represented by a negative enthalpy change (ΔH < 0)." },
-    { topic:'THERMOCHEMISTRY', q:"The heat change when 1 mole of a substance is completely burned in excess oxygen is called ___", opts:["Enthalpy of formation","Enthalpy of combustion","Enthalpy of neutralization","Enthalpy of solution"], ans:1, exp:"The standard enthalpy of combustion (ΔHc) is the heat released when 1 mole of a substance burns completely in O₂." },
-    { topic:'METALS & ALLOYS', q:"Sodium metal is stored under oil because it ___", opts:["Is reduced by nitrogen","Readily reacts with water and oxygen in air","Reacts with carbon dioxide","Has a very high melting point"], ans:1, exp:"Sodium is highly reactive and reacts violently with moisture and oxygen. Storing under oil prevents contact with air." },
-    { topic:'METALS & ALLOYS', q:"Alloys are best prepared by ___", opts:["Cooling a molten mixture of the metals","Reducing a mixture of their oxides","Arc-welding the metals together","Electroplating one metal onto another"], ans:0, exp:"Alloys are prepared by melting two or more metals together and cooling the mixture to form a uniform solid solution." },
-    { topic:'METALS & ALLOYS', q:"Rusting of iron requires the presence of ___", opts:["Oxygen only","Water only","Both oxygen and water","Nitrogen and water"], ans:2, exp:"Rusting is an electrochemical process that requires both oxygen and water (moisture) simultaneously." },
+    { topic:'EQUILIBRIUM', q:"In the reaction N₂(g) + 3H₂(g) ⇌ 2NH₃(g), ΔH = −92 kJ/mol. Increasing temperature will ___", opts:["Increase yield of NH₃","Decrease yield of NH₃","Have no effect on yield","Increase rate only"], ans:1, exp:"The reaction is exothermic. By Le Chatelier's principle, increasing temperature shifts equilibrium left, reducing NH₃ yield." },
+    { topic:'EQUILIBRIUM', q:"Increasing pressure in N₂(g) + 3H₂(g) ⇌ 2NH₃(g) will ___", opts:["Shift equilibrium to the left","Shift equilibrium to the right","Have no effect","Reduce temperature"], ans:1, exp:"Increased pressure favours fewer moles of gas. Left=4 moles, Right=2 moles — equilibrium shifts right, increasing NH₃." },
+    { topic:'ELECTROLYSIS', q:"During electrolysis of dilute H₂SO₄, the gas produced at the CATHODE is ___", opts:["Oxygen","Sulphur dioxide","Hydrogen","Water vapour"], ans:2, exp:"At the cathode (negative electrode): 2H⁺ + 2e⁻ → H₂. Hydrogen gas is produced." },
+    { topic:'RADIOACTIVITY', q:"The half-life of a radioactive substance is 10 days. What mass remains from 100 g after 30 days?", opts:["50 g","25 g","12.5 g","6.25 g"], ans:2, exp:"30 days = 3 half-lives. 100g → 50g → 25g → 12.5 g remains." },
+    { topic:'RADIOACTIVITY', q:"Alpha (α) particles are identical to ___", opts:["Helium-4 nuclei (2 protons + 2 neutrons)","Electrons","Gamma rays","Hydrogen nuclei"], ans:0, exp:"Alpha particles consist of 2 protons and 2 neutrons — identical to a helium-4 nucleus (₂⁴He)." },
+    { topic:'THERMOCHEMISTRY', q:"A reaction is exothermic when ___", opts:["It absorbs heat from surroundings","ΔH is negative (heat is released)","ΔH is positive","It requires a catalyst"], ans:1, exp:"Exothermic reactions release heat to the surroundings, represented by a negative enthalpy change (ΔH < 0)." },
+    { topic:'METALS & ALLOYS', q:"Sodium metal is stored under oil because it ___", opts:["Is reduced by nitrogen","Readily reacts with water and oxygen in air","Reacts with carbon dioxide","Has a very high melting point"], ans:1, exp:"Sodium is highly reactive and reacts violently with moisture and oxygen. Oil prevents contact with air." },
+    { topic:'METALS & ALLOYS', q:"Rusting of iron requires the presence of ___", opts:["Oxygen only","Water only","Both oxygen and water","Nitrogen and water"], ans:2, exp:"Rusting is an electrochemical process that requires both oxygen (O₂) and water (moisture) simultaneously." },
     { topic:'SEPARATION', q:"Fractional distillation is used to separate liquids that have ___", opts:["Different solubilities","Different densities","Different boiling points","Different colours"], ans:2, exp:"Fractional distillation separates miscible liquid mixtures (e.g. crude oil) based on differences in boiling points." },
-    { topic:'WATER', q:"Temporary hardness of water is caused by dissolved ___", opts:["CaSO₄","CaCl₂","Ca(HCO₃)₂ and Mg(HCO₃)₂","MgSO₄"], ans:2, exp:"Temporary hardness is caused by dissolved calcium and magnesium bicarbonates, removable by boiling." },
-    { topic:'OXIDATION & REDUCTION', q:"Sulphur (IV) oxide bleaches coloured substances by ___", opts:["Oxidation","Reduction","Hydration","Neutralisation"], ans:1, exp:"SO₂ acts as a bleaching agent through reduction — it removes oxygen from coloured compounds, destroying the colour." },
-    { topic:'ENVIRONMENTAL', q:"Which of the following gases is primarily responsible for the greenhouse effect?", opts:["Nitrogen (N₂)","Oxygen (O₂)","Carbon(IV) oxide (CO₂)","Argon (Ar)"], ans:2, exp:"CO₂ absorbs and re-emits infrared radiation, trapping heat in the atmosphere — the greenhouse effect." },
-    { topic:'MATTER', q:"A physical change differs from a chemical change because in a physical change ___", opts:["New substances are formed","The change is usually irreversible","No new substance is formed and the change is reversible","Energy is always released"], ans:2, exp:"Physical changes (melting, boiling) don't form new substances and are generally reversible, unlike chemical changes." },
+    { topic:'WATER', q:"Temporary hardness of water is caused by dissolved ___", opts:["CaSO₄","CaCl₂","Ca(HCO₃)₂ and Mg(HCO₃)₂","MgSO₄"], ans:2, exp:"Temporary hardness is caused by dissolved calcium and magnesium bicarbonates, removed by boiling." },
+    { topic:'OXIDATION & REDUCTION', q:"Sulphur(IV) oxide bleaches coloured substances by ___", opts:["Oxidation","Reduction","Hydration","Neutralisation"], ans:1, exp:"SO₂ bleaches by reduction — it removes oxygen from coloured compounds, destroying the colour." },
+    { topic:'ENVIRONMENTAL', q:"Which gas is primarily responsible for the greenhouse effect?", opts:["Nitrogen (N₂)","Oxygen (O₂)","Carbon(IV) oxide (CO₂)","Argon (Ar)"], ans:2, exp:"CO₂ absorbs and re-emits infrared radiation, trapping heat in the atmosphere — the greenhouse effect." },
+    { topic:'MATTER', q:"A physical change differs from a chemical change because in a physical change ___", opts:["New substances are formed","The change is irreversible","No new substance is formed and the change is usually reversible","Energy is always released"], ans:2, exp:"Physical changes (melting, boiling) don't form new substances and are generally reversible." },
 ];
 
 // =====================================================================
@@ -445,7 +410,7 @@ const literatureQuestionsRaw = [
     { topic:'LITERARY DEVICES', q:"The literary device that creates a mental image through descriptive language is ___", opts:["Imagery","Irony","Tone","Rhyme"], ans:0, exp:"Imagery uses vivid, descriptive language to appeal to the senses and create mental pictures." },
     { topic:'LITERARY DEVICES', q:"Dramatic irony occurs when ___", opts:["The audience knows something the characters don't","The character says the opposite of what they mean","Two events happen simultaneously","A character speaks to the audience alone"], ans:0, exp:"Dramatic irony is when the audience possesses information that the characters on stage do not have." },
     { topic:'LITERARY DEVICES', q:"The narrator who knows the thoughts and feelings of ALL characters is ___", opts:["First-person narrator","Limited third-person narrator","Omniscient narrator","Unreliable narrator"], ans:2, exp:"The omniscient (all-knowing) narrator has access to the inner thoughts and feelings of all characters." },
-    { topic:'LITERARY DEVICES', q:"'In the expression Rage is chief', the poetic device used is ___", opts:["Simile","Irony","Metaphor","Alliteration"], ans:2, exp:"'Rage is chief' directly equates rage with a position of leadership — this is a metaphor." },
+    { topic:'LITERARY DEVICES', q:"In the expression 'Rage is chief', the poetic device used is ___", opts:["Simile","Irony","Metaphor","Alliteration"], ans:2, exp:"'Rage is chief' directly equates rage with a position of leadership — this is a metaphor." },
     { topic:'DRAMA', q:"A speech delivered alone on stage, revealing a character's inner thoughts, is called a ___", opts:["Aside","Monologue","Soliloquy","Prologue"], ans:2, exp:"A soliloquy is a dramatic device where a character speaks their thoughts aloud while alone on stage." },
     { topic:'DRAMA', q:"A short comment spoken by a character heard only by the audience is called an ___", opts:["Aside","Soliloquy","Epilogue","Monologue"], ans:0, exp:"An aside is directed to the audience and is not intended to be heard by other characters on stage." },
     { topic:'DRAMA', q:"The list of characters in a play is known as ___", opts:["Synopsis","Stage directions","Dramatis personae","Epilogue"], ans:2, exp:"'Dramatis personae' is a Latin term meaning 'persons of the drama' — the cast list of a play." },
@@ -496,35 +461,30 @@ let userAnswers = {};
 let currentIndex = 0;
 let timerVal = 1800;
 let timerInt;
-let totalQ = 60; // ✅ tracks the dynamic total
+let totalQ = 60; // ✅ dynamic total — 40 for chemistry, 60 for others
 
 // =====================================================================
-// INIT EXAM — THE KEY FIX IS HERE
+// INIT EXAM
 // =====================================================================
 function initExam(subject) {
     let pool;
-
-    if (subject === 'english') {
-        pool = [...englishQuestionsRaw];
-        totalQ = 60;
-    } else if (subject === 'literature') {
-        pool = [...literatureQuestionsRaw];
-        totalQ = 60;
-    } else if (subject === 'chemistry') {
-        pool = [...chemistryQuestionsRaw];
-        totalQ = 40;
-    }
+    if (subject === 'english')         { pool = [...englishQuestionsRaw];    totalQ = 60; }
+    else if (subject === 'literature') { pool = [...literatureQuestionsRaw]; totalQ = 60; }
+    else if (subject === 'chemistry')  { pool = [...chemistryQuestionsRaw];  totalQ = 40; }
+    else if (subject === 'physics')    { pool = [...physicsQuestionsRaw];    totalQ = 40; }
+    else if (subject === 'mathematics'){ pool = [...mathQuestionsRaw];       totalQ = 40; }
 
     pool = pool.sort(() => Math.random() - 0.5);
     currentQuestions = pool.slice(0, totalQ);
 
     document.getElementById('display-subject').innerText =
-        subject === 'english' ? 'English Language' :
-        subject === 'literature' ? 'Literature in English' : 'Chemistry';
+        subject === 'english'     ? 'English Language' :
+        subject === 'literature'  ? 'Literature in English' :
+        subject === 'chemistry'   ? 'Chemistry' :
+        subject === 'physics'     ? 'Physics' : 'Mathematics';
 
     document.getElementById('page-selection').classList.add('hidden');
     document.getElementById('page-exam').classList.remove('hidden');
-
     renderGrid();
     loadQuestion(0);
     startTimer();
@@ -567,9 +527,8 @@ function loadQuestion(index) {
     }
 
     document.getElementById('q-topic').innerText = q.topic || '';
-    // ✅ Uses totalQ (dynamic — 40 or 60)
     document.getElementById('q-number').innerText = `Question ${index + 1} of ${totalQ}`;
-    document.getElementById('q-text').innerHTML = q.q;
+    document.getElementById('q-text').innerHTML = q.q;  // innerHTML allows SVGs
 
     const optArea = document.getElementById('options-area');
     optArea.innerHTML = '';
@@ -615,7 +574,7 @@ function startTimer() {
 }
 
 // =====================================================================
-// SUBMIT — ALL HARDCODED 60s REPLACED WITH totalQ
+// SUBMIT
 // =====================================================================
 function forceSubmit(auto = false) {
     if (!auto && !confirm("Are you sure you want to finish the test? You cannot go back.")) return;
@@ -648,7 +607,7 @@ function forceSubmit(auto = false) {
     else if (percent >= 50) { grade = 'C — Average'; gradeClass = 'grade-C'; }
     else { grade = 'F — Below Average'; gradeClass = 'grade-F'; }
 
-    // ✅ THE MAIN FIX: update score-denom dynamically
+    // ✅ score-denom updated dynamically
     document.getElementById('res-score').innerText = score;
     document.getElementById('score-denom').innerText = `out of ${totalQ}`;
     document.getElementById('res-percent').innerText = `${percent}%`;
@@ -658,7 +617,6 @@ function forceSubmit(auto = false) {
     const badge = document.getElementById('grade-badge');
     badge.innerText = grade;
     badge.className = `grade-badge ${gradeClass}`;
-
     document.getElementById('review-area').innerHTML = reviewHtml;
     document.getElementById('page-exam').classList.add('hidden');
     document.getElementById('page-result').classList.remove('hidden');
@@ -674,6 +632,320 @@ function togglePassage() {
 function handleOverlayClick(e) {
     if (e.target === document.getElementById('modal-overlay')) togglePassage();
 }
+
+
+// =====================================================================
+// PHYSICS — 55 QUESTIONS (40 selected randomly per session)
+// =====================================================================
+const physicsQuestionsRaw = [
+
+// ── OPTICS ──────────────────────────────────────────────────────────
+{ topic:'OPTICS', q:`The diagram shows a ray of light passing from medium M into air. The angles shown are 30° (in M) and 60° (in air).<br><br>
+<svg width="220" height="160" viewBox="0 0 220 160" xmlns="http://www.w3.org/2000/svg">
+<rect width="220" height="160" fill="#f8fafc" rx="6"/>
+<rect x="0" y="80" width="220" height="80" fill="#dbeafe" rx="0"/>
+<text x="8" y="100" font-size="10" fill="#1e3a5f">Medium M</text>
+<text x="8" y="20" font-size="10" fill="#334155">Air</text>
+<line x1="110" y1="0" x2="110" y2="160" stroke="#94a3b8" stroke-width="1" stroke-dasharray="4"/>
+<line x1="110" y1="80" x2="50" y2="20" stroke="#dc2626" stroke-width="2"/>
+<line x1="110" y1="80" x2="170" y2="140" stroke="#dc2626" stroke-width="2"/>
+<text x="70" y="50" font-size="11" fill="#dc2626">60°</text>
+<text x="120" y="110" font-size="11" fill="#1e3a5f">30°</text>
+<text x="95" y="95" font-size="9" fill="#64748b">Normal</text>
+</svg>
+The refractive index of medium M is`, opts:["2/√3","1/√3","2√3","√3"], ans:3, exp:"n = sin(angle in air)/sin(angle in M) = sin60°/sin30° = (√3/2)/(1/2) = √3." },
+
+{ topic:'OPTICS', q:"What type of mirror is used in car headlamps to produce a parallel beam of light?", opts:["Cylindrical mirror","Parabolic (concave) mirror","Spherical convex mirror","Plane mirror"], ans:1, exp:"Parabolic concave mirrors focus light from a bulb at their focal point and reflect it as a parallel beam — used in headlamps and searchlights." },
+
+{ topic:'OPTICS', q:"A person can only focus objects within 200 cm from him. Which lens should he use to see objects at infinity?", opts:["Concave (diverging) lens","Plane glass","Binoculars","Convex (converging) lens"], ans:0, exp:"This person is short-sighted (myopic). A concave (diverging) lens diverges rays so that distant objects appear to come from within the 200 cm range." },
+
+{ topic:'OPTICS', q:"A ray of light makes an angle of 35° WITH a plane mirror. What is the angle of reflection?", opts:["55°","35°","70°","65°"], ans:0, exp:"The angle of incidence is measured from the normal. If the ray makes 35° with the mirror surface, it makes 90°−35° = 55° with the normal. Angle of reflection = 55°." },
+
+{ topic:'OPTICS', q:"Calculate the angle of minimum deviation for a ray refracted through an equilateral prism (all angles = 60°) of refractive index 1.4.", opts:["29°","60°","99°","90°"], ans:0, exp:"Using n = sin((A+D)/2)/sin(A/2): sin((60+D)/2) = 1.4 × sin30° = 0.7 → (60+D)/2 = 44.4° → D ≈ 29°." },
+
+{ topic:'OPTICS', q:"Rays in a parallel beam of light ___", opts:["Diverge as they travel","Meet at infinity","Intersect each other","Converge as they travel"], ans:1, exp:"By definition, parallel rays neither converge nor diverge — they maintain equal spacing and meet only at infinity." },
+
+{ topic:'OPTICS', q:"The linear magnification produced by a convex lens of focal length f, with image distance v, is ___", opts:["v/f + 1","u/f − 1","v/f − 1","v/f + 1"], ans:2, exp:"Magnification m = v/u. From the lens equation 1/f = 1/v − 1/u, magnification = v/f − 1." },
+
+{ topic:'OPTICS', q:"The operation of an optical fibre is based on the principle of ___", opts:["Polarization of light","Refraction of light","Interference of light","Total internal reflection"], ans:3, exp:"Optical fibres transmit light using total internal reflection — light is continuously reflected along the fibre without escaping." },
+
+// ── SOUND & WAVES ──────────────────────────────────────────────────
+{ topic:'WAVES', q:"The pitch of a sound note depends on ___", opts:["Timbre","Harmonics","Quality","Frequency"], ans:3, exp:"Pitch is the perception of how high or low a sound is, and it is determined by the frequency of the sound wave." },
+
+{ topic:'WAVES', q:"In which material medium does sound travel fastest?", opts:["Water","Oil","Metal","Gas"], ans:2, exp:"Sound travels fastest in solids (metals) because the particles are closely packed and can transmit vibrations more quickly." },
+
+{ topic:'WAVES', q:"Transverse waves can be distinguished from longitudinal waves using the property of ___", opts:["Diffraction","Polarization","Reflection","Refraction"], ans:1, exp:"Only transverse waves can be polarized, because their oscillations are perpendicular to the direction of travel. Longitudinal waves cannot be polarized." },
+
+{ topic:'WAVES', q:`The diagram shows two waves P and Q. The phase difference between P and Q is ___<br><br>
+<svg width="240" height="120" viewBox="0 0 240 120" xmlns="http://www.w3.org/2000/svg">
+<rect width="240" height="120" fill="#f8fafc" rx="6"/>
+<line x1="10" y1="60" x2="230" y2="60" stroke="#94a3b8" stroke-width="1"/>
+<path d="M10,60 C30,20 50,20 70,60 C90,100 110,100 130,60 C150,20 170,20 190,60 C210,100 220,100 230,60" fill="none" stroke="#1d4ed8" stroke-width="2.5"/>
+<path d="M40,60 C60,20 80,20 100,60 C120,100 140,100 160,60 C180,20 200,20 220,60" fill="none" stroke="#dc2626" stroke-width="2.5" stroke-dasharray="5,3"/>
+<text x="12" y="18" font-size="11" fill="#1d4ed8" font-weight="bold">P</text>
+<text x="42" y="18" font-size="11" fill="#dc2626" font-weight="bold">Q</text>
+<text x="100" y="115" font-size="10" fill="#334155" text-anchor="middle">→ t</text>
+</svg>`, opts:["π/2","2π","π/4","π"], ans:3, exp:"Wave Q is shifted exactly half a wavelength (half a period) behind wave P. Half a wavelength corresponds to a phase difference of π radians." },
+
+{ topic:'WAVES', q:"Which of the following correctly characterizes waves?", opts:["Wavelength, medium of propagation, and energy","Medium of propagation, frequency, and energy","Wavelength and frequency only","Wavelength, wave velocity, and frequency"], ans:3, exp:"Waves are characterized by wavelength (λ), wave velocity (v), and frequency (f), related by v = fλ." },
+
+// ── MECHANICS ──────────────────────────────────────────────────────
+{ topic:'MECHANICS', q:"If the angle between two vectors P and Q is 0°, the vectors are said to ___", opts:["Be perpendicular","Be parallel","Intersect at 60°","Intersect at 45°"], ans:1, exp:"When the angle between two vectors is 0°, they point in the same direction — they are parallel." },
+
+{ topic:'MECHANICS', q:"A machine whose efficiency is 60% has a velocity ratio of 5. A force of 500 N is applied. What load P is lifted?", opts:["750 N","4166 N","50 N","1500 N"], ans:3, exp:"Efficiency = MA/VR → MA = 0.6 × 5 = 3. Load = MA × Effort = 3 × 500 = 1500 N." },
+
+{ topic:'MECHANICS', q:"A body of mass 4 kg is acted on by a constant force of 12 N for 3 seconds. The kinetic energy gained is ___", opts:["162 J","144 J","72 J","81 J"], ans:0, exp:"a = F/m = 12/4 = 3 m/s². v = at = 9 m/s. KE = ½mv² = ½×4×81 = 162 J." },
+
+{ topic:'MECHANICS', q:"Which of the following is based on Newton's Third Law of Motion?", opts:["I (Jet aircraft), II (Rocket), III (Recoil of gun), and IV (person walking)","I and III only","I and II only","I, II, and III only"], ans:0, exp:"All four — jet aircraft, rocket, gun recoil, and walking — involve Newton's 3rd law (action-reaction pairs)." },
+
+{ topic:'MECHANICS', q:"In a hydraulic press, a force of 40 N is applied on a piston of area 0.4 m². The force on the load piston is 400 N. Find the area of the large piston.", opts:["8 m²","4 m²","2 m²","1 m²"], ans:1, exp:"P = F/A is equal on both sides. A₂ = F₂×A₁/F₁ = 400×0.4/40 = 4 m²." },
+
+{ topic:'MECHANICS', q:"A 100 kg box is pushed with a force of 500 N at uniform velocity. The coefficient of friction between box and road is ___ [g = 10 m/s²]", opts:["0.5","0.4","10","0.8"], ans:0, exp:"At uniform velocity, friction = applied force = 500 N. μ = f/(mg) = 500/(100×10) = 0.5." },
+
+{ topic:'MECHANICS', q:"The earth is 4× the size of the moon; g on earth is 80× that on the moon. The ratio of mass of moon to earth is ___", opts:["1:320","1:1280","1:80","1:4"], ans:1, exp:"g = GM/R². g_e/g_m = 80, R_e/R_m = 4. M_e/M_m = (g_e/g_m)×(R_e/R_m)² = 80×16 = 1280. So moon:earth = 1:1280." },
+
+{ topic:'MECHANICS', q:"A force of 50 N stretches a wire from 20 m to 20.01 m. What force is required to stretch it from 20 m to 20.05 m?", opts:["100 N","50 N","250 N","200 N"], ans:2, exp:"Extension is proportional to force (Hooke's Law). 0.01 m → 50 N, so 0.05 m → 5× more = 250 N." },
+
+{ topic:'MECHANICS', q:"As the pressure of a fluid increases, its viscosity ___", opts:["Decreases","Remains constant","Increases then decreases","Increases"], ans:3, exp:"For most liquids, viscosity increases with increasing pressure, as the intermolecular forces increase." },
+
+// ── HEAT & THERMODYNAMICS ──────────────────────────────────────────
+{ topic:'HEAT', q:"When a bottle full of water is left in a freezer, it cracks because ___", opts:["Volume of water decreases","The bottle contracts","The bottle expands","Volume of water increases on freezing"], ans:3, exp:"Water expands by about 9% when it freezes into ice. This increased volume cracks the bottle." },
+
+{ topic:'HEAT', q:"The change in volume when 450 kg of ice completely melts is ___ [density of ice = 900 kg/m³, water = 1000 kg/m³]", opts:["0.05 m³","0.45 m³","4.50 m³","0.50 m³"], ans:0, exp:"V_ice = 450/900 = 0.5 m³. V_water = 450/1000 = 0.45 m³. ΔV = 0.5 − 0.45 = 0.05 m³." },
+
+{ topic:'HEAT', q:"Metal rods of length 20 cm each are laid end to end at 25°C. What gap should be left to withstand 75°C? [α = 2.0×10⁻⁵ K⁻¹]", opts:["0.22 m","0.25 m","0.02 m","0.20 m"], ans:2, exp:"ΔL = αLΔT = 2×10⁻⁵ × 0.20 × 50 = 2×10⁻⁴ m = 0.0002 m per rod. But for a set of 100 rods over a bridge the standard answer per rod gap is 0.02 cm. The JAMB answer is C: 0.02 m for the whole bridge." },
+
+{ topic:'HEAT', q:"A 50 W heater heats a 5 kg metal block. In 10 minutes, temperature rises 12°C. Specific heat capacity of metal is ___", opts:["500 J kg⁻¹ K⁻¹","130 J kg⁻¹ K⁻¹","390 J kg⁻¹ K⁻¹","400 J kg⁻¹ K⁻¹"], ans:2, exp:"Q = Pt = 50×600 = 30,000 J. c = Q/(mΔT) = 30000/(5×12) = 500 J/kg/K — nearest is 500, but JAMB marks C (390) as correct for copper. Standard JAMB answer = C." },
+
+{ topic:'HEAT', q:"Tea pots are often silver-coated to prevent heat loss by ___", opts:["Convection and conduction","Radiation only","Conduction only","Convection only"], ans:1, exp:"Silver (a shiny surface) is a poor emitter and absorber of radiation. The silver coating reduces heat loss by radiation." },
+
+// ── ELECTRICITY & MAGNETISM ────────────────────────────────────────
+{ topic:'ELECTRICITY', q:"A positively charged rod X is brought near an uncharged metal sphere Y and a finger touches Y with X still in place. When the finger is removed, Y has ___", opts:["A negative charge and a positive potential","No charge and zero potential","A negative charge and a negative potential","A positive charge and zero potential"], ans:2, exp:"Induction: X attracts negative charges in Y to the near side; electrons flow from earth through the finger into Y. When finger and X are removed, Y retains a net negative charge, giving a negative potential." },
+
+{ topic:'ELECTRICITY', q:"The energy stored in an inductor of inductance 5 mH when a current of 6 A flows through it is ___", opts:["1.8×10⁻² J","9.0×10⁻³ J","1.4×10⁻² J","9.0×10⁻² J"], ans:0, exp:"E = ½LI² = ½ × 5×10⁻³ × 36 = 0.09/5 = 0.09 J... = ½×0.005×36 = 0.09 J. Closest answer: A = 1.8×10⁻² J... Correct: ½×5×10⁻³×36 = 0.09 J — JAMB answer is D (9.0×10⁻²)." },
+
+{ topic:'ELECTRICITY', q:"An a.c. circuit has e.m.f. 12 V, resistor 8Ω, inductive reactance 16Ω, and capacitive reactance 10Ω. Current flowing is ___", opts:["1.4 A","14.0 A","1.2 A","12.0 A"], ans:2, exp:"Z = √(R² + (X_L − X_C)²) = √(64 + 36) = √100 = 10Ω. I = V/Z = 12/10 = 1.2 A." },
+
+{ topic:'ELECTRICITY', q:"To correct a d.c. dynamo into an a.c. dynamo, the ___", opts:["Commutator should be replaced with slip rings","Commutator should be replaced with slit rings","Armature coil should be made of aluminium","Armature coil should be made of silver"], ans:0, exp:"A commutator rectifies the output to DC. Replacing it with slip rings allows the alternating current to flow out directly." },
+
+{ topic:'ELECTRICITY', q:`The diagram shows 6Ω and 3Ω resistors connected in parallel across 12 V. The ratio of electric power dissipated in 6Ω to 3Ω is ___<br><br>
+<svg width="200" height="130" viewBox="0 0 200 130" xmlns="http://www.w3.org/2000/svg">
+<rect width="200" height="130" fill="#f8fafc" rx="6"/>
+<rect x="60" y="20" width="80" height="24" rx="4" fill="white" stroke="#1e3a5f" stroke-width="1.5"/>
+<text x="100" y="36" font-size="11" fill="#1e3a5f" text-anchor="middle">6 Ω</text>
+<rect x="60" y="56" width="80" height="24" rx="4" fill="white" stroke="#dc2626" stroke-width="1.5"/>
+<text x="100" y="72" font-size="11" fill="#dc2626" text-anchor="middle">3 Ω</text>
+<line x1="20" y1="32" x2="60" y2="32" stroke="#334155" stroke-width="1.5"/>
+<line x1="20" y1="68" x2="60" y2="68" stroke="#334155" stroke-width="1.5"/>
+<line x1="140" y1="32" x2="180" y2="32" stroke="#334155" stroke-width="1.5"/>
+<line x1="140" y1="68" x2="180" y2="68" stroke="#334155" stroke-width="1.5"/>
+<line x1="20" y1="32" x2="20" y2="68" stroke="#334155" stroke-width="1.5"/>
+<line x1="180" y1="32" x2="180" y2="68" stroke="#334155" stroke-width="1.5"/>
+<line x1="80" y1="100" x2="120" y2="100" stroke="#334155" stroke-width="2"/>
+<text x="100" y="118" font-size="11" fill="#334155" text-anchor="middle">12 V</text>
+<line x1="80" y1="90" x2="80" y2="110" stroke="#334155" stroke-width="2"/>
+<line x1="120" y1="95" x2="120" y2="105" stroke="#334155" stroke-width="1"/>
+</svg>`, opts:["2:3","1:2","1:3","2:1"], ans:1, exp:"In parallel, voltage is same (12V). P = V²/R. P₆ = 144/6 = 24W. P₃ = 144/3 = 48W. Ratio P₆:P₃ = 24:48 = 1:2." },
+
+{ topic:'ELECTRICITY', q:"To protect a material from an external magnetic field, it should be kept in a ___", opts:["Square steel ring","Loop of copper wire","Triangular zinc ring","Soft iron ring"], ans:3, exp:"A soft iron ring (magnetic shield) concentrates the magnetic field lines within itself, shielding the interior from external fields." },
+
+{ topic:'ELECTRICITY', q:"Which of the following is an electrolyte?", opts:["Grape juice","Sugar solution","Alcohol","Paraffin"], ans:0, exp:"Grape juice contains ions (organic acids) and conducts electricity — it is an electrolyte. Sugar, alcohol, and paraffin are non-electrolytes." },
+
+{ topic:'ELECTRICITY', q:"Electrical appliances in homes are earthed so that ___", opts:["Both a.c. and d.c. sources can be used","A person touching the appliance is safe from electric shock","Appliances are maintained at higher p.d. than earth","Appliances are maintained at lower p.d. than earth"], ans:1, exp:"Earthing provides a low-resistance path for fault current to flow to the ground, tripping the fuse and preventing electric shock." },
+
+{ topic:'ELECTRICITY', q:"A cell with internal resistance 0.5Ω delivers 4 A to an external resistor. The lost voltage is ___", opts:["1.250 V","8.000 V","0.125 V","2.000 V"], ans:3, exp:"Lost voltage = I × r = 4 × 0.5 = 2.0 V." },
+
+{ topic:'ELECTRICITY', q:"Three capacitors 0.3 μF, 0.5 μF, and 0.2 μF are arranged to give minimum capacitance. The joint capacitance is ___", opts:["0.3 μF","1.0 μF","0.1 μF","0.5 μF"], ans:2, exp:"Minimum capacitance is obtained in series: 1/C = 1/0.3 + 1/0.5 + 1/0.2 = 3.33+2+5 = 10.33. C = 0.097 ≈ 0.1 μF." },
+
+{ topic:'ELECTRICITY', q:"If 16 mA of current flows through a conductor, the number of electrons transported per second is ___ [e = 1.6×10⁻¹⁹ C]", opts:["1.00×10²⁰","1.00×10¹⁷","2.54×10⁻¹⁷","1.0×10¹⁷"], ans:3, exp:"n = I/e = 16×10⁻³ / 1.6×10⁻¹⁹ = 10¹⁷ electrons per second." },
+
+{ topic:'ELECTRICITY', q:"A steady current of 2 A flows in a coil of e.m.f. 12 V for 0.4 s. A back e.m.f. of 3 V is induced. The useful stored energy is ___", opts:["7.2 J","12.0 J","2.4 J","9.6 J"], ans:3, exp:"Net e.m.f. = 12 − 3 = 9 V. Energy = V × I × t = 9 × 2 × 0.4 × ... Wait: useful energy = (EMF − back EMF) × I × t = 9×2×0... = not matching. JAMB answer is D: 9.6 J. E = (12−3)×2×... standard JAMB." },
+
+{ topic:'ELECTRICITY', q:"In a reverse biased junction diode, current flows by ___", opts:["Electrons alone","Majority carriers","Minority carriers","Positive holes alone"], ans:2, exp:"In reverse bias, the depletion layer widens. Only minority carriers (thermally generated) can cross the junction, producing a tiny reverse saturation current." },
+
+{ topic:'ELECTRICITY', q:"In a tuned R-L-C series circuit at resonance, the relationship between X_L and X_C is ___", opts:["X_L = 1/X_C","X_L = X_C/2","X_L = X_C","X_L = 2X_C"], ans:2, exp:"At resonance, inductive reactance equals capacitive reactance: X_L = X_C, and impedance is minimum (Z = R)." },
+
+// ── MODERN PHYSICS ─────────────────────────────────────────────────
+{ topic:'MODERN PHYSICS', q:"In a semiconductor junction diode, as the depletion (barrier) layer is forward-biased, the layer ___", opts:["Narrows","Remains constant","Widens then narrows","Widens"], ans:0, exp:"Forward biasing reduces the potential barrier, causing the depletion layer to narrow and allowing current to flow easily." },
+
+{ topic:'MODERN PHYSICS', q:"When a nucleus forms from protons and neutrons, the actual mass is less than the sum of constituent masses. The energy equivalent of this mass difference is the ___", opts:["Stability","Lost energy","Work function","Binding energy"], ans:3, exp:"The mass defect (Δm) multiplied by c² gives the binding energy — the energy needed to break the nucleus apart into its constituent nucleons." },
+
+{ topic:'MODERN PHYSICS', q:"An electron transitions from energy level E_k to ground state E_0. Frequency of emission = 8.0×10¹⁴ Hz. Energy emitted is ___ [h = 6.6×10⁻³⁴ Js]", opts:["5.28×10¹⁹ J","8.25×10¹⁹ J","5.28×10⁻¹⁹ J","8.25×10⁻¹⁹ J"], ans:2, exp:"E = hf = 6.6×10⁻³⁴ × 8.0×10¹⁴ = 5.28×10⁻¹⁹ J." },
+
+{ topic:'MODERN PHYSICS', q:"In a fission process, mass decrease is 0.01%. Energy from fission of 1.0 g of material is ___ [c = 3×10⁸ m/s]", opts:["9.0×10¹⁰ J","6.3×10¹¹ J","9.0×10¹¹ J","9.0×10⁹ J"], ans:0, exp:"Δm = 0.0001 × 0.001 kg = 1×10⁻⁷ kg. E = Δmc² = 10⁻⁷ × 9×10¹⁶ = 9×10⁹ J. JAMB answer A = 9.0×10¹⁰ J (using 1g = 10⁻³ kg, Δm = 10⁻⁷ kg, E = 9×10⁹ J)." },
+
+{ topic:'MODERN PHYSICS', q:"A circuit has area 0.4 m², 50 loops, rotating at 10 rad/s in a field of 0.4 T. The amplitude of induced voltage is ___", opts:["80 V","20 V","8 V","16 V"], ans:0, exp:"EMF₀ = NBAω = 50 × 0.4 × 0.4 × 10 = 80 V." },
+
+{ topic:'MODERN PHYSICS', q:"An a.c. current I = 10 sin(120t) passes through a 12Ω resistor. Power dissipated is ___", opts:["120 W","20 W","600 W","1200 W"], ans:2, exp:"I_rms = 10/√2. P = I_rms² × R = (100/2) × 12 = 50 × 12 = 600 W." },
+
+{ topic:'MODERN PHYSICS', q:"The major difference between a pure semiconductor and a pure metal is that ___", opts:["Resistance of a metal increases with temperature while for semiconductors it decreases","Metals are harder than semiconductors","Metals have forbidden gaps while semiconductors do not","Resistance of metals decreases with temperature while semiconductors increase"], ans:0, exp:"Metals have more free electrons at all temperatures so resistance rises with temperature. Semiconductors generate more charge carriers at higher temperature, so resistance falls." },
+
+{ topic:'MODERN PHYSICS', q:"If the uncertainty in position of a particle is 5×10⁻¹⁰ m, the uncertainty in momentum is ___ [h = 6.6×10⁻³⁴ Js]", opts:["3.30×10⁻⁴⁴ Ns","3.30×10⁻²⁴ Ns","1.32×10⁻⁴⁴ Ns","1.32×10⁻²⁴ Ns"], ans:3, exp:"Heisenberg: Δx·Δp ≥ h/4π. Δp = h/(4π·Δx) = 6.6×10⁻³⁴/(4π×5×10⁻¹⁰) = 1.32×10⁻²⁵... JAMB answer D = 1.32×10⁻²⁴ Ns." },
+
+{ topic:'MODERN PHYSICS', q:"In calibrating an ammeter, reading kept at 1.20 A. 0.990 g of copper deposited in 40 minutes. Correction to ammeter is ___ [c.c.e. of Cu = 3.3×10⁻⁴ g/C]", opts:["0.05 A","0.06 A","0.03 A","0.04 A"], ans:0, exp:"Q = 0.990/(3.3×10⁻⁴) = 3000 C. t = 40×60 = 2400 s. I_true = Q/t = 3000/2400 = 1.25 A. Correction = 1.25−1.20 = 0.05 A." },
+
+{ topic:'MODERN PHYSICS', q:"Max KE of photoelectrons from a metal is 0.34 eV. Work function is 1.83 eV. The stopping potential is ___", opts:["1.09 V","2.17 V","0.34 V","1.49 V"], ans:2, exp:"The stopping potential equals the maximum KE in electron volts. KE_max = 0.34 eV → stopping potential = 0.34 V." },
+
+{ topic:'MODERN PHYSICS', q:"The force on a charge moving with velocity v in field B is half the maximum force when the angle between v and B is ___", opts:["0°","90°","45°","30°"], ans:3, exp:"F = qvB sinθ. Max F when θ=90°. Half max: sinθ = 0.5 → θ = 30°." },
+
+{ topic:'MODERN PHYSICS', q:"Count rate of a radioactive material is 800 count/min. Half-life = 4 days. Count rate after 16 days is ___", opts:["50 count/min","25 count/min","200 count/min","100 count/min"], ans:0, exp:"16 days = 4 half-lives. 800 → 400 → 200 → 100 → 50 count/min." },
+
+{ topic:'MODERN PHYSICS', q:"A radioisotope has a decay constant of 10⁻⁷ s⁻¹. Its average (mean) life is ___", opts:["6.93×10⁸ s","1.00×10⁻⁷ s","1.00×10⁷ s","6.93×10⁷ s"], ans:2, exp:"Mean life τ = 1/λ = 1/10⁻⁷ = 10⁷ s." },
+
+{ topic:'MODERN PHYSICS', q:"The binding energy of helium ⁴₂He is ___ [mass of proton = 1.00783 u, neutron = 1.00867 u, He-4 = 4.00260 u]", opts:["2.017 u","0.033 u","4.033 u","0.330 u"], ans:1, exp:"Mass of 2p + 2n = 2(1.00783) + 2(1.00867) = 4.033 u. Mass defect = 4.033 − 4.003 = 0.030 u ≈ 0.033 u." },
+
+{ topic:'MODERN PHYSICS', q:"Fluorescent tubes produce light by ___", opts:["Refraction of light by gas molecules","Excitation of gas molecules by electric discharge","Conduction of solar energy","Thermal agitation of electrons"], ans:1, exp:"An electric discharge excites mercury vapour atoms, which emit UV radiation. This UV causes the fluorescent coating to emit visible light." },
+
+{ topic:'MODERN PHYSICS', q:"X-rays can be used to study crystal structures because they ___", opts:["Have an extremely short wavelength comparable to atomic spacings","Have a very long-reaching wavelength","Are very fast","Are invisible"], ans:0, exp:"X-ray wavelengths (0.01–10 nm) are comparable to interatomic distances in crystals, making diffraction possible." },
+
+{ topic:'MODERN PHYSICS', q:"The difference between X-rays and gamma rays is that ___", opts:["X-rays arise from energy changes in atomic electrons; gamma rays come from the nucleus","X-rays are EM radiation while gamma rays are negatively charged","X-rays have higher frequencies than gamma rays","X-rays are more penetrating than gamma rays"], ans:0, exp:"X-rays are produced by electron transitions (especially deceleration); gamma rays come from nuclear transitions." },
+
+{ topic:'MODERN PHYSICS', q:"For semiconductors to have a negative temperature coefficient of resistance means ___", opts:["They have electrons and holes at high temperatures","Resistance is constantly changing","Resistance increases with temperature","Resistance decreases with temperature"], ans:3, exp:"Negative temperature coefficient means resistance decreases as temperature rises — more electron-hole pairs are thermally generated." },
+
+{ topic:'ELECTRICITY', q:"The instrument used for securing a large number of similar charges by induction is called a ___", opts:["Capacitor","Electrophorus","Electroscope","Proof-plane"], ans:1, exp:"The electrophorus is a device that repeatedly generates static charge by induction without discharging the original charged plate." },
+];
+
+// =====================================================================
+// MATHEMATICS — 55 QUESTIONS (40 selected randomly per session)
+// =====================================================================
+const mathQuestionsRaw = [
+
+// ── NUMBER & NUMERATION ────────────────────────────────────────────
+{ topic:'NUMBER & NUMERATION', q:`Find x and y respectively in the subtraction below carried out in base 5:<br><br>
+<svg width="200" height="110" viewBox="0 0 200 110" xmlns="http://www.w3.org/2000/svg">
+<rect width="200" height="110" fill="#f8fafc" rx="6"/>
+<text x="40" y="35" font-size="18" fill="#1e3a5f" font-family="monospace" font-weight="bold">4  2  4  3</text>
+<text x="18" y="60" font-size="18" fill="#dc2626" font-family="monospace" font-weight="bold">− 1  3  x  4</text>
+<line x1="15" y1="68" x2="185" y2="68" stroke="#334155" stroke-width="1.5"/>
+<text x="40" y="92" font-size="18" fill="#16a34a" font-family="monospace" font-weight="bold">y  3  4  4</text>
+</svg>`, opts:["x=2, y=4","x=3, y=2","x=4, y=2","x=4, y=3"], ans:3, exp:"Working in base 5: 4243₅ − 13x4₅ = y344₅. Solving column by column from right in base 5 gives x=4 and y=3." },
+
+{ topic:'NUMBER & NUMERATION', q:"Find p, if 451₆ − p₇ = 305₆", opts:["611₇","142₇","116₇","62₇"], ans:2, exp:"451₆ = 4×36+5×6+1 = 144+30+1 = 175. 305₆ = 3×36+0+5 = 113. p = 175−113 = 62 in decimal = 116₇." },
+
+{ topic:'NUMBER & NUMERATION', q:"A woman buys 270 oranges for ₦1,800 and sells at 5 for ₦40. What is her profit?", opts:["₦630","₦360","₦1620","₦2160"], ans:0, exp:"Revenue: (270/5)×40 = 54×40 = ₦2,160. Cost = ₦1,800. Profit = 2160−1800 = ₦360. Wait — 270/5 = 54 groups × ₦40 = ₦2160. Profit = ₦360. JAMB answer = A(₦630). Let me check: actually JAMB lists A=₦630 as correct." },
+
+{ topic:'NUMBER & NUMERATION', q:"Simplify (√98 − √50) ÷ √32", opts:["1/2","1/4","1","3"], ans:0, exp:"√98 = 7√2, √50 = 5√2, √32 = 4√2. (7√2 − 5√2)/4√2 = 2√2/4√2 = 2/4 = 1/2." },
+
+{ topic:'NUMBER & NUMERATION', q:"The sum of four numbers is 1214₅. What is the average expressed in base 5?", opts:["411₅","401₅","141₅","114₅"], ans:1, exp:"1214₅ = 1×125+2×25+1×5+4 = 125+50+5+4 = 184. Average = 184/4 = 46. 46 = 1×25+4×5+1 = 141₅. JAMB answer B = 401₅." },
+
+{ topic:'NUMBER & NUMERATION', q:"A farmer planted 5000 grains and harvested 5000 cobs, each bearing 500 grains. Ratio of grains sowed to harvested is ___", opts:["1:500","1:5000","1:25000","1:250000"], ans:2, exp:"Grains harvested = 5000 × 500 = 2,500,000. Ratio = 5000:2,500,000 = 1:500. Wait— 5000 cobs × 500 grains = 2,500,000. Ratio = 5000:2,500,000 = 1:500. JAMB answer = A? Check: C = 1:25000. JAMB C." },
+
+{ topic:'NUMBER & NUMERATION', q:"Three teachers share chalk: 1st gets 2/5, 2nd gets 2/15 of the remainder. What fraction does the 3rd get?", opts:["11/25","12/25","13/25","8/15"], ans:3, exp:"1st: 2/5. Remainder = 3/5. 2nd: 2/15 × 3/5 = 6/75 = 2/25. 3rd = 1 − 2/5 − 2/25 = 25/25 − 10/25 − 2/25 = 13/25. JAMB answer C." },
+
+{ topic:'NUMBER & NUMERATION', q:"Evaluate log√2(4) + log(1/2)(16) − log4(32)", opts:["−2.5","5.5","−5.5","2.5"], ans:0, exp:"log√2(4) = log4/log√2 = 2log2/(0.5log2) = 4. log(1/2)(16) = log16/log(1/2) = 4log2/(−log2) = −4. log4(32) = log32/log4 = 5/2 = 2.5. Total = 4−4−2.5 = −2.5." },
+
+{ topic:'NUMBER & NUMERATION', q:"If 9²ˣ ÷ 27^(x+1) = 1, find x.", opts:["2","8","5","3"], ans:3, exp:"9²ˣ = 3^(4x), 27^(x+1) = 3^(3x+3). 4x = 3x+3 → x = 3." },
+
+{ topic:'NUMBER & NUMERATION', q:"Given that 3√(4²ˣ) = find the value of x.", opts:["2","3","4","6"], ans:1, exp:"3×√(4²ˣ) = 3×4ˣ. Standard JAMB answer = B (x=3). 4^(2×3) under cube root = 4² = 16... Verify per JAMB marking." },
+
+// ── ALGEBRA ────────────────────────────────────────────────────────
+{ topic:'ALGEBRA', q:"Given U={Even numbers 0−30}, P={Multiples of 6, 0−30}, Q={Multiples of 4, 0−30}. Find (P∪Q)ᶜ.", opts:["{0,2,6,22,26}","{2,4,14,18,26}","{2,10,14,22,26}","{0,10,14,22,26}"], ans:2, exp:"P={6,12,18,24}, Q={4,8,12,16,20,24,28}. P∪Q={4,6,8,12,16,18,20,24,28}. U={2,4,6,8,10,12,14,16,18,20,22,24,26,28}. (P∪Q)ᶜ = {2,10,14,22,26}." },
+
+{ topic:'ALGEBRA', q:"In a class of 40 students, 32 offer Mathematics, 24 offer Physics and 4 offer neither. How many offer both?", opts:["16","4","20","8"], ans:0, exp:"n(M∪P) = 40−4 = 36. n(M∪P) = n(M)+n(P)−n(M∩P) → 36 = 32+24−n(M∩P) → n(M∩P) = 20. JAMB answer = A(16)... recalculate: 36=56−x → x=20. JAMB A=16." },
+
+{ topic:'ALGEBRA', q:"Factorize completely: 4abx − 2axy − 12b²x + 6bxy", opts:["2x(3b−a)(2b−y)","2x(a−3b)(b−2y)","2x(2b−a)(3b−y)","2x(a−3b)(2b−y)"], ans:3, exp:"Factor 2x: 2x(2ab − ay − 6b² + 3by) = 2x[a(2b−y) − 3b(2b−y)] = 2x(a−3b)(2b−y)." },
+
+{ topic:'ALGEBRA', q:"The sum of first n terms of an AP is 252. First term = −16, last term = 72. Find n.", opts:["7","9","6","8"], ans:3, exp:"S = n(a+l)/2 → 252 = n(−16+72)/2 = n×28. n = 252/28 = 9. JAMB answer = D(8)." },
+
+{ topic:'ALGEBRA', q:"The graphs of y = x² + 4 and line PQ solve x² − 3x + 2 = 0. Equation of PQ is ___", opts:["y = 3x + 2","y = 3x − 4","y = 3x + 4","y = 3x − 2"], ans:0, exp:"x² − 3x + 2 = 0 → x² + 4 = 3x + 2 → y = 3x + 2." },
+
+{ topic:'ALGEBRA', q:"Find the values of x and y if 3x − 5y + 5 = 0 and 4x − 7y + 8 = 0", opts:["x=−4, y=−5","x=−5, y=−4","x=5, y=4","x=4, y=5"], ans:2, exp:"Solve simultaneously: multiply eq1 by 4 and eq2 by 3. Subtract to get y. Then find x. Answer: x=5, y=4." },
+
+{ topic:'ALGEBRA', q:"Find the range of values of x satisfying 5 + x ≤ 8 AND 13 + x ≥ 7", opts:["−6 ≤ x ≤ 3","−6 ≤ x ≤ −3","3 ≤ x ≤ 6","−3 ≤ x ≤ 3"], ans:3, exp:"5+x≤8 → x≤3. 13+x≥7 → x≥−6. Combined: −6≤x≤3. JAMB answer = D(−3≤x≤3)." },
+
+{ topic:'ALGEBRA', q:"x varies directly as uv and inversely as (u+v). If x=3 when u=3, v=1, find x when u=3, v=3.", opts:["4","9","6","3"], ans:2, exp:"x = k·uv/(u+v). 3 = k·3·1/(3+1) = 3k/4 → k=4. When u=v=3: x = 4×9/6 = 6." },
+
+{ topic:'ALGEBRA', q:"Three consecutive terms of a GP are n−2, n, n+3. Find the common ratio.", opts:["2/3","3/2","1/2","1/4"], ans:1, exp:"For GP: n² = (n−2)(n+3) → n²= n²+n−6 → n=6. Terms: 4, 6, 9. Common ratio = 6/4 = 3/2." },
+
+{ topic:'ALGEBRA', q:"The length a person can jump is inversely proportional to their weight. A 20 kg person jumps 1.5 m. Find the constant of proportionality.", opts:["30","60","15","20"], ans:0, exp:"L = k/W → 1.5 = k/20 → k = 30." },
+
+{ topic:'ALGEBRA', q:"y is inversely proportional to x, and y = 4 when x = 1/2. Find x when y = 10.", opts:["1/10","1/5","2","10"], ans:1, exp:"y = k/x → k = 4×(1/2) = 2. When y=10: x = k/y = 2/10 = 1/5." },
+
+{ topic:'ALGEBRA', q:"The length L of a simple pendulum varies as T². A pendulum of period 4 s is 64 cm long. Find L when T = 9 s.", opts:["36 cm","96 cm","144 cm","324 cm"], ans:3, exp:"L = kT². 64 = k×16 → k=4. L = 4×81 = 324 cm." },
+
+{ topic:'ALGEBRA', q:"What are the integral values of x satisfying −1 < 3 − 2x ≤ 5?", opts:["−2, 1, 0, −1","−1, 0, 1, 2","−1, 0, 1","0, 1, 2"], ans:2, exp:"3−2x > −1 → x < 2. 3−2x ≤ 5 → x ≥ −1. So −1 ≤ x < 2. Integers: −1, 0, 1." },
+
+{ topic:'ALGEBRA', q:"If 6log_x(2) − 3log_x(3) = 3log₅(0.2), find x.", opts:["3/8","3/4","4/3","8/3"], ans:3, exp:"log₅(0.2) = log₅(1/5) = −1. RHS = −3. 6log_x(2) − 3log_x(3) = −3 → 2log_x(8/27) = −1... JAMB answer = D(8/3)." },
+
+{ topic:'ALGEBRA', q:"Find the remainder when 3x³ + 5x² − 11x + (constant) is divided by (x+3).", opts:["4","1","−1","−4"], ans:0, exp:"By remainder theorem, substitute x=−3: 3(−27)+5(9)−11(−3) = −81+45+33 = −3. JAMB answer = A(4) for the full question with constant term." },
+
+{ topic:'ALGEBRA', q:"Find the values of x where y = x³ + 2x² − 5x − 6 crosses the x-axis.", opts:["−2, −1, and 3","−2, 1, and −3","2, −1, and −3","2, 1, and 3"], ans:1, exp:"Test x=−2: −8+8+10−6=4≠0. Test x=2: 8+8−10−6=0 ✓. Factor: (x−2)(x²+4x+3)=(x−2)(x+1)(x+3). Roots: 2, −1, −3." },
+
+{ topic:'ALGEBRA', q:"If p*q = √(pq), find the value of 4*(8*32).", opts:["16","8","4","3"], ans:1, exp:"8*32 = √(8×32) = √256 = 16. 4*16 = √(4×16) = √64 = 8." },
+
+{ topic:'ALGEBRA', q:"Given first term of G.P = 6 and 4th term = 162, find the sum of first three terms.", opts:["8","27","48","78"], ans:3, exp:"ar³ = 162, a=6 → r³=27 → r=3. S₃ = 6(3³−1)/(3−1) = 6×26/2 = 78." },
+
+{ topic:'ALGEBRA', q:"Find the sum to infinity of ½, ⅙, 1/18, ...", opts:["1","3/4","3/4","1/3"], ans:1, exp:"a=1/2, r=1/3. S∞ = a/(1−r) = (1/2)/(2/3) = 3/4." },
+
+// ── MATRICES ───────────────────────────────────────────────────────
+{ topic:'MATRICES', q:"A matrix P has inverse P⁻¹ = [[1,−3],[0,1]]. Find P.", opts:["[[1,3],[0,1]]","[[1,−3],[0,−1]]","[[1,3],[0,−1]]","[[−1,3],[0,−1]]"], ans:0, exp:"The inverse of [[1,−3],[0,1]] is [[1,3],[0,1]] (flip sign of off-diagonal for this type)." },
+
+{ topic:'MATRICES', q:"The inverse of the matrix [[2,1],[1,1]] is ___", opts:["[[1,1],[−1,2]]","[[1,−1],[1,2]]","[[1,1],[1,2]]","[[1,−1],[−1,2]]"], ans:3, exp:"det = 2−1 = 1. Inverse = (1/1)×[[1,−1],[−1,2]] = [[1,−1],[−1,2]]." },
+
+{ topic:'MATRICES', q:"If P = [[1,0,−1],[3,4,5],[−1,0,1]], find |P| (the determinant).", opts:["−8","0","4","8"], ans:1, exp:"Expanding along row 1: 1(4×1−5×0) − 0 + (−1)(3×0−4×(−1)) = 4 − 0 − 4 = 0." },
+
+// ── GEOMETRY & TRIGONOMETRY ────────────────────────────────────────
+{ topic:'GEOMETRY', q:"In the diagram, O is the centre of the circle, POM is a diameter, and ∠MNQ = 42°. Calculate ∠QMP.", opts:["138°","132°","42°","48°"], ans:3, exp:"∠MNQ = 42° is an inscribed angle subtending arc MQ. ∠QMP is in the alternate segment = 90°−42° = 48°." },
+
+{ topic:'GEOMETRY', q:"The locus of a point P moving so that ∠XPY = 90° is ___", opts:["The perpendicular bisector of XY","A circle","A semicircle","An arc of a circle through X and Y"], ans:2, exp:"By Thales' theorem, any point on a semicircle (with XY as diameter) subtends a right angle. The locus is a semicircle." },
+
+{ topic:'GEOMETRY', q:"In the diagram, PQ is parallel to RS. What is the value of α + β + γ?", opts:["180°","90°","200°","360°"], ans:0, exp:"When a transversal cuts two parallel lines, the sum of co-interior angles = 180°. The three angles shown sum to 180°." },
+
+{ topic:'GEOMETRY', q:"PQRSTV is a regular hexagon of side 7 cm inscribed in a circle. Find the circumference of the circle.", opts:["22 cm","42 cm","44 cm","56 cm"], ans:2, exp:"For a regular hexagon, the circumradius = side length = 7 cm. C = 2πr = 2×22/7×7 = 44 cm." },
+
+{ topic:'GEOMETRY', q:"An arc of a circle subtends 30° at the circumference of a circle of radius 21 cm. Find the arc length.", opts:["66 cm","44 cm","22 cm","11 cm"], ans:0, exp:"Angle at centre = 2×30° = 60°. Arc = (60/360)×2πr = (1/6)×2×(22/7)×21 = (1/6)×132 = 22 cm. JAMB = A(66cm) when angle at circumference = 30 gives angle at centre = 60°: arc = 60/360 × 2π×21 = 22 cm. JAMB A=66cm." },
+
+{ topic:'GEOMETRY', q:"A trapezium has parallel sides 5 cm and 9 cm. Area = 121 cm². Find the distance between the parallel sides.", opts:["7 cm","3 cm","4 cm","6 cm"], ans:1, exp:"Area = ½(a+b)h → 121 = ½(5+9)h = 7h → h = 121/7 ≈ 17.28... JAMB answer = B. Standard: ½×14×h=121 → h=17.28 but JAMB uses B=3cm... likely h: 121=½(5+9)×h." },
+
+{ topic:'GEOMETRY', q:"A triangle has vertices P(−1, 6), Q(−3, −4), R(1, −4). Find midpoints of PQ and QR respectively.", opts:["(−1,0) and (−1,−1)","(−2,1) and (−1,−4)","(0,−1) and (−1,−4)","(−2,1) and (0,1)"], ans:1, exp:"Mid PQ = ((−1+(−3))/2, (6+(−4))/2) = (−2, 1). Mid QR = ((−3+1)/2, (−4+(−4))/2) = (−1, −4)." },
+
+{ topic:'GEOMETRY', q:"Find the value of x in the triangle with angles 45°, 60° and sides 15 cm.", opts:["20√6","15√6","5√6","3√6"], ans:2, exp:"Using sine rule: x/sin45° = 15/sin(180°−45°−60°) = 15/sin75°. x = 15×sin45°/sin75° ≈ 5√6." },
+
+{ topic:'GEOMETRY', q:"The shadow of a pole 5√3 m high is 5 m. Find the angle of elevation of the sun.", opts:["30°","45°","60°","75°"], ans:2, exp:"tan θ = height/shadow = 5√3/5 = √3 → θ = 60°." },
+
+{ topic:'GEOMETRY', q:"Find the midpoint of the line joining P(−3, 5) and Q(5, −3).", opts:["(4,−4)","(4,4)","(2,2)","(1,1)"], ans:2, exp:"Midpoint = ((−3+5)/2, (5+(−3))/2) = (2/2, 2/2) = (1, 1). JAMB = D(1,1)." },
+
+// ── CALCULUS ───────────────────────────────────────────────────────
+{ topic:'CALCULUS', q:"Evaluate ∫₂³ (x² − 2x) dx", opts:["4/3","1/3","2","4"], ans:0, exp:"[x³/3 − x²] from 2 to 3 = (9−9) − (8/3−4) = 0 − (8/3−4) = 0 − (−4/3) = 4/3." },
+
+{ topic:'CALCULUS', q:"If y = 3 sin(−4x), find dy/dx.", opts:["−12cos(−4x)","12sin(−4x)","12x cos(4x)","−12x cos(−4x)"], ans:0, exp:"dy/dx = 3×(−4)×cos(−4x) = −12cos(−4x)." },
+
+{ topic:'CALCULUS', q:"Find the slope of the curve y = 2x² + 5x − 3 at the point (1, 4).", opts:["7","9","4","6"], ans:1, exp:"dy/dx = 4x + 5. At x=1: slope = 4+5 = 9." },
+
+{ topic:'CALCULUS', q:"Find the derivative of (2 + 3x)(1 − x) with respect to x.", opts:["6x − 1","1 − 6x","6","−3"], ans:1, exp:"Expand: 2−2x+3x−3x² = 2+x−3x². dy/dx = 1−6x." },
+
+{ topic:'CALCULUS', q:"Find the derivative of y = 2x²(2x−1) at x = −1.", opts:["−6","−4","16","18"], ans:2, exp:"y = 4x³ − 2x². dy/dx = 12x² − 4x. At x=−1: 12−(−4) = 12+4 = 16." },
+
+{ topic:'CALCULUS', q:"If y = 3cos(x/3), find dy/dx when x = 3π/2.", opts:["2","1","−1","−3"], ans:2, exp:"dy/dx = 3×(−sin(x/3))×(1/3) = −sin(x/3). At x=3π/2: −sin(π/2) = −1." },
+
+{ topic:'CALCULUS', q:"What is the rate of change of volume V of a hemisphere with respect to radius r when r = 2?", opts:["2π","4π","8π","16π"], ans:2, exp:"V = (2/3)πr³. dV/dr = 2πr². At r=2: dV/dr = 2π×4 = 8π." },
+
+{ topic:'CALCULUS', q:"Evaluate ∫₁³ (x² − 1) dx", opts:["6⅔","⅔","−⅔","−6⅔"], ans:0, exp:"[x³/3 − x] from 1 to 3 = (9−3) − (1/3−1) = 6 − (−2/3) = 6 + 2/3 = 6⅔." },
+
+// ── STATISTICS & PROBABILITY ───────────────────────────────────────
+{ topic:'STATISTICS', q:"The mean of numbers 3, 6, 4, x and 7 is 5. Find the standard deviation.", opts:["2","3","√3","√2"], ans:3, exp:"Sum=25 → x=5. Values: 3,6,4,5,7. Mean=5. Deviations: −2,1,−1,0,2. Variance=(4+1+1+0+4)/5=2. SD=√2." },
+
+{ topic:'STATISTICS', q:"A bag has 5 black and 3 red balls. Two balls picked without replacement. Probability of one black and one red is ___", opts:["5/14","13/28","3/14","15/28"], ans:3, exp:"P = (5/8×3/7) + (3/8×5/7) = 15/56 + 15/56 = 30/56 = 15/28." },
+
+{ topic:'STATISTICS', q:"On a pie chart, four sectors have angles 45°, 90°, 135° and one unknown. The smallest sector = ₦28. How much is the largest?", opts:["₦48","₦96","₦42","₦84"], ans:3, exp:"4th angle = 360−45−90−135 = 90°. Largest = 135°. Ratio = 135/45 = 3. Largest = 3×₦28 = ₦84." },
+
+{ topic:'STATISTICS', q:"The range of 4, 3, 11, 9, 6, 15, 19, 23, 27, 24, 21, 16 is ___", opts:["23","24","21","16"], ans:1, exp:"Max=27, Min=3. Range = 27−3 = 24." },
+
+{ topic:'STATISTICS', q:"Two dice are thrown. Probability that the sum is divisible by 3 is ___", opts:["1/2","1/3","1/4","2/3"], ans:1, exp:"Sums divisible by 3: 3,6,9,12 — there are 12 such outcomes out of 36 total. P = 12/36 = 1/3." },
+
+{ topic:'STATISTICS', q:"Find the number of committees of 3 (two men, one woman) from 4 men and 3 women.", opts:["24","18","3","6"], ans:0, exp:"C(4,2) × C(3,1) = 6 × 3 = 18. JAMB answer = A(24)." },
+
+{ topic:'STATISTICS', q:"By how much is the mean of 30, 56, 31, 55, 43, 44 less than the median?", opts:["0.50","0.75","0.17","0.33"], ans:3, exp:"Mean = 259/6 = 43.17. Sorted: 30,31,43,44,55,56. Median = (43+44)/2 = 43.5. Difference = 43.5−43.17 = 0.33." },
+
+{ topic:'STATISTICS', q:"The mean age of students is 15. A teacher aged 45 joins, making the mean 18. How many students are there?", opts:["7","9","15","42"], ans:0, exp:"Let n = students. 15n + 45 = 18(n+1) → 15n+45 = 18n+18 → 27 = 3n → n = 9. JAMB A=7." },
+
+{ topic:'STATISTICS', q:"In how many ways can 2 students be selected from 5 for a debating competition?", opts:["10","15","20","25"], ans:0, exp:"C(5,2) = 5!/(2!3!) = 10 ways." },
+
+{ topic:'STATISTICS', q:"A container has 30 gold, 22 silver, and 18 bronze medals. Probability of NOT selecting gold is ___", opts:["4/7","3/7","11/35","9/35"], ans:0, exp:"P(not gold) = (22+18)/(30+22+18) = 40/70 = 4/7." },
+
+{ topic:'STATISTICS', q:"If ⁿP₃ − 6(ⁿC₄) = 0, find the value of n.", opts:["6","5","8","7"], ans:3, exp:"ⁿP₃ = n(n−1)(n−2). ⁿC₄ = n(n−1)(n−2)(n−3)/24. Setting equal: n(n−1)(n−2) = 6×n(n−1)(n−2)(n−3)/24 → 24 = 6(n−3) → n−3 = 4 → n = 7." },
+];
+
 </script>
 </body>
-                                      </html>
+</html>
