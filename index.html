@@ -1,255 +1,435 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SmartPrep CBT - Mrs. Adesanya</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --primary: #1e3a5f; --accent: #e8a020; --success: #16a34a;
-            --danger: #c0392b; --light-bg: #f4f6fb; --card: #ffffff;
-            --border: #dce3ef; --text: #1a2340; --muted: #6b7a99;
-            --shadow: 0 4px 18px rgba(30,58,95,0.10); --radius: 14px;
-        }
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { background: var(--light-bg); color: var(--text); font-family: 'DM Sans', sans-serif; min-height: 100vh; }
-        header { background: var(--primary); color: #fff; padding: 0.9rem 2rem; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 3px 12px rgba(0,0,0,0.18); position: sticky; top: 0; z-index: 50; }
-        .logo { display: flex; align-items: center; gap: 10px; }
-        .logo-icon { width: 36px; height: 36px; background: var(--accent); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; }
-        .logo-text { font-family: 'Playfair Display', serif; font-size: 1.25rem; letter-spacing: -0.3px; }
-        .logo-sub { font-size: 0.78rem; font-weight: 400; opacity: 0.75; margin-top: 1px; }
-        .btn-restart { background: rgba(255,255,255,0.12); border: 1.5px solid rgba(255,255,255,0.3); color: white; padding: 7px 18px; border-radius: 8px; font-weight: 600; font-size: 0.8rem; cursor: pointer; transition: 0.2s; }
-        .btn-restart:hover { background: rgba(255,255,255,0.22); }
-        .container { max-width: 1100px; margin: 0 auto; padding: 30px 16px 60px; }
-        .hidden { display: none !important; }
-        .selection-header { text-align: center; margin-bottom: 40px; }
-        .selection-header h1 { font-family: 'Playfair Display', serif; font-size: 2rem; color: var(--primary); margin-bottom: 8px; }
-        .selection-header p { color: var(--muted); font-size: 1rem; }
-        .subject-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 28px; }
-        .subject-card { background: var(--card); border-radius: var(--radius); padding: 40px 32px; text-align: center; cursor: pointer; border: 2px solid transparent; box-shadow: var(--shadow); transition: all 0.28s ease; }
-        .subject-card:hover { border-color: var(--accent); transform: translateY(-6px); box-shadow: 0 12px 32px rgba(30,58,95,0.18); }
-        .subject-card:hover .card-icon { transform: scale(1.15); }
-        .card-icon { font-size: 3rem; margin-bottom: 16px; display: inline-block; transition: 0.3s; }
-        .subject-card h2 { font-family: 'Playfair Display', serif; font-size: 1.35rem; color: var(--primary); margin-bottom: 8px; }
-        .subject-card p { color: var(--muted); font-size: 0.88rem; margin-bottom: 5px; }
-        .card-badge { display: inline-block; background: var(--accent); color: white; font-size: 0.78rem; font-weight: 700; padding: 4px 14px; border-radius: 20px; margin-top: 12px; }
-        .top-nav { background: var(--card); padding: 14px 20px; border-radius: var(--radius); margin-bottom: 18px; box-shadow: var(--shadow); display: flex; justify-content: space-between; align-items: center; position: sticky; top: 68px; z-index: 20; }
-        .top-nav h3 { font-family: 'Playfair Display', serif; font-size: 1.1rem; color: var(--primary); }
-        .timer { font-size: 1.5rem; font-weight: 700; color: var(--danger); font-variant-numeric: tabular-nums; letter-spacing: 1px; }
-        .timer.warning { animation: pulse 1s infinite; }
-        @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.5} }
-        .btn-finish { background: var(--danger); color: white; border: none; padding: 10px 22px; border-radius: 8px; font-weight: 700; font-size: 0.85rem; cursor: pointer; transition: 0.2s; }
-        .btn-finish:hover { background: #a93226; }
-        .exam-body { display: grid; grid-template-columns: 1fr 310px; gap: 20px; }
-        @media (max-width: 860px) { .exam-body { grid-template-columns: 1fr; } }
-        .question-card { background: var(--card); padding: 28px; border-radius: var(--radius); box-shadow: var(--shadow); }
-        .q-topic { display: inline-block; background: #eef2ff; color: var(--primary); font-size: 0.75rem; font-weight: 700; padding: 3px 12px; border-radius: 20px; margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.5px; }
-        .q-number { color: var(--accent); font-weight: 700; font-size: 0.9rem; margin-bottom: 8px; }
-        .q-text { font-size: 1.05rem; line-height: 1.75; margin-bottom: 24px; font-weight: 500; }
-        .q-text svg { display: block; margin: 12px 0; border-radius: 8px; border: 1px solid var(--border); background: #fff; }
-        .passage-btn { display: inline-flex; align-items: center; gap: 8px; background: #fff7e6; border: 1.5px solid var(--accent); color: #92400e; padding: 8px 16px; border-radius: 8px; cursor: pointer; font-weight: 600; font-size: 0.88rem; margin-bottom: 18px; transition: 0.2s; }
-        .passage-btn:hover { background: #fef3c7; }
-        .option { display: flex; align-items: center; padding: 14px 16px; border: 1.5px solid var(--border); border-radius: 10px; margin-bottom: 10px; cursor: pointer; transition: 0.2s; }
-        .option:hover { background: #f0f4ff; border-color: var(--primary); }
-        .option.selected { background: #eef2ff; border-color: var(--primary); font-weight: 600; }
-        .opt-letter { width: 32px; height: 32px; border-radius: 50%; background: var(--light-bg); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.88rem; margin-right: 14px; flex-shrink: 0; transition: 0.2s; }
-        .option.selected .opt-letter { background: var(--primary); color: white; }
-        .nav-btns { margin-top: 28px; display: flex; justify-content: space-between; }
-        .btn-nav { display: flex; align-items: center; gap: 6px; background: var(--primary); color: white; border: none; padding: 11px 24px; border-radius: 8px; font-weight: 600; font-size: 0.9rem; cursor: pointer; transition: 0.2s; }
-        .btn-nav:hover { opacity: 0.88; }
-        .btn-nav.prev { background: var(--muted); }
-        .nav-panel { background: var(--card); padding: 18px; border-radius: var(--radius); box-shadow: var(--shadow); }
-        .nav-panel h4 { font-size: 0.9rem; font-weight: 700; color: var(--primary); margin-bottom: 14px; padding-left: 4px; }
-        .nav-legend { display: flex; gap: 14px; margin-bottom: 12px; font-size: 0.75rem; color: var(--muted); flex-wrap: wrap; }
-        .legend-dot { display: inline-block; width: 10px; height: 10px; border-radius: 3px; margin-right: 4px; }
-        .grid-box { display: grid; grid-template-columns: repeat(5, 1fr); gap: 7px; max-height: 420px; overflow-y: auto; }
-        .grid-item { height: 38px; border: 1.5px solid var(--border); border-radius: 7px; display: flex; align-items: center; justify-content: center; font-size: 0.82rem; font-weight: 600; cursor: pointer; background: var(--card); transition: 0.15s; color: var(--text); }
-        .grid-item:hover { border-color: var(--primary); background: #f0f4ff; }
-        .grid-item.answered { background: var(--primary); color: white; border-color: var(--primary); }
-        .grid-item.current { border: 2.5px solid var(--accent); color: var(--primary); font-weight: 800; }
-        .grid-item.answered.current { background: var(--primary); color: white; border-color: var(--accent); }
-        .progress-wrap { margin-top: 16px; border-top: 1px solid var(--border); padding-top: 14px; }
-        .progress-label { font-size: 0.8rem; color: var(--muted); margin-bottom: 6px; display: flex; justify-content: space-between; }
-        .progress-bar { height: 6px; background: var(--border); border-radius: 10px; overflow: hidden; }
-        .progress-fill { height: 100%; background: var(--success); border-radius: 10px; transition: width 0.3s; }
-        #modal-overlay { position: fixed; inset: 0; background: rgba(20,30,60,0.55); display: none; justify-content: center; align-items: center; z-index: 1000; backdrop-filter: blur(3px); }
-        #modal-overlay.open { display: flex; }
-        .modal-content { background: white; width: 92%; max-width: 740px; max-height: 82vh; border-radius: var(--radius); padding: 32px; overflow-y: auto; position: relative; box-shadow: 0 20px 60px rgba(0,0,0,0.25); }
-        .modal-title { font-family: 'Playfair Display', serif; color: var(--primary); font-size: 1.2rem; margin-bottom: 14px; padding-right: 30px; }
-        .modal-body { font-size: 0.97rem; line-height: 1.9; color: #334155; }
-        .close-modal { position: absolute; top: 16px; right: 18px; font-size: 1.4rem; cursor: pointer; border: none; background: none; color: var(--muted); font-weight: 700; }
-        .close-modal:hover { color: var(--danger); }
-        .result-summary { background: var(--card); border-radius: var(--radius); padding: 44px 36px; text-align: center; max-width: 600px; margin: 0 auto 30px; box-shadow: var(--shadow); }
-        .result-summary h1 { font-family: 'Playfair Display', serif; color: var(--primary); font-size: 1.8rem; margin-bottom: 20px; }
-        .score-circle { width: 150px; height: 150px; border-radius: 50%; background: linear-gradient(135deg, var(--primary), #2d6aa8); color: white; display: flex; flex-direction: column; align-items: center; justify-content: center; margin: 0 auto 20px; box-shadow: 0 8px 30px rgba(30,58,95,0.3); }
-        .score-big { font-size: 2.4rem; font-weight: 800; font-family: 'Playfair Display', serif; line-height: 1; }
-        .score-denom { font-size: 0.85rem; opacity: 0.85; margin-top: 4px; }
-        .score-percent { font-size: 1.4rem; font-weight: 700; color: var(--primary); margin-bottom: 6px; }
-        .grade-badge { display: inline-block; padding: 6px 20px; border-radius: 20px; font-weight: 700; font-size: 0.95rem; margin-bottom: 16px; }
-        .grade-A { background: #dcfce7; color: #16a34a; }
-        .grade-B { background: #dbeafe; color: #1d4ed8; }
-        .grade-C { background: #fef9c3; color: #a16207; }
-        .grade-F { background: #fee2e2; color: var(--danger); }
-        .stats-row { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; margin: 20px 0; }
-        .stat-box { background: var(--light-bg); border-radius: 10px; padding: 14px 10px; }
-        .stat-val { font-size: 1.3rem; font-weight: 800; color: var(--primary); }
-        .stat-lbl { font-size: 0.75rem; color: var(--muted); margin-top: 2px; }
-        .btn-home { background: var(--primary); color: white; border: none; padding: 14px 36px; border-radius: 10px; font-size: 1rem; font-weight: 700; cursor: pointer; margin-top: 10px; transition: 0.2s; }
-        .btn-home:hover { background: #16305a; }
-        .corrections-card { background: var(--card); border-radius: var(--radius); padding: 28px; box-shadow: var(--shadow); }
-        .corrections-card h2 { font-family: 'Playfair Display', serif; color: var(--primary); margin-bottom: 20px; font-size: 1.4rem; }
-        .review-item { border-bottom: 1px solid var(--border); padding: 18px 0; }
-        .review-item:last-child { border-bottom: none; }
-        .review-q { font-weight: 600; margin-bottom: 10px; line-height: 1.5; }
-        .review-your { color: var(--danger); font-size: 0.9rem; margin-bottom: 4px; }
-        .review-correct { color: var(--success); font-size: 0.9rem; font-weight: 700; margin-bottom: 8px; }
-        .explanation-box { background: #f0fdf4; border-left: 4px solid var(--success); padding: 10px 14px; border-radius: 0 8px 8px 0; font-size: 0.88rem; color: #166534; line-height: 1.5; }
-        ::-webkit-scrollbar { width: 6px; }
-        ::-webkit-scrollbar-track { background: #f1f5f9; }
-        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SmartPrep CBT — Mrs. Adesanya</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@700;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════════════════
+   DESIGN SYSTEM  — SmartPrep Academic Gold & Navy
+═══════════════════════════════════════════════════ */
+:root{
+  --navy:#0f2342;--navy2:#1e3a5f;--navy3:#2d5282;
+  --gold:#d4a017;--gold2:#e8b94a;--gold3:#fef3c7;
+  --green:#16a34a;--red:#c0392b;--red2:#fee2e2;
+  --slate:#64748b;--border:#dce3ef;--bg:#f0f4fa;
+  --card:#fff;--text:#0f2342;--muted:#6b7a99;
+  --radius:16px;--shadow:0 6px 24px rgba(15,35,66,.10);
+  --shadow-lg:0 16px 48px rgba(15,35,66,.18);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font-family:'Plus Jakarta Sans',sans-serif;min-height:100vh;overflow-x:hidden}
+
+/* ── HEADER ── */
+header{
+  background:linear-gradient(135deg,var(--navy) 0%,var(--navy2) 100%);
+  color:#fff;padding:.9rem 1.5rem;
+  display:flex;justify-content:space-between;align-items:center;
+  box-shadow:0 3px 20px rgba(0,0,0,.22);position:sticky;top:0;z-index:100;
+}
+.logo{display:flex;align-items:center;gap:12px}
+.logo-icon{width:42px;height:42px;background:linear-gradient(135deg,var(--gold),var(--gold2));
+  border-radius:12px;display:flex;align-items:center;justify-content:center;
+  font-size:1.3rem;box-shadow:0 4px 12px rgba(212,160,23,.4)}
+.logo-title{font-family:'Fraunces',serif;font-size:1.2rem;letter-spacing:-.5px}
+.logo-sub{font-size:.72rem;opacity:.7;margin-top:1px}
+.btn-restart{background:rgba(255,255,255,.12);border:1.5px solid rgba(255,255,255,.25);
+  color:#fff;padding:8px 18px;border-radius:8px;font-weight:600;font-size:.78rem;
+  cursor:pointer;transition:.2s;letter-spacing:.4px}
+.btn-restart:hover{background:rgba(255,255,255,.22)}
+
+/* ── MAIN CONTAINER ── */
+.container{max-width:1100px;margin:0 auto;padding:28px 16px 60px}
+.hidden{display:none!important}
+
+/* ── PAGE: HOME ── */
+.home-header{text-align:center;margin-bottom:36px;padding-top:8px}
+.home-header h1{font-family:'Fraunces',serif;font-size:2.1rem;color:var(--navy);
+  margin-bottom:8px;letter-spacing:-.5px}
+.home-header p{color:var(--muted);font-size:.95rem}
+
+/* ── SUBJECT GRID ── */
+.subject-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:22px}
+.subject-card{
+  background:var(--card);border-radius:var(--radius);padding:32px 28px;
+  cursor:pointer;border:2px solid transparent;box-shadow:var(--shadow);
+  transition:all .28s cubic-bezier(.34,1.56,.64,1);position:relative;overflow:hidden;
+}
+.subject-card::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,var(--navy2),var(--navy3));
+  opacity:0;transition:.28s;border-radius:var(--radius);
+}
+.subject-card:hover{border-color:var(--gold);transform:translateY(-6px);
+  box-shadow:var(--shadow-lg)}
+.subject-card:hover .card-icon{transform:scale(1.18) rotate(-6deg)}
+.card-icon{font-size:2.8rem;margin-bottom:14px;display:inline-block;transition:.3s}
+.subject-card h2{font-family:'Fraunces',serif;font-size:1.35rem;color:var(--navy);
+  margin-bottom:6px}
+.subject-card p{color:var(--muted);font-size:.83rem;margin-bottom:4px;line-height:1.5}
+.card-badge{
+  display:inline-block;background:linear-gradient(135deg,var(--gold),var(--gold2));
+  color:#fff;font-size:.76rem;font-weight:700;padding:4px 14px;
+  border-radius:20px;margin-top:10px;box-shadow:0 3px 10px rgba(212,160,23,.3)
+}
+.card-sets-row{display:flex;gap:6px;margin-top:10px;flex-wrap:wrap}
+.set-pill{
+  padding:3px 12px;border-radius:20px;font-size:.72rem;font-weight:700;
+  background:var(--bg);color:var(--navy2);border:1.5px solid var(--border);
+  cursor:pointer;transition:.2s;
+}
+.set-pill:hover{background:var(--navy2);color:#fff;border-color:var(--navy2)}
+.set-pill.done{background:#dcfce7;color:var(--green);border-color:var(--green)}
+.set-pill.done::after{content:' ✓'}
+
+/* ── PAGE: SET SELECTION ── */
+.set-page{max-width:620px;margin:0 auto;text-align:center}
+.set-page-back{
+  display:inline-flex;align-items:center;gap:6px;color:var(--navy2);
+  font-weight:600;font-size:.9rem;cursor:pointer;margin-bottom:24px;
+  padding:8px 16px;border-radius:8px;border:1.5px solid var(--border);
+  background:var(--card);box-shadow:var(--shadow);transition:.2s;
+}
+.set-page-back:hover{background:var(--bg)}
+.set-subject-icon{font-size:4rem;margin-bottom:12px}
+.set-page h2{font-family:'Fraunces',serif;font-size:1.8rem;color:var(--navy);margin-bottom:6px}
+.set-page .sub-desc{color:var(--muted);font-size:.9rem;margin-bottom:30px}
+.set-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:28px}
+.set-card{
+  background:var(--card);border-radius:var(--radius);padding:24px 16px;
+  cursor:pointer;border:2.5px solid var(--border);box-shadow:var(--shadow);
+  transition:all .25s ease;text-align:center;position:relative;overflow:hidden;
+}
+.set-card:hover:not(.locked){border-color:var(--gold);transform:translateY(-4px);
+  box-shadow:var(--shadow-lg)}
+.set-card.done-set{border-color:var(--green);background:#f0fdf4}
+.set-card.active-set{border-color:var(--navy2);background:#eff6ff}
+.set-card h3{font-family:'Fraunces',serif;font-size:1.4rem;color:var(--navy);margin-bottom:4px}
+.set-card p{font-size:.8rem;color:var(--muted);margin-bottom:10px}
+.set-card .set-status{font-size:.78rem;font-weight:700;margin-top:8px}
+.set-card.done-set .set-status{color:var(--green)}
+.set-card .set-score-chip{
+  display:inline-block;background:var(--gold3);color:var(--gold);
+  font-size:.72rem;font-weight:700;padding:3px 10px;border-radius:12px;margin-top:6px;
+}
+.set-info-banner{
+  background:linear-gradient(135deg,var(--navy),var(--navy2));
+  color:#fff;border-radius:var(--radius);padding:18px 22px;
+  font-size:.88rem;line-height:1.6;text-align:left;margin-top:10px;
+}
+.set-info-banner strong{color:var(--gold2)}
+
+/* ── PAGE: EXAM ── */
+.top-bar{
+  background:var(--card);padding:13px 20px;border-radius:var(--radius);
+  margin-bottom:18px;box-shadow:var(--shadow);
+  display:flex;justify-content:space-between;align-items:center;
+  position:sticky;top:68px;z-index:20;
+}
+.top-bar-left h3{font-family:'Fraunces',serif;font-size:1rem;color:var(--navy)}
+.top-bar-left span{font-size:.75rem;color:var(--muted);display:block;margin-top:1px}
+.timer{
+  font-size:1.5rem;font-weight:700;color:var(--red);font-variant-numeric:tabular-nums;
+  letter-spacing:1px;padding:6px 16px;border-radius:10px;background:var(--red2);
+}
+.timer.warning{animation:blink 1s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.4}}
+.btn-finish{background:var(--red);color:#fff;border:none;padding:10px 22px;
+  border-radius:8px;font-weight:700;font-size:.82rem;cursor:pointer;transition:.2s}
+.btn-finish:hover{background:#a93226}
+
+.exam-body{display:grid;grid-template-columns:1fr 300px;gap:20px}
+@media(max-width:820px){.exam-body{grid-template-columns:1fr}}
+@media(max-width:600px){.set-cards{grid-template-columns:1fr}}
+
+/* ── QUESTION CARD ── */
+.question-card{
+  background:var(--card);padding:28px;border-radius:var(--radius);
+  box-shadow:var(--shadow);animation:fadeSlide .3s ease;
+}
+@keyframes fadeSlide{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.q-topic-chip{
+  display:inline-block;background:#eef2ff;color:var(--navy2);font-size:.72rem;
+  font-weight:700;padding:3px 12px;border-radius:20px;margin-bottom:10px;
+  text-transform:uppercase;letter-spacing:.5px;
+}
+.q-number{color:var(--gold);font-weight:700;font-size:.88rem;margin-bottom:6px}
+.q-text{font-size:1.05rem;line-height:1.78;margin-bottom:22px;font-weight:500}
+.q-text svg{display:block;margin:12px 0;border-radius:8px;
+  border:1px solid var(--border);background:#fff}
+.passage-btn{
+  display:inline-flex;align-items:center;gap:8px;background:#fff7e6;
+  border:1.5px solid var(--gold);color:#92400e;padding:8px 16px;
+  border-radius:8px;cursor:pointer;font-weight:600;font-size:.86rem;
+  margin-bottom:16px;transition:.2s;
+}
+.passage-btn:hover{background:var(--gold3)}
+.option{
+  display:flex;align-items:center;padding:14px 16px;
+  border:1.5px solid var(--border);border-radius:10px;
+  margin-bottom:10px;cursor:pointer;transition:.2s;
+}
+.option:hover:not(.selected):not(.correct):not(.wrong){
+  background:#f0f4ff;border-color:var(--navy2)}
+.option.selected{background:#eff6ff;border-color:var(--navy2);font-weight:600}
+.option.correct{background:#f0fdf4;border-color:var(--green);font-weight:600}
+.option.wrong{background:var(--red2);border-color:var(--red)}
+.opt-letter{
+  width:32px;height:32px;border-radius:50%;background:var(--bg);
+  display:flex;align-items:center;justify-content:center;font-weight:700;
+  font-size:.86rem;margin-right:14px;flex-shrink:0;transition:.2s;
+}
+.option.selected .opt-letter{background:var(--navy2);color:#fff}
+.option.correct .opt-letter{background:var(--green);color:#fff}
+.option.wrong .opt-letter{background:var(--red);color:#fff}
+.nav-btns{margin-top:26px;display:flex;justify-content:space-between;gap:10px}
+.btn-nav{
+  display:flex;align-items:center;gap:6px;background:var(--navy2);color:#fff;
+  border:none;padding:12px 24px;border-radius:8px;font-weight:600;
+  font-size:.88rem;cursor:pointer;transition:.2s;flex:1;justify-content:center;
+}
+.btn-nav:hover{background:var(--navy)}
+.btn-nav.prev{background:var(--slate)}
+.btn-nav:disabled{opacity:.4;cursor:not-allowed}
+
+/* ── NAVIGATOR PANEL ── */
+.nav-panel{background:var(--card);padding:18px;border-radius:var(--radius);
+  box-shadow:var(--shadow)}
+.nav-panel h4{font-size:.88rem;font-weight:700;color:var(--navy);
+  margin-bottom:12px;padding-left:2px}
+.nav-legend{display:flex;gap:12px;margin-bottom:10px;font-size:.73rem;
+  color:var(--muted);flex-wrap:wrap}
+.legend-dot{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:4px}
+.grid-box{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;
+  max-height:400px;overflow-y:auto}
+.grid-item{
+  height:36px;border:1.5px solid var(--border);border-radius:7px;
+  display:flex;align-items:center;justify-content:center;font-size:.8rem;
+  font-weight:600;cursor:pointer;background:var(--card);transition:.15s;color:var(--text);
+}
+.grid-item:hover{border-color:var(--navy2);background:#f0f4ff}
+.grid-item.answered{background:var(--navy2);color:#fff;border-color:var(--navy2)}
+.grid-item.current{border:2.5px solid var(--gold);font-weight:800;color:var(--navy)}
+.grid-item.answered.current{background:var(--navy2);color:#fff;border-color:var(--gold)}
+.progress-wrap{margin-top:14px;border-top:1px solid var(--border);padding-top:12px}
+.progress-label{font-size:.78rem;color:var(--muted);margin-bottom:6px;
+  display:flex;justify-content:space-between}
+.progress-bar{height:7px;background:var(--border);border-radius:10px;overflow:hidden}
+.progress-fill{height:100%;background:linear-gradient(90deg,var(--navy2),var(--gold));
+  border-radius:10px;transition:width .4s}
+
+/* ── RESULT PAGE ── */
+.result-wrapper{max-width:680px;margin:0 auto}
+.result-card{
+  background:var(--card);border-radius:var(--radius);padding:40px 32px;
+  text-align:center;box-shadow:var(--shadow-lg);margin-bottom:24px;
+}
+.result-card h1{font-family:'Fraunces',serif;color:var(--navy);font-size:1.7rem;
+  margin-bottom:20px}
+.score-ring{
+  width:160px;height:160px;border-radius:50%;margin:0 auto 16px;
+  background:conic-gradient(var(--gold) 0deg, var(--navy2) 0deg);
+  display:flex;align-items:center;justify-content:center;position:relative;
+}
+.score-ring-inner{
+  width:130px;height:130px;border-radius:50%;
+  background:linear-gradient(135deg,var(--navy),var(--navy2));
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  color:#fff;
+}
+.score-big{font-family:'Fraunces',serif;font-size:2.6rem;font-weight:900;line-height:1}
+.score-denom{font-size:.85rem;opacity:.8;margin-top:4px}
+.score-pct{font-size:1.5rem;font-weight:700;color:var(--navy);margin-bottom:8px}
+.grade-badge{display:inline-block;padding:6px 22px;border-radius:20px;
+  font-weight:700;font-size:.92rem;margin-bottom:18px}
+.grade-A{background:#dcfce7;color:var(--green)}
+.grade-B{background:#dbeafe;color:#1d4ed8}
+.grade-C{background:#fef9c3;color:#a16207}
+.grade-F{background:var(--red2);color:var(--red)}
+.stats-row{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:18px 0}
+.stat-box{background:var(--bg);border-radius:10px;padding:14px 8px}
+.stat-val{font-size:1.3rem;font-weight:800;color:var(--navy)}
+.stat-lbl{font-size:.73rem;color:var(--muted);margin-top:2px}
+.result-actions{display:flex;flex-direction:column;gap:10px;margin-top:16px}
+.btn-action{
+  padding:14px 28px;border-radius:10px;font-size:.95rem;font-weight:700;
+  cursor:pointer;border:none;transition:.2s;
+}
+.btn-primary{background:linear-gradient(135deg,var(--navy),var(--navy2));color:#fff}
+.btn-primary:hover{opacity:.9}
+.btn-secondary{background:var(--gold3);color:var(--gold);border:2px solid var(--gold)}
+.btn-secondary:hover{background:var(--gold);color:#fff}
+.btn-outline{background:var(--card);color:var(--navy2);border:2px solid var(--border)}
+.btn-outline:hover{border-color:var(--navy2)}
+
+/* ── CORRECTIONS ── */
+.corrections-card{background:var(--card);border-radius:var(--radius);
+  padding:26px;box-shadow:var(--shadow)}
+.corrections-card h2{font-family:'Fraunces',serif;color:var(--navy);
+  margin-bottom:18px;font-size:1.3rem}
+.review-item{border-bottom:1px solid var(--border);padding:16px 0}
+.review-item:last-child{border-bottom:none}
+.review-q{font-weight:600;margin-bottom:8px;line-height:1.55;font-size:.95rem}
+.review-your{color:var(--red);font-size:.88rem;margin-bottom:4px}
+.review-correct{color:var(--green);font-size:.88rem;font-weight:700;margin-bottom:6px}
+.exp-box{background:#f0fdf4;border-left:4px solid var(--green);padding:10px 14px;
+  border-radius:0 8px 8px 0;font-size:.85rem;color:#166534;line-height:1.5}
+
+/* ── MODAL ── */
+#modal-overlay{position:fixed;inset:0;background:rgba(10,20,50,.6);
+  display:none;justify-content:center;align-items:center;z-index:1000;
+  backdrop-filter:blur(4px)}
+#modal-overlay.open{display:flex}
+.modal-box{background:#fff;width:92%;max-width:740px;max-height:82vh;
+  border-radius:var(--radius);padding:30px;overflow-y:auto;position:relative;
+  box-shadow:0 24px 72px rgba(0,0,0,.3)}
+.modal-title{font-family:'Fraunces',serif;color:var(--navy);font-size:1.15rem;
+  margin-bottom:12px;padding-right:30px}
+.modal-body{font-size:.96rem;line-height:1.9;color:#334155;white-space:pre-line}
+.close-modal{position:absolute;top:14px;right:16px;font-size:1.4rem;cursor:pointer;
+  border:none;background:none;color:var(--muted);font-weight:700}
+.close-modal:hover{color:var(--red)}
+
+/* ── SCROLLBAR ── */
+::-webkit-scrollbar{width:6px}
+::-webkit-scrollbar-track{background:#f1f5f9}
+::-webkit-scrollbar-thumb{background:#cbd5e1;border-radius:4px}
+</style>
 </head>
 <body>
 <header>
-    <div class="logo">
-        <div class="logo-icon">📚</div>
-        <div>
-            <div class="logo-text">SmartPrep CBT</div>
-            <div class="logo-sub">by Mrs. Adesanya</div>
-        </div>
+  <div class="logo">
+    <div class="logo-icon">📚</div>
+    <div>
+      <div class="logo-title">SmartPrep CBT</div>
+      <div class="logo-sub">by Mrs. Adesanya</div>
     </div>
-    <button class="btn-restart" onclick="location.reload()">⟳ RESTART</button>
+  </div>
+  <button class="btn-restart" onclick="goHome()">⟳ HOME</button>
 </header>
+
 <div class="container">
 
-<!-- SELECTION PAGE -->
-<section id="page-selection">
-    <div class="selection-header">
-        <h1>JAMB Practice Centre</h1>
-        <p>Select a subject to begin your timed 30-minute CBT session.</p>
-    </div>
-    <div class="subject-grid">
-        <div class="subject-card" onclick="initExam('english')">
-            <span class="card-icon">📖</span>
-            <h2>English Language</h2>
-            <p>Comprehension · Lexis &amp; Structure</p>
-            <p>Synonyms · Antonyms · Oral English</p>
-            <p>Phonetics · The Lekki Headmaster</p>
-            <div class="card-badge">60 Questions · 30 Mins</div>
-        </div>
-        <div class="subject-card" onclick="initExam('chemistry')">
-            <span class="card-icon">🧪</span>
-            <h2>Chemistry</h2>
-            <p>Physical · Inorganic · Organic</p>
-            <p>Calculations · Periodicity · Bonding</p>
-            <p>Gas Laws · Diagrams · Radioactivity</p>
-            <div class="card-badge">40 Questions · 30 Mins</div>
-        </div>
-        <div class="subject-card" onclick="initExam('literature')">
-            <span class="card-icon">🎭</span>
-            <h2>Literature in English</h2>
-            <p>Drama · Prose · Literary Devices</p>
-            <p>Themes · Character · Setting · Plot</p>
-            <p>Figures of Speech · Poetry</p>
-            <div class="card-badge">60 Questions · 30 Mins</div>
-        </div>
-        <div class="subject-card" onclick="initExam('physics')">
-            <span class="card-icon">⚡</span>
-            <h2>Physics</h2>
-            <p>Mechanics · Waves · Optics · Heat</p>
-            <p>Electricity · Magnetism · Modern Physics</p>
-            <p>Past JAMB Questions with Diagrams</p>
-            <div class="card-badge">40 Questions · 30 Mins</div>
-        </div>
-        <div class="subject-card" onclick="initExam('mathematics')">
-            <span class="card-icon">📐</span>
-            <h2>Mathematics</h2>
-            <p>Algebra · Geometry · Calculus</p>
-            <p>Statistics · Probability · Trigonometry</p>
-            <p>Past JAMB Questions with Calculations</p>
-            <div class="card-badge">40 Questions · 30 Mins</div>
-        </div>
-    </div>
+<!-- ══════════════ PAGE: HOME ══════════════ -->
+<section id="pg-home">
+  <div class="home-header">
+    <h1>JAMB Practice Centre</h1>
+    <p>Choose a subject — then pick a set to begin your CBT session.</p>
+  </div>
+  <div class="subject-grid" id="subject-grid"></div>
 </section>
 
-<!-- EXAM PAGE -->
-<section id="page-exam" class="hidden">
-    <div class="top-nav">
-        <h3 id="display-subject">English Language</h3>
-        <div class="timer" id="timer">30:00</div>
-        <button class="btn-finish" onclick="forceSubmit()">FINISH TEST</button>
+<!-- ══════════════ PAGE: SET SELECTION ══════════════ -->
+<section id="pg-sets" class="hidden">
+  <div class="set-page">
+    <div class="set-page-back" onclick="goHome()">← Back to Subjects</div>
+    <div id="set-subject-icon" class="set-subject-icon">📖</div>
+    <h2 id="set-subject-name">English Language</h2>
+    <p class="sub-desc" id="set-subject-desc">Select a Set to start your practice session</p>
+    <div class="set-cards" id="set-cards-container"></div>
+    <div class="set-info-banner">
+      <strong>How Sets Work:</strong> Each set contains different questions from the past question bank.
+      Complete all three sets for full exam coverage.
+      Your progress is saved automatically. ✓ = Completed set.
     </div>
-    <div class="exam-body">
-        <main>
-            <div class="question-card">
-                <button id="view-passage-btn" class="passage-btn hidden" onclick="togglePassage()">📄 Read Passage / Instructions</button>
-                <div class="q-topic" id="q-topic">COMPREHENSION</div>
-                <div class="q-number" id="q-number">Question 1 of 60</div>
-                <div class="q-text" id="q-text">Loading...</div>
-                <div id="options-area"></div>
-                <div class="nav-btns">
-                    <button class="btn-nav prev" onclick="nav(-1)">← Previous</button>
-                    <button class="btn-nav" onclick="nav(1)">Next →</button>
-                </div>
-            </div>
-        </main>
-        <aside>
-            <div class="nav-panel">
-                <h4>Question Navigator</h4>
-                <div class="nav-legend">
-                    <span><span class="legend-dot" style="background:var(--primary)"></span>Answered</span>
-                    <span><span class="legend-dot" style="background:var(--border);border:1.5px solid #aaa"></span>Skipped</span>
-                </div>
-                <div class="grid-box" id="nav-grid"></div>
-                <div class="progress-wrap">
-                    <div class="progress-label"><span>Progress</span><span id="progress-text">0 / 60</span></div>
-                    <div class="progress-bar"><div class="progress-fill" id="progress-fill" style="width:0%"></div></div>
-                </div>
-            </div>
-        </aside>
-    </div>
+  </div>
 </section>
 
-<!-- RESULT PAGE -->
-<section id="page-result" class="hidden">
-    <div class="result-summary">
-        <h1>Your Result</h1>
-        <div class="score-circle">
-            <div class="score-big" id="res-score">0</div>
-            <div class="score-denom" id="score-denom">out of 60</div>
+<!-- ══════════════ PAGE: EXAM ══════════════ -->
+<section id="pg-exam" class="hidden">
+  <div class="top-bar">
+    <div class="top-bar-left">
+      <h3 id="exam-subject-label">English Language</h3>
+      <span id="exam-set-label">Set A</span>
+    </div>
+    <div class="timer" id="timer">30:00</div>
+    <button class="btn-finish" onclick="forceSubmit()">FINISH</button>
+  </div>
+  <div class="exam-body">
+    <main>
+      <div class="question-card">
+        <button id="view-passage-btn" class="passage-btn hidden" onclick="togglePassage()">
+          📄 Read Passage
+        </button>
+        <div class="q-topic-chip" id="q-topic">COMPREHENSION</div>
+        <div class="q-number" id="q-number">Question 1 of 60</div>
+        <div class="q-text" id="q-text">Loading...</div>
+        <div id="options-area"></div>
+        <div class="nav-btns">
+          <button class="btn-nav prev" onclick="nav(-1)" id="btn-prev">← Prev</button>
+          <button class="btn-nav" onclick="nav(1)" id="btn-next">Next →</button>
         </div>
-        <div class="score-percent" id="res-percent">0%</div>
-        <div class="grade-badge" id="grade-badge">—</div>
-        <div class="stats-row">
-            <div class="stat-box"><div class="stat-val" id="stat-correct">0</div><div class="stat-lbl">Correct</div></div>
-            <div class="stat-box"><div class="stat-val" id="stat-wrong">0</div><div class="stat-lbl">Wrong</div></div>
-            <div class="stat-box"><div class="stat-val" id="stat-time">0m</div><div class="stat-lbl">Time Used</div></div>
+      </div>
+    </main>
+    <aside>
+      <div class="nav-panel">
+        <h4>Question Navigator</h4>
+        <div class="nav-legend">
+          <span><span class="legend-dot" style="background:var(--navy2)"></span>Answered</span>
+          <span><span class="legend-dot" style="background:var(--border);border:1.5px solid #aaa"></span>Skipped</span>
         </div>
-        <button class="btn-home" onclick="location.reload()">Back to Home</button>
+        <div class="grid-box" id="nav-grid"></div>
+        <div class="progress-wrap">
+          <div class="progress-label">
+            <span>Progress</span><span id="progress-text">0/60</span>
+          </div>
+          <div class="progress-bar">
+            <div class="progress-fill" id="progress-fill" style="width:0%"></div>
+          </div>
+        </div>
+      </div>
+    </aside>
+  </div>
+</section>
+
+<!-- ══════════════ PAGE: RESULT ══════════════ -->
+<section id="pg-result" class="hidden">
+  <div class="result-wrapper">
+    <div class="result-card">
+      <h1>🎉 Quiz Completed!</h1>
+      <div class="score-ring" id="score-ring">
+        <div class="score-ring-inner">
+          <div class="score-big" id="res-score">0</div>
+          <div class="score-denom" id="score-denom">out of 60</div>
+        </div>
+      </div>
+      <div class="score-pct" id="res-percent">0%</div>
+      <div class="grade-badge" id="grade-badge">—</div>
+      <div class="stats-row">
+        <div class="stat-box"><div class="stat-val" id="stat-correct">0</div><div class="stat-lbl">Correct</div></div>
+        <div class="stat-box"><div class="stat-val" id="stat-wrong">0</div><div class="stat-lbl">Wrong</div></div>
+        <div class="stat-box"><div class="stat-val" id="stat-time">0m</div><div class="stat-lbl">Time Used</div></div>
+      </div>
+      <div class="result-actions">
+        <button class="btn-action btn-primary" onclick="tryAgain()">🔁 Try Same Set Again</button>
+        <button class="btn-action btn-secondary" onclick="tryAnotherSet()">📚 Try Another Set</button>
+        <button class="btn-action btn-outline" onclick="goHome()">🏠 Back to Home</button>
+      </div>
     </div>
     <div class="corrections-card">
-        <h2>Full Corrections &amp; Explanations</h2>
-        <div id="review-area"></div>
+      <h2>Full Corrections &amp; Explanations</h2>
+      <div id="review-area"></div>
     </div>
+  </div>
 </section>
 
 </div><!-- /container -->
 
-<!-- MODAL -->
+<!-- PASSAGE MODAL -->
 <div id="modal-overlay" onclick="handleOverlayClick(event)">
-    <div class="modal-content">
-        <button class="close-modal" onclick="togglePassage()">×</button>
-        <div class="modal-title" id="modal-title">Reading Passage</div>
-        <div class="modal-body" id="passage-text"></div>
-    </div>
+  <div class="modal-box">
+    <button class="close-modal" onclick="togglePassage()">×</button>
+    <div class="modal-title" id="modal-title">Reading Passage</div>
+    <div class="modal-body" id="passage-text"></div>
+  </div>
 </div>
 
-<script>
 
-// =====================================================================
-// PASSAGES
-// =====================================================================
+<script>
+// ═══════════════════════════════════════════════════════════════════
+// PASSAGES (for English comprehension)
+// ═══════════════════════════════════════════════════════════════════
 const passages = {
     COMP1: { title:"Comprehension Passage 1 — Digital Age & Mental Health", text:`The digital age has brought a significant shift in how we communicate. While social media platforms offer instant connectivity, they also present serious challenges to personal privacy and mental health. Studies conducted in over twenty countries show that excessive screen time is strongly linked to increased anxiety and depression among teenagers. Experts and psychologists suggest that setting firm boundaries for digital consumption is essential for maintaining a healthy psychological balance in today's world.\n\nHowever, the convenience of digital tools cannot be entirely dismissed. They facilitate global trade, long-distance education, and cross-cultural communication on an unprecedented scale. The key lies in achieving a balance — leveraging the benefits while consciously managing the adverse effects. Parents, schools, and policymakers all have roles to play in guiding the young generation towards a healthier relationship with technology.` },
     COMP2: { title:"Comprehension Passage 2 — Corruption in Public Sector", text:`Corruption in the public sector remains a major obstacle for developing nations seeking sustainable growth. It siphons off resources that ought to be channelled into infrastructure, healthcare, and education. Transparency International has repeatedly called for stricter legislative frameworks and better judicial oversight to curb this widespread menace. Whistleblower protection laws, independent anti-corruption commissions, and regular public audits are among the recommended tools.\n\nIn many cases, it is the common citizen who bears the heaviest brunt of systemic failure. Schools crumble for want of funds, hospitals lack basic equipment, and roads remain unmotorable — yet public accounts show billions appropriated for development. The resultant erosion of public trust in government institutions can have profound long-term consequences for national cohesion and democratic stability.` },
@@ -262,6 +442,7 @@ const passages = {
 // =====================================================================
 // ENGLISH LANGUAGE — 60 QUESTIONS
 // =====================================================================
+
 const englishQuestionsRaw = [
     { pid:'COMP1', topic:'COMPREHENSION', q:"According to the passage, what is a major challenge brought by the digital age?", opts:["Lack of internet access","Threats to personal privacy and mental health","Absence of social media","Expensive smartphones"], ans:1, exp:"The passage explicitly mentions challenges to personal privacy and mental health as major issues of the digital age." },
     { pid:'COMP1', topic:'COMPREHENSION', q:"According to the passage, what do experts recommend for psychological balance?", opts:["Avoiding technology completely","Using only educational apps","Setting boundaries for digital consumption","Exercising every morning"], ans:2, exp:"The passage says 'setting firm boundaries for digital consumption is essential for maintaining a healthy psychological balance'." },
@@ -339,6 +520,73 @@ const englishQuestionsRaw = [
 // =====================================================================
 // CHEMISTRY — 40 QUESTIONS  (SVG diagrams fully included)
 // =====================================================================
+
+
+// ── EXTRA ENGLISH FROM PAST JAMB PDF ─────────────────────────────────────────
+// These augment the English pool to reach 180 questions (3×60)
+
+const englishPDFQuestions = [
+  // SYNONYMS from PDF
+  { topic:'SYNONYMS', q:"The monitor was told to <em>look into</em> the cause of the confusion in the classroom.", opts:["Investigate","Punish","Spy on","Watch"], ans:0, exp:"'Look into' means to investigate or examine a matter carefully." },
+  { topic:'SYNONYMS', q:"The workers protested about the <em>cut</em> in their wages.", opts:["Decrease","Lateness","Amount","Gap"], ans:0, exp:"A 'cut' in wages means a decrease or reduction in pay." },
+  { topic:'SYNONYMS', q:"She <em>found</em> a naira note on the field.", opts:["Hid","Discovered","Lost","Dropped"], ans:1, exp:"'Found' means discovered — she came upon it unexpectedly." },
+  { topic:'SYNONYMS', q:"The man asked his wife to buy <em>expensive</em> materials for her dresses.", opts:["Beautiful","Gay","Costly","Many"], ans:2, exp:"Expensive means costly — high in price." },
+  { topic:'SYNONYMS', q:"Mr Subomi wants to <em>give up</em> his appointment.", opts:["Transfer to another","Resign from","Keep for his son","Share with others"], ans:1, exp:"'Give up' an appointment means to resign from it." },
+
+  // ANTONYMS from PDF
+  { topic:'ANTONYMS', q:"They all <em>agree</em> that John was a fast runner after the race.", opts:["Cheered","Denied","Said","Shouted"], ans:1, exp:"The opposite of 'agree' is 'denied' — to refuse to accept or contradict." },
+  { topic:'ANTONYMS', q:"Last year our well was <em>empty</em>.", opts:["Few","Full","Shallow","Low"], ans:1, exp:"The opposite of empty is full." },
+  { topic:'ANTONYMS', q:"Solomon did not feel comfortable in his coat because it was made of <em>rough</em> materials.", opts:["Light","Cheap","Smooth","Delicate"], ans:2, exp:"The opposite of rough (texture) is smooth." },
+
+  // FILL-IN-THE-GAP from PDF
+  { topic:'FILL-IN-THE-GAP', q:"I passed my entrance examination ……….. unfortunately, I was not accepted by the university.", opts:["And","Because","For","But"], ans:3, exp:"'But' introduces a contrast — I passed but was not accepted." },
+  { topic:'FILL-IN-THE-GAP', q:"The only witness to the theft was so shocked that he couldn't describe exactly ………", opts:["What the thief looked like","How the thief looked like","That the thief looked like","Which the thief looked like"], ans:0, exp:"'What' is the correct relative pronoun here — 'what the thief looked like'." },
+  { topic:'FILL-IN-THE-GAP', q:"The lady accompanied by her two friends …………", opts:["Has arrived","Have arrived","Have been arriving","Is being arrived"], ans:0, exp:"'The lady' is the grammatical subject (singular), so 'has arrived' is correct. 'Accompanied by' is a parenthetical phrase." },
+  { topic:'FILL-IN-THE-GAP', q:"When one lecturer had an accident last semester, I often go to the hospital …………", opts:["For visit","To be visiting","To visit","Visit"], ans:2, exp:"'To visit' (infinitive of purpose) is the correct form here." },
+  { topic:'FILL-IN-THE-GAP', q:"Ade was unhappy after the race …….. he failed to get a medal.", opts:["Because","Since","But","For"], ans:0, exp:"'Because' gives the reason for Ade's unhappiness." },
+  { topic:'FILL-IN-THE-GAP', q:"This is the lady ……. stole my car.", opts:["Who","Which","Whom","Would have"], ans:0, exp:"'Who' is used for persons as the subject of the relative clause." },
+  { topic:'FILL-IN-THE-GAP', q:"If you were around, I …….. happy.", opts:["Would be","Would have been","Have been","Was"], ans:0, exp:"Second conditional: 'If + past tense... would + bare infinitive'. 'Would be' is correct." },
+  { topic:'FILL-IN-THE-GAP', q:"I was bed-ridden for a week; Akeem was too ………. to assist with the harvesting.", opts:["Smart","Gently","Head","Reluctant"], ans:3, exp:"'Reluctant' (unwilling) correctly fits the context — he was too reluctant to help." },
+  { topic:'FILL-IN-THE-GAP', q:"While I was gone, who ……… here?", opts:["Came","Comes","Have come","Has come"], ans:0, exp:"Simple past 'came' is correct for a completed action in the past." },
+  { topic:'FILL-IN-THE-GAP', q:"Good children assist their mother's ……….", opts:["Cooked","To cook","To be cooking","In cooking"], ans:1, exp:"'To cook' (infinitive) is the correct form after 'assist...to'." },
+  { topic:'FILL-IN-THE-GAP', q:"The football team supporters ………. wildly when a goal was scored.", opts:["Cheered","Groaned","Wept","Shouted"], ans:0, exp:"'Cheered' means to shout encouragement — the correct word for supporters celebrating a goal." },
+  { topic:'FILL-IN-THE-GAP', q:"When the fire alarm came on, we ………. out of the building.", opts:["Rushed","Walked","Strolled","Crawled"], ans:0, exp:"In an emergency, people 'rushed' — moved quickly. The others (walked, strolled, crawled) are too slow or inappropriate." },
+  { topic:'FILL-IN-THE-GAP', q:"The party has …….. the country for a long time.", opts:["Tormented","Promised","Ruled","Lied"], ans:2, exp:"'Ruled' (governed) a country is the correct colocation." },
+  { topic:'FILL-IN-THE-GAP', q:"A long time was expended before Sisi Caro could settle …….. the price of the weave-on.", opts:["In","To","On","With"], ans:2, exp:"'Settle on' a price means to agree on/decide upon a price." },
+  { topic:'FILL-IN-THE-GAP', q:"When the children heard the ………. of their father's car, they all ran to their rooms.", opts:["Horn","Humming","Sound","Break"], ans:0, exp:"'Horn' — the specific sound of a car horn — is the most precise and natural word here." },
+  { topic:'FILL-IN-THE-GAP', q:"In the lecture hall, the lecturer gave the …………. to the students.", opts:["Lecture","Dialogue","Warning","Talk"], ans:0, exp:"A lecturer gives a 'lecture' in a lecture hall — this is the correct colocation." },
+  { topic:'FILL-IN-THE-GAP', q:"The priest gave ………. in the church.", opts:["Dialogue","Counselling","Sermon","Advice"], ans:2, exp:"A priest gives a 'sermon' — a religious address in a church." },
+  { topic:'FILL-IN-THE-GAP', q:"Olumide is absent ……….. the lecture today.", opts:["From","Of","Over","In"], ans:0, exp:"'Absent from' is the correct preposition collocation." },
+  { topic:'FILL-IN-THE-GAP', q:"The man in the black suit should ………. the horse.", opts:["Mount","Sit","In","By"], ans:0, exp:"One 'mounts' a horse — the correct verb for getting on a horse." },
+  { topic:'FILL-IN-THE-GAP', q:"I ………. to Uyo tomorrow.", opts:["Probably","Shall probably go","Have probably gone","Were probably going"], ans:1, exp:"'Shall probably go' is the correct future form for first-person future plans." },
+  { topic:'FILL-IN-THE-GAP', q:"Olu is a very good friend on ………. I can rely.", opts:["Where","Which","Whom","Who"], ans:2, exp:"'Whom' is the correct object pronoun in a relative clause after a preposition." },
+  { topic:'FILL-IN-THE-GAP', q:"Janet's fever was so acute that she ………. an injection.", opts:["Must have","Ought to have","Had to have","Had"], ans:2, exp:"'Had to have' expresses necessity — she was required to have an injection." },
+  { topic:'FILL-IN-THE-GAP', q:"I know of an elephant ………. has only three legs.", opts:["Who","Which","Whom","Of which"], ans:1, exp:"'Which' is used for animals and things as the subject of a relative clause." },
+  { topic:'FILL-IN-THE-GAP', q:"There were no tomatoes in the supermarket; Ronke bought some pepper ……….", opts:["Unless","So","Whereas","Since"], ans:1, exp:"'So' shows a result — there were no tomatoes, so she bought pepper instead." },
+  { topic:'FILL-IN-THE-GAP', q:"The security vehicle raced ………. full speed with the blaring siren.", opts:["On","With","At","In"], ans:2, exp:"'At full speed' is the correct prepositional phrase." },
+  { topic:'FILL-IN-THE-GAP', q:"William loves reading love-story books to take his mind ………. his worries.", opts:["From","Out","Away","Off"], ans:3, exp:"'Take one's mind off' something means to stop thinking about a worry — 'off' is correct." },
+  { topic:'FILL-IN-THE-GAP', q:"I don't know what to do with these children; they are always quarreling ……….", opts:["Themselves","Myself","One another","Each of them"], ans:2, exp:"'One another' is used for mutual actions among more than two people — correct here." },
+  { topic:'FILL-IN-THE-GAP', q:"David couldn't have said a thing like that ……….", opts:["Did he?","Could he?","Would he?","Can he?"], ans:1, exp:"'Couldn't have' requires the matching tag question 'could he?' using the same modal." },
+  { topic:'FILL-IN-THE-GAP', q:"If he had known, he wouldn't have come ……….", opts:["Wasn't he?","Would he?","Couldn't he?","Wouldn't he?"], ans:1, exp:"'Wouldn't have come' requires the tag 'would he?' (positive auxiliary + subject)." },
+  { topic:'FILL-IN-THE-GAP', q:"Neither James nor Stella felt happy ………. the incident.", opts:["By","In","About","For"], ans:2, exp:"'Happy about' something is the correct preposition collocation." },
+  { topic:'FILL-IN-THE-GAP', q:"Anybody would be impressed ………. such an impressive performance.", opts:["For","At","With","From"], ans:1, exp:"'Impressed at/by/with' — 'at' is the standard JAMB answer here." },
+  { topic:'FILL-IN-THE-GAP', q:"Ajose and Emmanuel ………. the work yesterday.", opts:["Finished","Finish","Shall finish","Would finish"], ans:0, exp:"'Yesterday' signals past tense. 'Finished' is the correct simple past form." },
+  { topic:'FILL-IN-THE-GAP', q:"A large number of spectators ………. present at the football match.", opts:["Were been","Were","Was","Have been"], ans:1, exp:"'A large number of' takes a plural verb: 'were present'." },
+  { topic:'FILL-IN-THE-GAP', q:"Tom and his wife ………. killed in an accident.", opts:["Were","Was","Were been","Had been"], ans:0, exp:"'Tom and his wife' is a compound (plural) subject requiring 'were'." },
+  { topic:'FILL-IN-THE-GAP', q:"My mother instructed me that I must ………. before breakfast.", opts:["Bath","Have my bathe","Take my bath","Bath myself"], ans:2, exp:"'Take a bath' is the correct standard phrase in formal English." },
+  { topic:'FILL-IN-THE-GAP', q:"Take your umbrella because it ……….", opts:["Is raining","Wanted to rain","Had rained","Was raining"], ans:0, exp:"'It is raining' (present continuous) describes rain happening right now — the logical reason to take an umbrella." },
+  { topic:'FILL-IN-THE-GAP', q:"When I heard the deafening sound, I ………. under the bed.", opts:["Hidden","Had hid","Hid","Am hiding"], ans:2, exp:"Simple past 'hid' is correct for a completed action in the past." },
+  { topic:'FILL-IN-THE-GAP', q:"Babatope wishes he ………. such a man.", opts:["Am being","Was","Were","Am"], ans:2, exp:"'Wish' + subjunctive: 'wish he were' is the grammatically correct form." },
+  { topic:'FILL-IN-THE-GAP', q:"Janet sat for the examination ………. she had malaria.", opts:["While","Since","Though","Why"], ans:2, exp:"'Though' (although) introduces a concessive clause showing contrast — she sat despite having malaria." },
+  { topic:'FILL-IN-THE-GAP', q:"Amina wore a man's hat ………. looked very funny on her.", opts:["That","Who","Which","Whose"], ans:0, exp:"'That' or 'which' can be used for things. 'That' is the standard JAMB answer here." },
+  { topic:'FILL-IN-THE-GAP', q:"When Ade came in, he sat on a chair and ………. for a drink.", opts:["Was asking","Asked","Will ask","After"], ans:1, exp:"Parallel past tense: 'came in, sat... and asked' — simple past is consistent." },
+  { topic:'FILL-IN-THE-GAP', q:"Lawrence, please if you come ………. my brother in town, inform him I am here.", opts:["Over","Across","Through","After"], ans:1, exp:"'Come across' means to meet or encounter by chance." },
+  { topic:'FILL-IN-THE-GAP', q:"Charles quickly got a match and struck it on ………. sole of my shoe.", opts:["This","The","A","Each"], ans:1, exp:"'The sole' — referring to a specific, known sole — requires the definite article 'the'." },
+  { topic:'FILL-IN-THE-GAP', q:"Olu asked the secretary to know if anybody ………. to see him.", opts:["Wants","Wanted","Has been waiting","Is wishing"], ans:1, exp:"Reported speech: the main verb 'asked' (past) requires the reported verb to backshift: 'wanted'." },
+  { topic:'FILL-IN-THE-GAP', q:"My brother came in ………. I was sleeping.", opts:["While","Despite","And then","Although"], ans:0, exp:"'While' introduces a simultaneous past action — my brother came in while I was sleeping." },
+  { topic:'FILL-IN-THE-GAP', q:"………. likes to be cheated.", opts:["Not many people","Nobody","Few people","No people"], ans:1, exp:"'Nobody' is the grammatically standard and idiomatic way to say 'no person'. JAMB answer = B." },
+];
+
 const chemistryQuestionsRaw = [
     { topic:'GAS LAWS — DIAGRAM', q:`Study the graph below which shows the relationship between PV and P for a gas. Which curve represents an IDEAL gas?<br><br><svg width="220" height="160" viewBox="0 0 220 160" xmlns="http://www.w3.org/2000/svg"><rect width="220" height="160" fill="#f8fafc" rx="6"/><line x1="30" y1="130" x2="195" y2="130" stroke="#334155" stroke-width="1.5"/><line x1="30" y1="130" x2="30" y2="15" stroke="#334155" stroke-width="1.5"/><text x="100" y="150" font-size="11" fill="#334155" text-anchor="middle">Pressure (P)</text><text x="12" y="75" font-size="11" fill="#334155" text-anchor="middle" transform="rotate(-90,12,75)">PV</text><line x1="30" y1="72" x2="195" y2="72" stroke="#1d4ed8" stroke-width="2.5" stroke-dasharray="6,3"/><text x="198" y="76" font-size="12" fill="#1d4ed8" font-weight="bold">X</text><path d="M30,72 Q80,60 130,40 T195,20" fill="none" stroke="#dc2626" stroke-width="2"/><text x="198" y="24" font-size="12" fill="#dc2626" font-weight="bold">Y</text><path d="M30,72 Q80,82 130,95 T195,110" fill="none" stroke="#16a34a" stroke-width="2"/><text x="198" y="114" font-size="12" fill="#16a34a" font-weight="bold">Z</text></svg>`, opts:["Curve Y","Curve X — the horizontal line","Curve Z","None of the curves"], ans:1, exp:"For an ideal gas PV = nRT = constant at fixed temperature. This gives a horizontal line (X). Real gases deviate — some curve upward (Y) or downward (Z) from ideal behaviour." },
 
@@ -390,6 +638,7 @@ const chemistryQuestionsRaw = [
 // =====================================================================
 // LITERATURE — 60 QUESTIONS
 // =====================================================================
+
 const literatureQuestionsRaw = [
     { topic:'LITERARY DEVICES', q:"Which literary device involves giving human qualities to non-human things?", opts:["Metaphor","Personification","Irony","Hyperbole"], ans:1, exp:"Personification attributes human qualities, feelings, or actions to inanimate objects or abstract concepts." },
     { topic:'LITERARY DEVICES', q:"A direct comparison that does NOT use 'like' or 'as' is called ___", opts:["Simile","Personification","Metaphor","Allusion"], ans:2, exp:"A metaphor makes a direct comparison by stating one thing IS another, without 'like' or 'as'." },
@@ -637,6 +886,7 @@ function handleOverlayClick(e) {
 // =====================================================================
 // PHYSICS — 55 QUESTIONS (40 selected randomly per session)
 // =====================================================================
+
 const physicsQuestionsRaw = [
 
 // ── OPTICS ──────────────────────────────────────────────────────────
@@ -808,6 +1058,7 @@ The refractive index of medium M is`, opts:["2/√3","1/√3","2√3","√3"], a
 // =====================================================================
 // MATHEMATICS — 55 QUESTIONS (40 selected randomly per session)
 // =====================================================================
+
 const mathQuestionsRaw = [
 
 // ── NUMBER & NUMERATION ────────────────────────────────────────────
@@ -943,9 +1194,398 @@ const mathQuestionsRaw = [
 
 { topic:'STATISTICS', q:"A container has 30 gold, 22 silver, and 18 bronze medals. Probability of NOT selecting gold is ___", opts:["4/7","3/7","11/35","9/35"], ans:0, exp:"P(not gold) = (22+18)/(30+22+18) = 40/70 = 4/7." },
 
-{ topic:'STATISTICS', q:"If ⁿP₃ − 6(ⁿC₄) = 0, find the value of n.", opts:["6","5","8","7"], ans:3, exp:"ⁿP₃ = n(n−1)(n−2). ⁿC₄ = n(n−1)(n−2)(n−3)/24. Setting equal: n(n−1)(n−2) = 6×n(n−1)(n−2)(n−3)/24 → 24 = 6(n−3) → n−3 = 4 → n = 7." },
+{ topic:'STATISTICS', q:"If ⁿP₃ − 6(ⁿC₄) = 0, find the value of n.", opts:["6","5","8","7"], ans:3, exp:"ⁿP₃ = n(n−1)(n−2). ⁿC₄ = n(n−1)(n−2)(n−3)/24. Setting equal: n(n−1)(n−2) = 6×n(n−1)(n−2)(n−3)/24 → 24 = 6(n−3) → n−3 = 4 → n = 7." }, 
 ];
+
+// ═══════════════════════════════════════════════════════════════════
+// SUBJECT CONFIG
+// ═══════════════════════════════════════════════════════════════════
+const SUBJECTS = {
+  english: {
+    label: 'English Language', icon: '📖',
+    desc: 'Comprehension · Lexis · Structure · Oral English · Lekki Headmaster',
+    totalPerSet: 60, sets: 3,
+    pool: () => [...englishQuestionsRaw, ...englishPDFQuestions],
+  },
+  chemistry: {
+    label: 'Chemistry', icon: '🧪',
+    desc: 'Physical · Inorganic · Organic · Gas Laws · Calculations · Diagrams',
+    totalPerSet: 40, sets: 3,
+    pool: () => [...chemistryQuestionsRaw],
+  },
+  literature: {
+    label: 'Literature in English', icon: '🎭',
+    desc: 'Drama · Prose · Poetry · Literary Devices · Themes · Characters',
+    totalPerSet: 60, sets: 3,
+    pool: () => [...literatureQuestionsRaw],
+  },
+  physics: {
+    label: 'Physics', icon: '⚡',
+    desc: 'Mechanics · Waves · Optics · Electricity · Modern Physics · Diagrams',
+    totalPerSet: 40, sets: 3,
+    pool: () => [...physicsQuestionsRaw],
+  },
+  mathematics: {
+    label: 'Mathematics', icon: '📐',
+    desc: 'Algebra · Geometry · Calculus · Statistics · Probability · Matrices',
+    totalPerSet: 40, sets: 3,
+    pool: () => [...mathQuestionsRaw],
+  },
+};
+
+const SET_NAMES = ['A', 'B', 'C'];
+
+// ═══════════════════════════════════════════════════════════════════
+// APP STATE
+// ═══════════════════════════════════════════════════════════════════
+let activeSubject = null;   // key e.g. 'english'
+let activeSet = null;       // 'A' | 'B' | 'C'
+
+
+
+// ═══════════════════════════════════════════════════════════════════
+// STORAGE HELPERS
+// ═══════════════════════════════════════════════════════════════════
+function storageKey(subj, set) { return `smartprep_${subj}_set${set}`; }
+
+function saveResult(subj, set, score, total, timeTaken) {
+  try {
+    const data = { score, total, pct: Math.round(score/total*100), timeTaken,
+                   date: new Date().toLocaleDateString() };
+    localStorage.setItem(storageKey(subj, set), JSON.stringify(data));
+  } catch(e) {}
+}
+
+function getResult(subj, set) {
+  try {
+    const v = localStorage.getItem(storageKey(subj, set));
+    return v ? JSON.parse(v) : null;
+  } catch(e) { return null; }
+}
+
+// ═══════════════════════════════════════════════════════════════════
+// SET SPLITTER — Splits a shuffled pool into 3 equal, non-overlapping sets
+// ═══════════════════════════════════════════════════════════════════
+function splitIntoSets(pool, perSet) {
+  // Deterministic shuffle using subject+date seed so sets are stable per day
+  const shuffled = [...pool].sort(() => Math.random() - 0.5);
+  return {
+    A: shuffled.slice(0, perSet),
+    B: shuffled.slice(perSet, perSet * 2),
+    C: shuffled.slice(perSet * 2, perSet * 3),
+  };
+}
+
+// Cache the splits so they don't re-randomise during a session
+const _setCache = {};
+function getSetsForSubject(subjKey) {
+  if (!_setCache[subjKey]) {
+    const cfg = SUBJECTS[subjKey];
+    const pool = cfg.pool();
+    const needed = cfg.totalPerSet * 3;
+    // If pool is too small, repeat/cycle to fill
+    let filled = [...pool];
+    while (filled.length < needed) {
+      filled = filled.concat([...pool].sort(() => Math.random() - 0.5));
+    }
+    filled = filled.slice(0, needed);
+    _setCache[subjKey] = splitIntoSets(filled, cfg.totalPerSet);
+  }
+  return _setCache[subjKey];
+}
+
+// ═══════════════════════════════════════════════════════════════════
+// NAVIGATION
+// ═══════════════════════════════════════════════════════════════════
+function showPage(id) {
+  ['pg-home','pg-sets','pg-exam','pg-result'].forEach(p => {
+    document.getElementById(p).classList.toggle('hidden', p !== id);
+  });
+  window.scrollTo(0, 0);
+}
+
+function goHome() {
+  if (timerInt) clearInterval(timerInt);
+  timerInt = null;
+  activeSubject = null;
+  activeSet = null;
+  renderHome();
+  showPage('pg-home');
+}
+
+function openSetPage(subjKey) {
+  activeSubject = subjKey;
+  const cfg = SUBJECTS[subjKey];
+  document.getElementById('set-subject-icon').textContent = cfg.icon;
+  document.getElementById('set-subject-name').textContent = cfg.label;
+  document.getElementById('set-subject-desc').textContent = cfg.desc;
+  renderSetCards(subjKey);
+  showPage('pg-sets');
+}
+
+function tryAnotherSet() {
+  openSetPage(activeSubject);
+}
+
+function tryAgain() {
+  if (activeSubject && activeSet) startExam(activeSubject, activeSet);
+}
+
+// ═══════════════════════════════════════════════════════════════════
+// RENDER HOME
+// ═══════════════════════════════════════════════════════════════════
+function renderHome() {
+  const grid = document.getElementById('subject-grid');
+  grid.innerHTML = '';
+  Object.entries(SUBJECTS).forEach(([key, cfg]) => {
+    const card = document.createElement('div');
+    card.className = 'subject-card';
+    card.onclick = () => openSetPage(key);
+
+    // Build pills showing set status
+    let pillsHtml = '<div class="card-sets-row">';
+    SET_NAMES.forEach(s => {
+      const res = getResult(key, s);
+      const isDone = !!res;
+      pillsHtml += `<span class="set-pill${isDone?' done':''}" 
+        onclick="event.stopPropagation();openSetPage('${key}')">
+        Set ${s}${isDone ? ' ✓' : ''}
+      </span>`;
+    });
+    pillsHtml += '</div>';
+
+    card.innerHTML = `
+      <span class="card-icon">${cfg.icon}</span>
+      <h2>${cfg.label}</h2>
+      <p>${cfg.desc}</p>
+      ${pillsHtml}
+      <div class="card-badge">${cfg.totalPerSet} Qs × 3 Sets · 30 Mins</div>
+    `;
+    grid.appendChild(card);
+  });
+}
+
+// ═══════════════════════════════════════════════════════════════════
+// RENDER SET CARDS
+// ═══════════════════════════════════════════════════════════════════
+function renderSetCards(subjKey) {
+  const cfg = SUBJECTS[subjKey];
+  const container = document.getElementById('set-cards-container');
+  container.innerHTML = '';
+
+  SET_NAMES.forEach(setName => {
+    const res = getResult(subjKey, setName);
+    const card = document.createElement('div');
+    card.className = 'set-card' + (res ? ' done-set' : '');
+
+    let statusHtml = res
+      ? `<div class="set-status">✅ Completed</div>
+         <div class="set-score-chip">${res.score}/${res.total} — ${res.pct}%</div>
+         <div style="font-size:.72rem;color:var(--muted);margin-top:6px">${res.date}</div>`
+      : `<div class="set-status" style="color:var(--muted)">Not started yet</div>`;
+
+    card.innerHTML = `
+      <h3>Set ${setName}</h3>
+      <p>${cfg.totalPerSet} Questions · 30 Min</p>
+      ${statusHtml}
+      <button class="btn-action btn-primary" style="margin-top:14px;padding:10px 16px;font-size:.82rem;border-radius:8px"
+        onclick="startExam('${subjKey}','${setName}')">
+        ${res ? '🔁 Redo Set ' + setName : '▶ Start Set ' + setName}
+      </button>
+    `;
+    container.appendChild(card);
+  });
+}
+
+// ═══════════════════════════════════════════════════════════════════
+// START EXAM
+// ═══════════════════════════════════════════════════════════════════
+function startExam(subjKey, setName) {
+  activeSubject = subjKey;
+  activeSet = setName;
+
+  const cfg = SUBJECTS[subjKey];
+  totalQ = cfg.totalPerSet;
+
+  const sets = getSetsForSubject(subjKey);
+  currentQuestions = [...sets[setName]].sort(() => Math.random() - 0.5);
+  userAnswers = {};
+  currentIndex = 0;
+  timerVal = 1800;
+
+  document.getElementById('exam-subject-label').textContent = cfg.label;
+  document.getElementById('exam-set-label').textContent = `Set ${setName}`;
+
+  renderGrid();
+  loadQuestion(0);
+  startTimer();
+  showPage('pg-exam');
+}
+
+// ═══════════════════════════════════════════════════════════════════
+// RENDER NAVIGATOR GRID
+// ═══════════════════════════════════════════════════════════════════
+function renderGrid() {
+  const grid = document.getElementById('nav-grid');
+  grid.innerHTML = '';
+  currentQuestions.forEach((_, i) => {
+    const div = document.createElement('div');
+    div.className = 'grid-item';
+    div.id = `nav-${i}`;
+    div.textContent = i + 1;
+    div.onclick = () => loadQuestion(i);
+    grid.appendChild(div);
+  });
+}
+
+// ═══════════════════════════════════════════════════════════════════
+// LOAD QUESTION
+// ═══════════════════════════════════════════════════════════════════
+function loadQuestion(index) {
+  currentIndex = index;
+  const q = currentQuestions[index];
+
+  document.querySelectorAll('.grid-item').forEach(el => el.classList.remove('current'));
+  const navItem = document.getElementById(`nav-${index}`);
+  if (navItem) { navItem.classList.add('current'); navItem.scrollIntoView({block:'nearest'}); }
+
+  // Passage button
+  const pBtn = document.getElementById('view-passage-btn');
+  if (q.pid && passages[q.pid]) {
+    pBtn.classList.remove('hidden');
+    document.getElementById('passage-text').textContent = passages[q.pid].text;
+    document.getElementById('modal-title').textContent = passages[q.pid].title;
+  } else {
+    pBtn.classList.add('hidden');
+  }
+
+  document.getElementById('q-topic').textContent = q.topic || '';
+  document.getElementById('q-number').textContent = `Question ${index + 1} of ${totalQ}`;
+  document.getElementById('q-text').innerHTML = q.q;
+
+  const optArea = document.getElementById('options-area');
+  optArea.innerHTML = '';
+  q.opts.forEach((opt, i) => {
+    const div = document.createElement('div');
+    div.className = 'option' + (userAnswers[index] === i ? ' selected' : '');
+    div.onclick = () => selectAnswer(index, i);
+    div.innerHTML = `<div class="opt-letter">${String.fromCharCode(65+i)}</div><span>${opt}</span>`;
+    optArea.appendChild(div);
+  });
+
+  document.getElementById('btn-prev').disabled = (index === 0);
+  document.getElementById('btn-next').textContent = (index === totalQ - 1) ? 'Finish ✓' : 'Next →';
+  document.getElementById('btn-next').onclick = (index === totalQ - 1)
+    ? () => forceSubmit() : () => nav(1);
+
+  updateProgress();
+}
+
+function selectAnswer(qIndex, optIndex) {
+  userAnswers[qIndex] = optIndex;
+  document.getElementById(`nav-${qIndex}`)?.classList.add('answered');
+  loadQuestion(qIndex);
+}
+
+function nav(step) {
+  const n = currentIndex + step;
+  if (n >= 0 && n < totalQ) loadQuestion(n);
+}
+
+function updateProgress() {
+  const answered = Object.keys(userAnswers).length;
+  document.getElementById('progress-text').textContent = `${answered}/${totalQ}`;
+  document.getElementById('progress-fill').style.width = `${(answered/totalQ)*100}%`;
+}
+
+// ═══════════════════════════════════════════════════════════════════
+// TIMER
+// ═══════════════════════════════════════════════════════════════════
+function startTimer() {
+  if (timerInt) clearInterval(timerInt);
+  timerVal = 1800;
+  const el = document.getElementById('timer');
+  timerInt = setInterval(() => {
+    timerVal--;
+    const m = Math.floor(timerVal / 60), s = timerVal % 60;
+    el.textContent = `${m}:${s < 10 ? '0'+s : s}`;
+    el.classList.toggle('warning', timerVal <= 300);
+    if (timerVal <= 0) forceSubmit(true);
+  }, 1000);
+}
+
+// ═══════════════════════════════════════════════════════════════════
+// SUBMIT
+// ═══════════════════════════════════════════════════════════════════
+function forceSubmit(auto = false) {
+  if (!auto && !confirm('Are you sure you want to finish? You cannot go back.')) return;
+  clearInterval(timerInt); timerInt = null;
+
+  let score = 0;
+  let reviewHtml = '';
+
+  currentQuestions.forEach((q, i) => {
+    const ua = userAnswers[i];
+    const ok = ua === q.ans;
+    if (ok) score++;
+    const userText = ua !== undefined ? q.opts[ua] : 'Skipped';
+    const correctText = q.opts[q.ans];
+    reviewHtml += `
+    <div class="review-item">
+      <div class="review-q">Q${i+1} [${q.topic}]: ${q.q}</div>
+      <div class="review-your">Your answer: ${userText} ${ok ? '✓' : '✗'}</div>
+      ${!ok ? `<div class="review-correct">✅ Correct: ${correctText}</div>` : ''}
+      <div class="exp-box"><strong>Explanation:</strong> ${q.exp}</div>
+    </div>`;
+  });
+
+  const pct = Math.round((score / totalQ) * 100);
+  const timeTaken = Math.round((1800 - timerVal) / 60);
+
+  // Save result
+  saveResult(activeSubject, activeSet, score, totalQ, timeTaken);
+
+  // Animated score ring
+  const deg = Math.round((score / totalQ) * 360);
+  document.getElementById('score-ring').style.background =
+    `conic-gradient(var(--gold) ${deg}deg, var(--border) ${deg}deg)`;
+
+  let grade, gc;
+  if (pct >= 70) { grade = 'A — Excellent 🏆'; gc = 'grade-A'; }
+  else if (pct >= 60) { grade = 'B — Good 👍'; gc = 'grade-B'; }
+  else if (pct >= 50) { grade = 'C — Average 📚'; gc = 'grade-C'; }
+  else { grade = 'F — Below Average 📖'; gc = 'grade-F'; }
+
+  document.getElementById('res-score').textContent = score;
+  document.getElementById('score-denom').textContent = `out of ${totalQ}`;
+  document.getElementById('res-percent').textContent = `${pct}%`;
+  document.getElementById('stat-correct').textContent = score;
+  document.getElementById('stat-wrong').textContent = totalQ - score;
+  document.getElementById('stat-time').textContent = `${timeTaken}m`;
+  const badge = document.getElementById('grade-badge');
+  badge.textContent = grade;
+  badge.className = `grade-badge ${gc}`;
+  document.getElementById('review-area').innerHTML = reviewHtml;
+
+  showPage('pg-result');
+}
+
+// ═══════════════════════════════════════════════════════════════════
+// MODAL
+// ═══════════════════════════════════════════════════════════════════
+function togglePassage() {
+  document.getElementById('modal-overlay').classList.toggle('open');
+}
+function handleOverlayClick(e) {
+  if (e.target === document.getElementById('modal-overlay')) togglePassage();
+}
+
+// ═══════════════════════════════════════════════════════════════════
+// BOOT
+// ═══════════════════════════════════════════════════════════════════
+renderHome();
+showPage('pg-home');
 
 </script>
 </body>
-</html>
+              </html>
