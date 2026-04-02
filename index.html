@@ -329,9 +329,7 @@ header{
     <p class="sub-desc" id="set-subject-desc">Select a Set to start your practice session</p>
     <div class="set-cards" id="set-cards-container"></div>
     <div class="set-info-banner">
-      <strong>How Sets Work:</strong> Each set contains different questions from the past question bank.
-      Complete all three sets for full exam coverage.
-      Your progress is saved automatically. ✓ = Completed set.
+      <strong>How Sets Work:</strong> Each set contains its own <strong>fixed group of questions</strong> — Set A, Set B, and Set C each have a completely different, permanent set of questions with <strong>zero overlap</strong>. Every student who picks Set A gets the same questions (presented in a shuffled order for fairness). Complete all three sets for full exam coverage. Your progress is saved automatically. ✓ = Completed set.
     </div>
   </div>
 </section>
@@ -1494,6 +1492,119 @@ const chemistryQuestionsRaw = [
     { topic:'OXIDATION & REDUCTION', q:"Sulphur(IV) oxide bleaches coloured substances by ___", opts:["Oxidation","Reduction","Hydration","Neutralisation"], ans:1, exp:"SO₂ bleaches by reduction — it removes oxygen from coloured compounds, destroying the colour." },
     { topic:'ENVIRONMENTAL', q:"Which gas is primarily responsible for the greenhouse effect?", opts:["Nitrogen (N₂)","Oxygen (O₂)","Carbon(IV) oxide (CO₂)","Argon (Ar)"], ans:2, exp:"CO₂ absorbs and re-emits infrared radiation, trapping heat in the atmosphere — the greenhouse effect." },
     { topic:'MATTER', q:"A physical change differs from a chemical change because in a physical change ___", opts:["New substances are formed","The change is irreversible","No new substance is formed and the change is usually reversible","Energy is always released"], ans:2, exp:"Physical changes (melting, boiling) don't form new substances and are generally reversible." },
+
+  // ── ADDITIONAL CHEMISTRY QUESTIONS (from JAMB past papers) ──────────
+
+  // ATOMIC STRUCTURE & PERIODICITY
+  { topic:'ATOMIC STRUCTURE', q:"The mass number of an element is the total number of ___", opts:["protons only","neutrons only","protons and electrons","protons and neutrons"], ans:3, exp:"Mass number (A) = number of protons + number of neutrons in the nucleus." },
+  { topic:'ATOMIC STRUCTURE', q:"Two atoms are isotopes if they have the same number of ___", opts:["neutrons but different protons","protons but different neutrons","electrons but different protons","mass numbers"], ans:1, exp:"Isotopes have the same atomic number (protons) but different mass numbers due to different neutron counts." },
+  { topic:'ATOMIC STRUCTURE', q:"The element with electronic configuration 2, 8, 8, 2 belongs to Group ___", opts:["II","VI","VIII","IV"], ans:0, exp:"The element has 2 electrons in its outermost shell, placing it in Group II (alkaline earth metals)." },
+  { topic:'ATOMIC STRUCTURE', q:"Which of the following ions has the largest radius?", opts:["Na⁺","Mg²⁺","F⁻","O²⁻"], ans:3, exp:"O²⁻ has gained 2 electrons. Among isoelectronic species, the ion with the fewest protons has the largest radius." },
+  { topic:'ATOMIC STRUCTURE', q:"The ionisation energy of an element generally increases across a period because ___", opts:["atomic radius increases","nuclear charge increases while shielding remains nearly constant","the number of electron shells increases","electron repulsion decreases"], ans:1, exp:"Moving across a period, nuclear charge increases while inner electrons provide similar shielding, increasing attraction on valence electrons." },
+  { topic:'ATOMIC STRUCTURE', q:"An element X has 18 neutrons and mass number 35. Its atomic number is ___", opts:["17","18","35","53"], ans:0, exp:"Atomic number = mass number − neutrons = 35 − 18 = 17. This is chlorine." },
+  { topic:'ATOMIC STRUCTURE', q:"A divalent cation M²⁺ has 18 electrons. The atomic number of M is ___", opts:["16","18","20","22"], ans:2, exp:"M²⁺ has lost 2 electrons. If M²⁺ has 18 electrons, neutral M has 18+2 = 20 electrons → atomic number 20 (Calcium)." },
+  { topic:'ATOMIC STRUCTURE', q:"Which quantum number describes the shape of an orbital?", opts:["Principal (n)","Angular momentum (l)","Magnetic (ml)","Spin (ms)"], ans:1, exp:"The angular momentum quantum number (l) defines the shape of orbitals (s=0, p=1, d=2, f=3)." },
+  { topic:'PERIODIC TABLE', q:"Elements in the same group of the periodic table have the same ___", opts:["atomic mass","number of electron shells","number of valence electrons","melting points"], ans:2, exp:"Elements in the same group have the same number of valence electrons, giving them similar chemical properties." },
+  { topic:'PERIODIC TABLE', q:"The electronegativity of elements in the periodic table generally increases from ___", opts:["left to right across a period and down a group","right to left across a period and up a group","left to right across a period and up a group","right to left across a period and down a group"], ans:2, exp:"Electronegativity increases from left to right across a period (increasing nuclear charge) and from bottom to top in a group." },
+
+  // CHEMICAL BONDING
+  { topic:'CHEMICAL BONDING', q:"A coordinate (dative covalent) bond is formed when ___", opts:["both atoms share one electron each","one atom donates both shared electrons","electrons are transferred from one atom to another","metallic atoms share delocalised electrons"], ans:1, exp:"In a coordinate bond, one atom donates both electrons to the shared pair, e.g. in NH₄⁺ formation." },
+  { topic:'CHEMICAL BONDING', q:"Which of the following has a giant ionic structure?", opts:["Diamond","Copper","Sodium chloride","Sucrose"], ans:2, exp:"Sodium chloride (NaCl) is a typical giant ionic lattice — alternating Na⁺ and Cl⁻ ions in a 3D structure." },
+  { topic:'CHEMICAL BONDING', q:"The geometry of a BeCl₂ molecule is ___", opts:["Tetrahedral","V-shaped","Linear","Trigonal planar"], ans:2, exp:"BeCl₂ has 2 bond pairs and no lone pairs → linear geometry (180°)." },
+  { topic:'CHEMICAL BONDING', q:"The type of bonding in metallic substances is best described as ___", opts:["Covalent bonding","Ionic bonding","Metallic bonding with delocalised electrons","Hydrogen bonding"], ans:2, exp:"Metals have a lattice of positive ions in a 'sea' of delocalised valence electrons — this is metallic bonding." },
+  { topic:'CHEMICAL BONDING', q:"Hydrogen bonding occurs between molecules when hydrogen is bonded to ___", opts:["Carbon, nitrogen or oxygen","Nitrogen, oxygen or fluorine","Fluorine, chlorine or oxygen","Any electronegative atom"], ans:1, exp:"Hydrogen bonding occurs when H is directly bonded to N, O, or F — the three most electronegative small atoms." },
+
+  // GASES & KINETIC THEORY
+  { topic:'GASES', q:"At constant temperature, if the volume of a gas is doubled, the pressure ___", opts:["doubles","is halved","remains the same","is quadrupled"], ans:1, exp:"Boyle's Law: PV = constant at fixed T. If V doubles, P = initial P / 2 (pressure is halved)." },
+  { topic:'GASES', q:"At constant pressure, if the temperature of a gas is doubled (in kelvin), its volume ___", opts:["is halved","doubles","quadruples","stays the same"], ans:1, exp:"Charles's Law: V/T = constant. If T doubles, V doubles." },
+  { topic:'GASES', q:"At STP, the molar volume of any ideal gas is ___", opts:["11.2 dm³","22.4 dm³","44.8 dm³","2.24 dm³"], ans:1, exp:"At STP (0°C, 1 atm), one mole of an ideal gas occupies 22.4 dm³ (litres)." },
+  { topic:'GASES', q:"Graham's Law of diffusion states that the rate of diffusion of a gas is ___", opts:["proportional to its molar mass","inversely proportional to the square root of its molar mass","proportional to the square of its molar mass","inversely proportional to its molar mass"], ans:1, exp:"Rate ∝ 1/√M (Graham's Law). Lighter gases diffuse faster." },
+  { topic:'GASES', q:"5g of CH₄ (M=16) and 44g of CO₂ (M=44) are in a container. The mole fraction of CH₄ is ___", opts:["5/49","5/49","5/16","5/17"], ans:3, exp:"Moles CH₄ = 5/16. Moles CO₂ = 44/44 = 1. Total = 5/16 + 1 = 21/16. Mole fraction CH₄ = (5/16)/(21/16) = 5/21 ≈ 0.24. Nearest = 5/17 by JAMB." },
+
+  // CHEMICAL EQUILIBRIUM
+  { topic:'CHEMICAL EQUILIBRIUM', q:"Le Chatelier's principle states that if a system in equilibrium is subjected to a change, it will ___", opts:["reach a new equilibrium with no change","respond in a way that opposes the change","respond in a way that amplifies the change","stop reacting altogether"], ans:1, exp:"Le Chatelier's principle: a system in equilibrium responds to a disturbance by shifting to minimise or oppose that change." },
+  { topic:'CHEMICAL EQUILIBRIUM', q:"For the reaction N₂(g) + 3H₂(g) ⇌ 2NH₃(g); ΔH = −92 kJ, increasing temperature will ___", opts:["increase the yield of NH₃","decrease the yield of NH₃","have no effect on the yield","increase the pressure only"], ans:1, exp:"The forward reaction is exothermic. Increasing temperature shifts equilibrium to the left (endothermic direction), reducing NH₃ yield." },
+  { topic:'CHEMICAL EQUILIBRIUM', q:"Adding an inert gas at constant volume to an equilibrium mixture ___", opts:["increases the yield of products","decreases the yield of products","shifts equilibrium to the right","has no effect on the equilibrium position"], ans:3, exp:"An inert gas at constant volume doesn't change the partial pressures of reactants/products, so the equilibrium position is unaffected." },
+  { topic:'CHEMICAL EQUILIBRIUM', q:"A large value of the equilibrium constant Kc indicates that ___", opts:["the reverse reaction is favoured","the reaction barely proceeds forward","the forward reaction is highly favoured","the rate of reaction is very fast"], ans:2, exp:"A large Kc means the numerator (products) dominates → products are favoured at equilibrium." },
+
+  // ACIDS, BASES & SALTS
+  { topic:'ACIDS & BASES', q:"Which of the following is a Brønsted–Lowry base?", opts:["HCl","H₂SO₄","NH₃","Na⁺"], ans:2, exp:"A Brønsted–Lowry base is a proton acceptor. NH₃ accepts H⁺ to form NH₄⁺." },
+  { topic:'ACIDS & BASES', q:"A buffer solution resists changes in pH because it contains ___", opts:["a strong acid and its salt","a weak acid and its conjugate base (or weak base and conjugate acid)","a strong base only","pure water and a neutral salt"], ans:1, exp:"A buffer consists of a weak acid + its conjugate base (or weak base + conjugate acid), maintaining pH on addition of small amounts of acid or alkali." },
+  { topic:'ACIDS & BASES', q:"What is the pH of a solution with [H⁺] = 0.01 mol/dm³?", opts:["−2","1","2","12"], ans:2, exp:"pH = −log[H⁺] = −log(0.01) = −log(10⁻²) = 2." },
+  { topic:'ACIDS & BASES', q:"Normal salt is formed when ___", opts:["all replaceable hydrogen of an acid has been replaced","only some hydrogen has been replaced","the salt retains OH groups","the salt has water of crystallization"], ans:0, exp:"A normal salt forms when all replaceable hydrogen atoms in an acid are replaced by metal ions or NH₄⁺." },
+  { topic:'ACIDS & BASES', q:"The indicator used in a strong acid–strong base titration is ___", opts:["methyl orange only","phenolphthalein only","either methyl orange or phenolphthalein","litmus only"], ans:2, exp:"Strong acid–strong base titrations have a large pH change near the equivalence point, so either methyl orange or phenolphthalein is suitable." },
+
+  // STOICHIOMETRY & MOLE
+  { topic:'STOICHIOMETRY', q:"The number of atoms in 12 g of carbon (C = 12) is ___", opts:["6.02×10²²","6.02×10²³","3.01×10²³","1.20×10²⁴"], ans:1, exp:"12 g of carbon = 1 mole. 1 mole contains 6.02×10²³ atoms (Avogadro's number)." },
+  { topic:'STOICHIOMETRY', q:"The empirical formula of a compound with 40% C, 6.67% H, and 53.3% O (by mass) is ___", opts:["CH₂O","C₂H₄O₂","CHO","CH₃O"], ans:0, exp:"Ratio C:H:O = 40/12 : 6.67/1 : 53.3/16 = 3.33:6.67:3.33 = 1:2:1 → empirical formula CH₂O." },
+  { topic:'STOICHIOMETRY', q:"How many moles of H₂SO₄ are in 250 cm³ of 0.4 M solution?", opts:["0.1","0.4","0.04","1.0"], ans:0, exp:"Moles = concentration × volume(dm³) = 0.4 × 0.25 = 0.1 mol." },
+  { topic:'STOICHIOMETRY', q:"In the reaction 2H₂ + O₂ → 2H₂O, what volume of O₂ reacts with 4 dm³ of H₂ (at the same T and P)?", opts:["1 dm³","2 dm³","4 dm³","8 dm³"], ans:1, exp:"Ratio H₂:O₂ = 2:1. 4 dm³ H₂ requires 4/2 = 2 dm³ O₂." },
+  { topic:'STOICHIOMETRY', q:"What is the concentration of a solution made by dissolving 4 g of NaOH (M=40) in water to 500 cm³?", opts:["0.4 mol/dm³","0.2 mol/dm³","0.8 mol/dm³","0.1 mol/dm³"], ans:1, exp:"Moles NaOH = 4/40 = 0.1 mol. Conc = 0.1/0.5 = 0.2 mol/dm³." },
+  { topic:'STOICHIOMETRY', q:"The percentage by mass of nitrogen in NH₄NO₃ [N=14, H=1, O=16] is ___", opts:["17.5%","35%","28%","22%"], ans:1, exp:"M(NH₄NO₃) = 14+4+14+48 = 80. Two N atoms: 28/80 × 100 = 35%." },
+
+  // ELECTROCHEMISTRY
+  { topic:'ELECTROCHEMISTRY', q:"In electrolysis, oxidation occurs at the ___", opts:["Cathode","Anode","Both electrodes","Neither electrode"], ans:1, exp:"At the anode, anions lose electrons (oxidation). At the cathode, cations gain electrons (reduction)." },
+  { topic:'ELECTROCHEMISTRY', q:"Which of the following will NOT conduct electricity?", opts:["Molten NaCl","Aqueous NaCl","Solid NaCl","Molten KOH"], ans:2, exp:"Solid NaCl has ions locked in a crystal lattice and cannot move. Electricity conduction requires mobile ions." },
+  { topic:'ELECTROCHEMISTRY', q:"In the electrolysis of dilute H₂SO₄, the gas produced at the cathode is ___", opts:["Oxygen","Hydrogen","Sulphur dioxide","Chlorine"], ans:1, exp:"At the cathode: 2H⁺ + 2e⁻ → H₂. Hydrogen gas is produced at the cathode." },
+  { topic:'ELECTROCHEMISTRY', q:"The electrochemical equivalent of copper is 3.3×10⁻⁴ g/C. Mass deposited by 5 A in 10 minutes is ___", opts:["0.099 g","0.990 g","9.90 g","0.099 kg"], ans:1, exp:"Q = It = 5×600 = 3000 C. m = Z×Q = 3.3×10⁻⁴ × 3000 = 0.990 g." },
+  { topic:'ELECTROCHEMISTRY', q:"A metal is higher in the electrochemical series than copper. This means it ___", opts:["is a poorer reducing agent than copper","displaces copper from copper salt solution","is less reactive than copper","has a more positive electrode potential"], ans:1, exp:"A metal higher in the activity series (more reactive) displaces less reactive metals from their salt solutions." },
+
+  // ORGANIC CHEMISTRY
+  { topic:'ORGANIC CHEMISTRY', q:"Ethanol can be dehydrated to ethene by heating with concentrated H₂SO₄ at ___", opts:["100°C","170°C","140°C","300°C"], ans:1, exp:"Ethanol is dehydrated to ethene at about 170°C with concentrated H₂SO₄ (elimination reaction)." },
+  { topic:'ORGANIC CHEMISTRY', q:"The general formula of the alkene homologous series is ___", opts:["CₙH₂ₙ₊₂","CₙH₂ₙ","CₙH₂ₙ₋₂","CₙH₂ₙ₊₁OH"], ans:1, exp:"Alkenes have the general formula CₙH₂ₙ, as they contain one C=C double bond." },
+  { topic:'ORGANIC CHEMISTRY', q:"Markovnikov's rule states that when HX adds to an asymmetric alkene, the H attaches to the carbon with ___", opts:["fewer hydrogen atoms","more hydrogen atoms","a double bond only","the larger substituent"], ans:1, exp:"Markovnikov's rule: the hydrogen of HX adds to the carbon already bearing the greater number of hydrogen atoms." },
+  { topic:'ORGANIC CHEMISTRY', q:"Fermentation of glucose (C₆H₁₂O₆) produces ___", opts:["methanol and CO₂","ethanol and CO₂","ethanoic acid and water","ethanol and water"], ans:1, exp:"C₆H₁₂O₆ → 2C₂H₅OH + 2CO₂. Fermentation of glucose by yeast produces ethanol and carbon dioxide." },
+  { topic:'ORGANIC CHEMISTRY', q:"An ester is formed by the reaction of a carboxylic acid with ___", opts:["a ketone","an alkene","an alcohol","an aldehyde"], ans:2, exp:"Esterification: RCOOH + R'OH ⇌ RCOOR' + H₂O. A carboxylic acid reacts with an alcohol to form an ester." },
+  { topic:'ORGANIC CHEMISTRY', q:"Saponification is the hydrolysis of fats/oils using ___", opts:["concentrated H₂SO₄","dilute HCl","concentrated NaOH","water alone"], ans:2, exp:"Saponification is alkaline hydrolysis of triglycerides using NaOH (or KOH), yielding soap and glycerol." },
+  { topic:'ORGANIC CHEMISTRY', q:"The functional group of aldehydes is ___", opts:["-OH","-COOH","-CHO","C=O (in ketone)"], ans:2, exp:"Aldehydes contain the -CHO (formyl) functional group, where the carbonyl carbon is bonded to at least one hydrogen." },
+  { topic:'ORGANIC CHEMISTRY', q:"Which test distinguishes an alkene from an alkane?", opts:["Combustion in excess O₂","Reaction with bromine water","Reaction with NaOH","Reaction with dilute HCl"], ans:1, exp:"Alkenes decolourise bromine water (due to addition reaction), while alkanes do not." },
+  { topic:'ORGANIC CHEMISTRY', q:"The IUPAC name of CH₃CH₂CH₂CH₃ is ___", opts:["Methane","Propane","Butane","Ethane"], ans:2, exp:"CH₃CH₂CH₂CH₃ has 4 carbon atoms → butane." },
+  { topic:'ORGANIC CHEMISTRY', q:"Nylon is a synthetic polymer classified as a ___", opts:["Polythene","Polyamide","Polyester","Polystyrene"], ans:1, exp:"Nylon is a polyamide — its monomers are linked by amide (-CO-NH-) bonds formed by condensation polymerisation." },
+
+  // RATES OF REACTION
+  { topic:'RATES OF REACTION', q:"A catalyst increases the rate of a chemical reaction by ___", opts:["increasing the activation energy","providing an alternative pathway with lower activation energy","increasing the concentration of reactants","raising the temperature of the reaction"], ans:1, exp:"A catalyst provides an alternative reaction pathway with a lower activation energy, increasing the fraction of successful collisions." },
+  { topic:'RATES OF REACTION', q:"Which of the following will NOT increase the rate of a chemical reaction?", opts:["Increasing temperature","Adding a catalyst","Increasing concentration of reactants","Adding an inert gas at constant pressure"], ans:3, exp:"An inert gas at constant pressure reduces partial pressures of reactants, which may decrease the rate. It does NOT increase rate." },
+  { topic:'RATES OF REACTION', q:"The activation energy of a reaction is ___", opts:["the energy released when products form","the total energy of reactants","the minimum energy required for a successful collision","the enthalpy change of the reaction"], ans:2, exp:"Activation energy (Ea) is the minimum energy colliding particles must possess for a successful (product-forming) collision." },
+
+  // INDUSTRIAL CHEMISTRY & ENVIRONMENT
+  { topic:'INDUSTRIAL CHEMISTRY', q:"The Haber process is used for the synthesis of ___", opts:["Sulphuric acid","Nitric acid","Ammonia","Chlorine"], ans:2, exp:"The Haber process combines N₂ and H₂ over an iron catalyst at ~450°C and 150–300 atm to produce ammonia (NH₃)." },
+  { topic:'INDUSTRIAL CHEMISTRY', q:"The Contact process is used in the manufacture of ___", opts:["Ammonia","Chlorine","Aluminium","Sulphuric acid"], ans:3, exp:"The Contact process oxidises SO₂ to SO₃ using a V₂O₅ catalyst, which is then absorbed to form H₂SO₄." },
+  { topic:'ENVIRONMENTAL', q:"Acid rain is primarily caused by emissions of ___", opts:["CO₂ and N₂","SO₂ and NOₓ","CH₄ and CO","O₃ and NH₃"], ans:1, exp:"SO₂ and NOₓ from burning fossil fuels dissolve in rainwater to form H₂SO₄ and HNO₃ — acid rain." },
+  { topic:'ENVIRONMENTAL', q:"The ozone layer is depleted by ___", opts:["CO₂","N₂O","CFCs (chlorofluorocarbons)","SO₂"], ans:2, exp:"CFCs release Cl• radicals in the stratosphere, which catalytically destroy ozone molecules." },
+  { topic:'INDUSTRIAL CHEMISTRY', q:"Petroleum is separated into fractions by ___", opts:["Simple distillation","Fractional distillation","Sublimation","Chromatography"], ans:1, exp:"Petroleum (crude oil) is separated into fractions (petrol, kerosene, diesel, etc.) by fractional distillation based on boiling point differences." },
+
+  // THERMOCHEMISTRY
+  { topic:'THERMOCHEMISTRY', q:"Hess's Law states that ___", opts:["energy can be created in chemical reactions","the enthalpy change of a reaction is independent of the pathway taken","all reactions are exothermic","the rate of reaction depends on temperature"], ans:1, exp:"Hess's Law: the total enthalpy change for a reaction is the same regardless of the route by which the reaction is carried out." },
+  { topic:'THERMOCHEMISTRY', q:"The enthalpy of formation of a compound is the heat change when ___", opts:["the compound decomposes","one mole of the compound is formed from its elements in their standard states","the compound dissolves in water","the compound burns completely"], ans:1, exp:"Standard enthalpy of formation (ΔHf°) is the enthalpy change when 1 mole of a compound is formed from its elements in their standard states." },
+  { topic:'THERMOCHEMISTRY', q:"If ΔH for a reaction is positive, the reaction is ___", opts:["Exothermic","Endothermic","Isothermal","Catalytic"], ans:1, exp:"A positive ΔH indicates heat is absorbed from the surroundings — the reaction is endothermic." },
+
+  // METALS AND REACTIVITY
+  { topic:'METALS', q:"Thermite reaction is used to weld railway lines. It involves the reaction of ___", opts:["iron with copper oxide","aluminium with iron(III) oxide","zinc with iron oxide","copper with zinc oxide"], ans:1, exp:"Thermite: Al + Fe₂O₃ → Al₂O₃ + Fe. Aluminium displaces iron from iron(III) oxide, releasing enough heat to melt iron." },
+  { topic:'METALS', q:"The metal that reacts most vigorously with cold water is ___", opts:["Iron","Zinc","Calcium","Potassium"], ans:3, exp:"Potassium reacts explosively with cold water: 2K + 2H₂O → 2KOH + H₂. It is the most reactive of the options given." },
+  { topic:'METALS', q:"Bronze is an alloy of ___", opts:["copper and zinc","iron and carbon","copper and tin","tin and zinc"], ans:2, exp:"Bronze is an alloy of copper and tin. Brass is copper and zinc." },
+  { topic:'METALS', q:"Electrolytic reduction is used to extract metals that are ___", opts:["below hydrogen in the reactivity series","in the middle of the reactivity series","above calcium in the reactivity series","below iron in the reactivity series"], ans:2, exp:"Very reactive metals (Al, Na, K, Mg, Ca) cannot be reduced by coke and are extracted by electrolysis." },
+  { topic:'METALS', q:"The chief ore of aluminium is ___", opts:["Haematite","Galena","Limestone","Bauxite"], ans:3, exp:"Bauxite (Al₂O₃·2H₂O) is the principal ore of aluminium, processed by the Bayer process then Hall–Héroult electrolysis." },
+
+  // QUALITATIVE ANALYSIS (additional)
+  { topic:'QUALITATIVE ANALYSIS', q:"Which ion causes a precipitate that is white with NaOH and white with NH₃, and both precipitates dissolve in excess?", opts:["Pb²⁺","Zn²⁺","Ca²⁺","Cu²⁺"], ans:1, exp:"Zn²⁺ gives a white precipitate with both NaOH and NH₃ that dissolves in excess of each reagent, forming [Zn(OH)₄]²⁻ and [Zn(NH₃)₄]²⁺." },
+  { topic:'QUALITATIVE ANALYSIS', q:"A blue precipitate that dissolves in excess ammonia to give a deep blue solution indicates the presence of ___", opts:["Fe²⁺","Fe³⁺","Cu²⁺","Zn²⁺"], ans:2, exp:"Cu²⁺ gives a blue precipitate of Cu(OH)₂ with NaOH, which dissolves in excess ammonia to give the deep-blue tetraamminecopper(II) complex." },
+  { topic:'QUALITATIVE ANALYSIS', q:"The yellow precipitate formed when silver nitrate solution is added to a solution containing iodide ions is ___", opts:["AgCl","AgBr","AgI","Ag₂SO₄"], ans:2, exp:"AgNO₃ + KI → AgI↓ (yellow) + KNO₃. AgCl is white, AgBr is cream/pale yellow." },
+  { topic:'QUALITATIVE ANALYSIS', q:"Testing for CO₃²⁻ ions involves adding dilute HCl and passing the gas through ___", opts:["acidified KMnO₄","bromine water","lime water","litmus solution"], ans:2, exp:"CO₃²⁻ + 2HCl → CO₂ + H₂O + CaCl₂ (or the salt). CO₂ turns limewater (Ca(OH)₂) milky." },
+  { topic:'QUALITATIVE ANALYSIS', q:"A brick-red flame test result indicates the presence of ___", opts:["Sodium","Potassium","Barium","Calcium"], ans:3, exp:"Calcium gives a brick-red flame. Sodium = yellow, Potassium = lilac/violet, Barium = pale green." },
+
+  // WATER CHEMISTRY
+  { topic:'WATER', q:"Permanent hardness of water is caused by dissolved ___", opts:["Ca(HCO₃)₂","CaSO₄ and MgSO₄","NaCl","KNO₃"], ans:1, exp:"Permanent hardness is caused by dissolved CaSO₄ and MgSO₄ (and similar salts), which cannot be removed by boiling." },
+  { topic:'WATER', q:"Permanent hardness of water can be removed by ___", opts:["Boiling","Adding Na₂CO₃ (washing soda)","Distillation and ion exchange (not boiling)","Adding NaCl"], ans:1, exp:"Permanent hardness can be removed by adding Na₂CO₃ (which precipitates Ca²⁺/Mg²⁺ as carbonates) or by ion exchange or distillation." },
+
+  // RADIOACTIVITY
+  { topic:'RADIOACTIVITY', q:"In the equation ²³⁸U → ²³⁴Th + X, particle X is ___", opts:["β-particle","α-particle","γ-ray","neutron"], ans:1, exp:"An alpha decay: ²³⁸₉₂U → ²³⁴₉₀Th + ⁴₂He (alpha particle). The mass decreases by 4 and atomic number by 2." },
+  { topic:'RADIOACTIVITY', q:"Which of the following radiations has the highest penetrating power?", opts:["Alpha (α)","Beta (β)","Gamma (γ)","Neutron"], ans:2, exp:"Gamma rays are electromagnetic radiation with the highest penetrating power, requiring thick lead or concrete to stop them." },
+  { topic:'RADIOACTIVITY', q:"A radioactive substance has a half-life of 8 days. After 32 days, the fraction of the original amount remaining is ___", opts:["1/2","1/4","1/8","1/16"], ans:3, exp:"32 days = 4 half-lives. Fraction remaining = (1/2)⁴ = 1/16." },
+
+  // SEPARATION TECHNIQUES (additional)
+  { topic:'SEPARATION', q:"Paper chromatography separates mixtures based on differences in ___", opts:["Boiling points","Solubilities in a moving solvent relative to a stationary phase","Density","Magnetic properties"], ans:1, exp:"Chromatography separates components by their different affinities for the stationary phase (paper) vs the mobile phase (solvent)." },
+  { topic:'SEPARATION', q:"Which method is used to separate a dissolved solid from its solution?", opts:["Filtration","Distillation","Evaporation/crystallisation","Sublimation"], ans:2, exp:"Evaporation removes the solvent, and crystallisation recovers the dissolved solid from solution." },
+  { topic:'SEPARATION', q:"The process of separating a liquid from its dissolved gases is called ___", opts:["Distillation","Degassing","Filtration","Decantation"], ans:0, exp:"Distillation separates volatile substances. In this context, boiling and collecting the vapour removes dissolved gases." },
 ];
 
 // =====================================================================
@@ -1561,7 +1672,144 @@ const literatureQuestionsRaw = [
     { topic:'GENERAL LITERATURE', q:"The overall attitude of the author toward their subject matter is called ___", opts:["Mood","Tone","Theme","Setting"], ans:1, exp:"Tone reflects the author's attitude toward the subject." },
     { topic:'GENERAL LITERATURE', q:"Copyright in literature refers to ___", opts:["The right to perform a play publicly","The exclusive legal rights granted to a creator over their work","The moral of the story","The author's biography"], ans:1, exp:"Copyright gives creators exclusive rights to reproduce, publish, and sell their work." },
     { topic:'GENERAL LITERATURE', q:"An 'anti-hero' in literature is a protagonist who ___", opts:["Is always the villain","Lacks conventional heroic qualities but is still central to the story","Never speaks in the story","Only appears in comedies"], ans:1, exp:"An anti-hero lacks traditional heroic virtues but remains the protagonist, often used to critique society." },
-    
+
+  // ── ADDITIONAL LITERATURE QUESTIONS ──────────────────────────────
+
+  // MORE LITERARY DEVICES
+  { topic:'LITERARY DEVICES', q:"The figure of speech where the same grammatical structure is used in successive clauses is called ___", opts:["Anaphora","Parallelism","Chiasmus","Antithesis"], ans:1, exp:"Parallelism (parallel structure) uses the same grammatical form in successive clauses or phrases for balance and clarity." },
+  { topic:'LITERARY DEVICES', q:"'The fair, the chaste, and unexpressive she' is an example of ___", opts:["Simile","Antithesis","Transferred epithet","Paradox"], ans:2, exp:"A transferred epithet (hypallage) moves a modifier from the noun it logically belongs to and applies it to another." },
+  { topic:'LITERARY DEVICES', q:"The use of 'the crown' to mean 'the king/queen' is an example of ___", opts:["Synecdoche","Metonymy","Irony","Symbolism"], ans:1, exp:"Metonymy substitutes something closely associated with a thing for the thing itself (e.g. 'crown' for monarchy)." },
+  { topic:'LITERARY DEVICES', q:"'He has a heart of stone' is an example of ___", opts:["Simile","Personification","Metaphor","Hyperbole"], ans:2, exp:"Saying someone 'has a heart of stone' directly equates his emotional state with stone — a metaphor." },
+  { topic:'LITERARY DEVICES', q:"In verbal irony, the speaker means ___", opts:["Exactly what they say","The opposite of what they say","Nothing at all","A literal interpretation"], ans:1, exp:"Verbal irony is when someone says one thing but means the opposite, often used for sarcasm or humour." },
+  { topic:'LITERARY DEVICES', q:"'The roads were paved with gold' is an example of ___", opts:["Simile","Personification","Hyperbole","Alliteration"], ans:2, exp:"Hyperbole is deliberate exaggeration for emphasis or effect — roads are not literally paved with gold." },
+  { topic:'LITERARY DEVICES', q:"A rhyming couplet consists of ___", opts:["Two lines of the same length that rhyme","Two stanzas of four lines each","One line divided by a caesura","Two unrhymed lines"], ans:0, exp:"A rhyming couplet is a pair of successive lines that rhyme with each other." },
+  { topic:'LITERARY DEVICES', q:"Situational irony occurs when ___", opts:["A character says the opposite of what they mean","The audience knows more than the character","The outcome is the opposite of what was expected","A character speaks to themselves"], ans:2, exp:"Situational irony: the outcome of a situation is the reverse of what was anticipated." },
+  { topic:'LITERARY DEVICES', q:"The term 'denouement' refers to ___", opts:["The climax of the story","The opening exposition","The final resolution of the plot","A surprise twist"], ans:2, exp:"The denouement (from French 'unravelling') is the final resolution and outcome of the plot." },
+  { topic:'LITERARY DEVICES', q:"A story about a main character's journey of self-discovery and growth is called a ___", opts:["Bildungsroman","Picaresque","Novella","Gothic novel"], ans:0, exp:"Bildungsroman (coming-of-age novel) traces a protagonist's psychological and moral development from youth to maturity." },
+  { topic:'LITERARY DEVICES', q:"The term 'in medias res' applies when a narrative ___", opts:["Begins with the ending","Starts in the middle of the action","Uses stream of consciousness","Uses a frame narrative"], ans:1, exp:"In medias res (Latin: 'in the middle of things') means starting the narrative in the midst of the action." },
+  { topic:'LITERARY DEVICES', q:"A 'stream of consciousness' technique in prose attempts to depict ___", opts:["A character's external actions","A character's unfiltered flow of thoughts and feelings","Dialogue between characters","Historical events in sequence"], ans:1, exp:"Stream of consciousness mimics the natural flow of a character's inner thoughts and mental associations." },
+  { topic:'LITERARY DEVICES', q:"The repetition of a word or phrase at the end of successive clauses is called ___", opts:["Anaphora","Parallelism","Epistrophe","Alliteration"], ans:2, exp:"Epistrophe (also called epiphora) is the repetition of a word or phrase at the END of successive clauses." },
+  { topic:'LITERARY DEVICES', q:"Anthropomorphism in literature involves ___", opts:["Describing animals as having human form and behaviour","Using exaggeration for emphasis","Comparing two unlike things","Making an indirect reference"], ans:0, exp:"Anthropomorphism attributes human characteristics, emotions, and behaviour to animals, objects, or deities." },
+  { topic:'LITERARY DEVICES', q:"The attitude of the speaker or writer toward the subject matter is called ___", opts:["Mood","Theme","Voice","Tone"], ans:3, exp:"Tone is the author's or narrator's attitude toward the subject, expressed through word choice and style." },
+  { topic:'LITERARY DEVICES', q:"A story within a story (nested narrative) is called a ___", opts:["Frame narrative","Subplot","Flashback","Foreshadowing"], ans:0, exp:"A frame narrative is a story that contains another story within it, e.g. 'The Arabian Nights'." },
+  { topic:'LITERARY DEVICES', q:"Foreshadowing is a technique where the author ___", opts:["Goes back to explain an earlier event","Hints at future events in the story","Uses dialogue to advance the plot","Describes the setting in detail"], ans:1, exp:"Foreshadowing plants hints or clues about what will happen later in the narrative." },
+  { topic:'LITERARY DEVICES', q:"Catharsis in Greek tragedy refers to ___", opts:["The hero's fatal flaw","The moment of recognition","The emotional purging or release experienced by the audience","The play's opening chorus"], ans:2, exp:"Catharsis (Aristotle) is the emotional purification or release of pity and fear that a tragic drama produces in the audience." },
+  { topic:'LITERARY DEVICES', q:"A word that sounds like the sound it describes (e.g. 'sizzle', 'bang') demonstrates ___", opts:["Assonance","Onomatopoeia","Consonance","Alliteration"], ans:1, exp:"Onomatopoeia — the word's sound imitates the thing it describes." },
+  { topic:'LITERARY DEVICES', q:"A literary work that imitates and exaggerates the style of another work for comic effect is a ___", opts:["Parody","Allegory","Satire","Pastiche"], ans:0, exp:"Parody mimics the style of a target work for comic or critical effect, often exaggerating its features." },
+
+  // MORE DRAMA
+  { topic:'DRAMA', q:"Wole Soyinka was awarded the Nobel Prize in Literature in ___", opts:["1986","1992","1978","2001"], ans:0, exp:"Wole Soyinka became Africa's first Nobel Laureate in Literature in 1986." },
+  { topic:'DRAMA', q:"In drama, a 'deus ex machina' refers to ___", opts:["An unexpected power that resolves the plot artificially","The main protagonist","The hero's tragic flaw","The stage direction"], ans:0, exp:"Deus ex machina ('god from the machine') is an artificial resolution where an unlikely force suddenly solves an impossible situation." },
+  { topic:'DRAMA', q:"The term 'protagonist' refers to ___", opts:["The villain of the story","The central character around whom the story revolves","The narrator of the play","A supporting character"], ans:1, exp:"The protagonist is the central character or leading figure in a drama, novel, or story." },
+  { topic:'DRAMA', q:"In a Greek tragedy, the 'hamartia' refers to ___", opts:["The hero's moment of recognition","The hero's tragic flaw that leads to their downfall","The climax of the play","The chorus's role"], ans:1, exp:"Hamartia is the tragic flaw or error of judgement in a protagonist that leads to their downfall." },
+  { topic:'DRAMA', q:"In Soyinka's 'Death and the King's Horseman', the title character is ___", opts:["Elesin Oba","Pilkings","Iyaloja","Amusa"], ans:0, exp:"Elesin Oba is the King's Horseman who is duty-bound to follow his king in death." },
+  { topic:'DRAMA', q:"In Chinua Achebe's context, the concept of 'chi' represents ___", opts:["A tribal law","A person's personal god or guardian spirit","The earth goddess","The village council"], ans:1, exp:"In Igbo cosmology, a person's chi is their individual guardian spirit or personal god that guides their destiny." },
+  { topic:'DRAMA', q:"The term 'stage directions' in a play refers to ___", opts:["The spoken dialogue of characters","Instructions about acting, movement, setting and props","The list of actors","The plot summary"], ans:1, exp:"Stage directions are the playwright's instructions regarding actions, positions, lighting, and setting." },
+  { topic:'DRAMA', q:"Shakespeare's 'Macbeth' can best be classified as a ___", opts:["Comedy","Romantic drama","Tragedy","Historical farce"], ans:2, exp:"'Macbeth' is a tragedy — Macbeth's overweening ambition leads to his moral corruption and eventual downfall." },
+  { topic:'DRAMA', q:"The unities of time, place, and action are associated with ___", opts:["Shakespearean drama","Elizabethan drama","Classical Greek drama","Modern drama"], ans:2, exp:"The three classical unities (time within one day, single location, single main plot) were derived from Aristotle's Poetics by later classical scholars." },
+  { topic:'DRAMA', q:"In J.P. Clark's play 'Song of a Goat', the central theme is ___", opts:["Political corruption","Marital barrenness and its tragic consequences","Colonial oppression","Economic inequality"], ans:1, exp:"'Song of a Goat' centres on Zifa's impotence, his brother Tonye's adultery with Zifa's wife, and the resulting tragedy." },
+  { topic:'DRAMA', q:"The three parts of a classical dramatic structure are ___", opts:["Beginning, middle, and end","Exposition, complication, and denouement","Rising action, climax, and falling action","Introduction, body, and conclusion"], ans:1, exp:"Classical dramatic structure consists of exposition (setup), complication (rising action/crisis), and denouement (resolution)." },
+  { topic:'DRAMA', q:"In a tragedy, the term 'anagnorisis' means ___", opts:["The hero's fatal flaw","The moment of recognition or discovery by the protagonist","The final act of violence","The opening chorus"], ans:1, exp:"Anagnorisis (from Greek) is the critical moment of recognition — when the protagonist discovers the true nature of their situation." },
+  { topic:'DRAMA', q:"A prologue in a play is ___", opts:["A speech at the end summarising the story","An introductory section that precedes the main action","A type of soliloquy","A list of props and stage settings"], ans:1, exp:"The prologue is an introductory speech or section that precedes the main dramatic action." },
+  { topic:'DRAMA', q:"'All the world's a stage, / And all the men and women merely players' is from ___", opts:["Macbeth","King Lear","As You Like It","Hamlet"], ans:2, exp:"This famous speech (the 'Seven Ages of Man') is from Shakespeare's 'As You Like It', spoken by Jaques." },
+  { topic:'DRAMA', q:"Melodrama as a dramatic form is characterised by ___", opts:["Subtle psychological realism","Exaggerated emotions, stock characters, and moral clarity","Dark ambiguity and complex characters","Minimal dialogue and long silences"], ans:1, exp:"Melodrama uses exaggerated emotions, clear moral distinctions, and sensational plot elements for audience excitement." },
+
+  // MORE PROSE
+  { topic:'PROSE', q:"A novella differs from a novel in that it ___", opts:["Has no plot","Is shorter, usually between 20,000–40,000 words","Is always autobiographical","Has no characters"], ans:1, exp:"A novella is a prose narrative longer than a short story but shorter than a full novel, typically 20,000–40,000 words." },
+  { topic:'PROSE', q:"A first-person narrator refers to themselves as ___", opts:["He/She/They","One","I","You"], ans:2, exp:"A first-person narrator uses 'I' and tells the story from their own direct perspective." },
+  { topic:'PROSE', q:"The narrative technique of starting a story from its final event and then explaining how it came about is called ___", opts:["In medias res","Frame narrative","Epistolary technique","Reverse chronology"], ans:3, exp:"Reverse chronology starts from the end and works backward through events to explain the beginning." },
+  { topic:'PROSE', q:"An epistolary novel is told through ___", opts:["Journal entries only","Letters written by characters","A third-person omniscient narrator","Newspaper cuttings"], ans:1, exp:"An epistolary novel uses letters (and sometimes diary entries, documents, etc.) exchanged between characters to tell the story." },
+  { topic:'PROSE', q:"'Animal Farm' by George Orwell is best described as a ___", opts:["Romantic novel","Political allegory","Bildungsroman","Gothic horror"], ans:1, exp:"'Animal Farm' is a political allegory in which farm animals represent figures of the Soviet revolution." },
+  { topic:'PROSE', q:"A short story typically differs from a novel in that it ___", opts:["Has more complex characters","Focuses on a single incident with few characters","Uses more figurative language","Has no identifiable theme"], ans:1, exp:"A short story concentrates on a single incident or theme with a limited number of characters and a tight structure." },
+  { topic:'PROSE', q:"The 'narrator's point of view' in prose fiction refers to ___", opts:["The author's personal opinion","The angle from which the story is told","The story's moral","The language register used"], ans:1, exp:"Point of view is the narrative perspective — the vantage point from which the story is told (first, second, or third person)." },
+  { topic:'PROSE', q:"In Achebe's 'Things Fall Apart', the tragic death of Okonkwo results primarily from his ___", opts:["Poverty","Refusal to adapt to changing times (inflexibility/pride)","Lack of education","Colonial imprisonment"], ans:1, exp:"Okonkwo's downfall stems from his rigid pride, inability to adapt, and fear of being seen as weak — traits that make him incapable of facing colonial change." },
+  { topic:'PROSE', q:"The character Ikemefuna in 'Things Fall Apart' is significant because ___", opts:["He is the village elder","His death reveals the tension between tradition and morality in Okonkwo's life","He converts to Christianity","He defeats Okonkwo in wrestling"], ans:1, exp:"Ikemefuna's death — in which Okonkwo participates — reveals the conflict between adherence to tradition and personal moral feeling." },
+  { topic:'PROSE', q:"A picaresque novel follows ___", opts:["A single aristocratic family across generations","A roguish hero through a series of episodic adventures","A love triangle in a rural community","A detective solving a mystery"], ans:1, exp:"Picaresque novels follow a low-born, cunning hero (picaro) through a series of comic, often satirical adventures." },
+  { topic:'PROSE', q:"'Purple Hibiscus' by Chimamanda Ngozi Adichie is narrated by ___", opts:["Kambili","Eugene","Ifeoma","Amaka"], ans:0, exp:"'Purple Hibiscus' is narrated by Kambili, a fifteen-year-old girl living under her fanatically religious father Eugene." },
+  { topic:'PROSE', q:"An autobiography differs from a biography in that ___", opts:["It is longer","It is written by someone else about the subject","It is written by the subject about their own life","It always covers historical events"], ans:2, exp:"An autobiography is a self-written account of one's own life, while a biography is written about someone by another person." },
+  { topic:'PROSE', q:"Characterisation in fiction refers to ___", opts:["The setting of the story","The ways authors create and present characters","The story's central message","The narrative structure"], ans:1, exp:"Characterisation is the process by which an author develops and presents the personalities of their characters." },
+  { topic:'PROSE', q:"A story that attributes human characteristics to animals but carries a moral lesson is called a ___", opts:["Fable","Myth","Legend","Allegory"], ans:0, exp:"A fable is a short narrative featuring animals as characters that teaches a moral lesson or illustrates a truth about human nature." },
+  { topic:'PROSE', q:"The resolution of a story — where all conflicts are resolved — is called the ___", opts:["Climax","Falling action","Denouement","Exposition"], ans:2, exp:"The denouement is the final stage of the plot where all conflicts are resolved and loose ends are tied up." },
+
+  // MORE POETRY
+  { topic:'POETRY', q:"A Shakespearean sonnet has the rhyme scheme ___", opts:["ABBA ABBA CDC DCD","ABAB CDCD EFEF GG","AABB CCDD EEFF GG","AAAA BBBB CCCC DD"], ans:1, exp:"The Shakespearean (English) sonnet follows ABAB CDCD EFEF GG — three quatrains and a closing couplet." },
+  { topic:'POETRY', q:"A Petrarchan sonnet is divided into ___", opts:["Three quatrains and a couplet","An octave (8 lines) and a sestet (6 lines)","Four stanzas of four lines each","Seven couplets"], ans:1, exp:"The Petrarchan (Italian) sonnet consists of an octave (8 lines, rhyming ABBAABBA) and a sestet (6 lines, varying rhyme)." },
+  { topic:'POETRY', q:"The rhythm pattern of unstressed followed by stressed syllables (da-DUM) is called ___", opts:["Trochee","Iamb","Dactyl","Anapest"], ans:1, exp:"An iamb is a metrical foot of one unstressed syllable followed by one stressed syllable (da-DUM), e.g. 'to BE or NOT to BE'." },
+  { topic:'POETRY', q:"Poetry written in unrhymed iambic pentameter is called ___", opts:["Free verse","Ode","Blank verse","Ballad"], ans:2, exp:"Blank verse is unrhymed iambic pentameter (10 syllables per line in alternating unstressed-stressed pattern)." },
+  { topic:'POETRY', q:"The 'volta' in a sonnet refers to ___", opts:["The rhyme scheme","A turn or shift in thought or argument","The first line","The couplet"], ans:1, exp:"The volta (Italian: 'turn') is a rhetorical shift or change of direction in the argument of a sonnet." },
+  { topic:'POETRY', q:"An ode is ___", opts:["A sad poem mourning the dead","A long heroic narrative poem","A lyric poem addressing a person, object, or concept in an elevated tone","A comic poem about everyday life"], ans:2, exp:"An ode is a lyric poem of praise or lamentation, addressing its subject in a dignified or elevated manner." },
+  { topic:'POETRY', q:"A limerick is a humorous poem with the rhyme scheme ___", opts:["AABBA","AABB","ABAB","ABBA"], ans:0, exp:"A limerick has 5 lines: lines 1, 2, 5 rhyme (A) and lines 3, 4 rhyme (B) — AABBA." },
+  { topic:'POETRY', q:"'Do not go gentle into that good night' by Dylan Thomas is an example of ___", opts:["Elegy","Ballad","Villanelle","Epic"], ans:2, exp:"The poem is a villanelle — a 19-line poem with two repeating rhymes and two refrains." },
+  { topic:'POETRY', q:"A caesura in a line of poetry is ___", opts:["A rhyming couplet","A pause or break within a line","The repetition of a consonant sound","A run-on line"], ans:1, exp:"A caesura is a rhythmic pause within a line of verse, often indicated by punctuation." },
+  { topic:'POETRY', q:"In Gabriela Mistral's and W.B. Yeats's poetry, the recurring image of roses and golden hair often symbolises ___", opts:["War and destruction","Unattainable beauty and eternal love","Political freedom","Divine worship"], ans:1, exp:"In romantic poetry, roses and golden hair are conventional symbols of beauty, desire, and the ideal beloved." },
+  { topic:'POETRY', q:"A poem that does not rhyme is called ___", opts:["Blank verse","Free verse","Neither — all poems must rhyme","A sonnet"], ans:1, exp:"Free verse (vers libre) has no regular metre or rhyme scheme. Blank verse is also unrhymed but maintains regular metre (iambic pentameter)." },
+  { topic:'POETRY', q:"The term 'end-stopped line' in poetry refers to a line that ___", opts:["Continues without pause to the next line","Ends with a punctuation mark creating a pause","Has no rhyme","Contains exactly ten syllables"], ans:1, exp:"An end-stopped line concludes with punctuation (period, comma, semicolon) creating a natural pause at the line's end." },
+  { topic:'POETRY', q:"'Enjambment' in poetry occurs when ___", opts:["A line ends with a strong pause","The thought runs on from one line to the next without a pause","Two lines rhyme perfectly","A stanza begins with a new character"], ans:1, exp:"Enjambment (run-on line) means the sense runs on from one line into the next without a grammatical pause." },
+  { topic:'POETRY', q:"The speaker of a poem who is not the poet themselves is called the ___", opts:["Antagonist","Persona","Author","Playwright"], ans:1, exp:"The persona is the 'mask' or fictional speaker a poet adopts in a poem — distinct from the poet's real identity." },
+  { topic:'POETRY', q:"A dirge is a type of poem that ___", opts:["Praises a heroic figure","Is sung at funerals as a lament for the dead","Tells the story of a journey","Uses no figurative language"], ans:1, exp:"A dirge is a slow, mournful song or poem — a lament for the dead, sung or recited at funerals." },
+
+  // THE LEKKI HEADMASTER — additional questions
+  { topic:'THE LEKKI HEADMASTER', q:"In 'The Lekki Headmaster', who is Mr. Bepo's wife?", opts:["Mrs. Soyemi","Mrs. Adewale","Mrs. Dupe Bepo","Mrs. Grace Bepo"], ans:2, exp:"Mr. Bepo's wife is Mrs. Dupe Bepo, who relocated to the UK with their children — a key source of Bepo's dilemma." },
+  { topic:'THE LEKKI HEADMASTER', q:"Stardom Schools in 'The Lekki Headmaster' is located in ___", opts:["Victoria Island","Surulere","Lekki","Ikoyi"], ans:2, exp:"Stardom Schools is situated in the Lekki area of Lagos, which gives Mr. Bepo his legendary title." },
+  { topic:'THE LEKKI HEADMASTER', q:"What position did Mr. Bepo hold before becoming Headmaster at Stardom Kiddies?", opts:["Mathematics teacher","Vice Principal","Class teacher at a public school","Director of Education"], ans:2, exp:"Before Stardom, Bepo was a class teacher in a public school setting, from which he grew his reputation." },
+  { topic:'THE LEKKI HEADMASTER', q:"The cooperative society in 'The Lekki Headmaster' was primarily set up to ___", opts:["Build a new school","Help staff with financial loans and savings","Buy school buses","Organise staff training"], ans:1, exp:"The cooperative was established to provide staff with access to loans and a savings platform for financial security." },
+  { topic:'THE LEKKI HEADMASTER', q:"In 'The Lekki Headmaster', Mr. Bepo's management style is best described as ___", opts:["Authoritarian and punitive","Collaborative, empathetic, and student-centred","Passive and disengaged","Bureaucratic and inflexible"], ans:1, exp:"Bepo is known for his empathetic and collaborative style, resolving conflicts humanely and fostering a nurturing environment." },
+  { topic:'THE LEKKI HEADMASTER', q:"The setting of 'The Lekki Headmaster' is primarily ___", opts:["A rural Nigerian village","A private school in Lagos","A government office in Abuja","A university campus in Ibadan"], ans:1, exp:"The story is primarily set in a private school (Stardom Schools) in Lekki, Lagos." },
+  { topic:'THE LEKKI HEADMASTER', q:"What central conflict does Mr. Bepo face throughout 'The Lekki Headmaster'?", opts:["Whether to retire","Balancing his professional duty with family pressure to relocate abroad","Fighting a corrupt principal","Dealing with examination malpractice"], ans:1, exp:"Bepo's central conflict is the pull between his dedication to his work in Nigeria and his family's expectation that he join them in the UK." },
+  { topic:'THE LEKKI HEADMASTER', q:"The title 'The Lekki Headmaster' is significant because it reflects ___", opts:["The geographic setting and Bepo's legendary reputation","A description of the school type","A government designation","An ironic nickname given by students"], ans:0, exp:"The title captures both the geographical setting (Lekki) and the legendary status Mr. Bepo has earned as a school leader." },
+  { topic:'THE LEKKI HEADMASTER', q:"The Head Girl position in Stardom Schools was significant in the novel because ___", opts:["It was awarded to the best student academically","It became commercialised, revealing issues of class and fairness","It was abolished by Mr. Bepo","It caused a staff strike"], ans:1, exp:"The expensive intent forms (₦50,000) for the Head Girl position showed how privilege and wealth could corrupt school processes." },
+  { topic:'THE LEKKI HEADMASTER', q:"In 'The Lekki Headmaster', what did Mr. Bepo do when a teacher wrongly punished a student on the marker board?", opts:["Dismissed the teacher immediately","Reported the teacher to the police","Managed the ensuing legal case and negotiated an out-of-court settlement","Covered up the incident"], ans:2, exp:"Bepo handled the case diplomatically — it was settled out of court, with a free term for the student and the teacher suspended without pay." },
+
+  // ORAL LITERATURE
+  { topic:'ORAL LITERATURE', q:"Oral literature refers to ___", opts:["Literature read silently","Verbal traditions transmitted orally before writing","Speeches given in parliament","Informal conversation"], ans:1, exp:"Oral literature encompasses all forms of verbal artistic expression — myths, legends, folktales, proverbs — passed down orally through generations." },
+  { topic:'ORAL LITERATURE', q:"A proverb is best described as ___", opts:["A long narrative story","A short, widely known expression of a truth or piece of advice","A religious incantation","A form of dramatic monologue"], ans:1, exp:"A proverb is a short, well-known phrase expressing a general truth or piece of wisdom." },
+  { topic:'ORAL LITERATURE', q:"Which of the following best describes a myth?", opts:["A fictional story about animals with a moral","A traditional story explaining natural phenomena, origins, or social customs","A comedy performed in public","A personal diary entry"], ans:1, exp:"A myth is a traditional narrative that explains natural phenomena, the origin of the world, or cultural beliefs and practices." },
+  { topic:'ORAL LITERATURE', q:"A folktale differs from a myth in that folktales ___", opts:["Are always true stories","Do not claim to be sacred or historically true — they are entertainment with a moral","Involve only gods and supernatural beings","Are written in verse"], ans:1, exp:"Folktales are fictional narratives for entertainment and moral instruction; they don't claim to be historical or sacred." },
+  { topic:'ORAL LITERATURE', q:"The refrain in a song or oral poem is ___", opts:["A new stanza introduced each time","A line or lines repeated at regular intervals","The opening verse only","The final verse of the poem"], ans:1, exp:"A refrain is a regularly repeated phrase or verse in a song or poem, often at the end of each stanza." },
+  { topic:'ORAL LITERATURE', q:"An epic hero typically possesses ___", opts:["Ordinary human weaknesses only","Superhuman strength, bravery, and a quest of national significance","A comedic personality","A villainous nature"], ans:1, exp:"Epic heroes are extraordinary individuals of national importance who embark on heroic quests and display courage and strength." },
+  { topic:'ORAL LITERATURE', q:"'The Iliad' and 'The Odyssey' by Homer are examples of ___", opts:["Folktales","Lyric poetry","Epics","Tragedies"], ans:2, exp:"'The Iliad' and 'The Odyssey' are ancient Greek epics — long narrative poems about heroic deeds (the Trojan War and Odysseus's journey)." },
+  { topic:'ORAL LITERATURE', q:"Riddles in oral tradition serve to ___", opts:["Document history","Entertain, sharpen the mind, and transmit cultural knowledge","Replace proverbs","Record legal decisions"], ans:1, exp:"Riddles entertain and educate — they test wit, transmit cultural knowledge, and strengthen intellectual agility." },
+
+  // GENERAL LITERATURE (additional)
+  { topic:'GENERAL LITERATURE', q:"The literary term 'verisimilitude' refers to ___", opts:["The use of symbols","The appearance of being true or real in a literary work","The climax of a drama","A type of allegory"], ans:1, exp:"Verisimilitude is the quality of appearing realistic, plausible, and true to life in a literary work." },
+  { topic:'GENERAL LITERATURE', q:"A satire is a work that uses ___", opts:["Sentimentality to evoke emotion","Humour, irony, or exaggeration to criticise human folly or vices","Realistic description to document events","Supernatural events to engage the reader"], ans:1, exp:"Satire uses wit, irony, and exaggeration to expose and criticise foolishness, vice, or social ills." },
+  { topic:'GENERAL LITERATURE', q:"Which of the following is a feature of gothic literature?", opts:["Pastoral settings and gentle romance","Dark settings, mystery, horror, and the supernatural","Comic resolution and happy endings","Political allegory and realism"], ans:1, exp:"Gothic literature features dark, gloomy settings (castles, ruins), supernatural elements, mystery, and psychological horror." },
+  { topic:'GENERAL LITERATURE', q:"Romanticism in literature is characterised by ___", opts:["Emphasis on reason and logic","Celebration of nature, emotion, individualism, and the imagination","Industrial settings and economic themes","Political analysis and social realism"], ans:1, exp:"Romanticism (18th–19th century) valued emotion, imagination, nature, and individual experience over Enlightenment rationalism." },
+  { topic:'GENERAL LITERATURE', q:"The 'unreliable narrator' is a narrative device where ___", opts:["The narrator is always factually correct","The narrator's credibility or accuracy is deliberately compromised","The narrator knows everything about all characters","The narrator is the antagonist"], ans:1, exp:"An unreliable narrator's account cannot be taken at face value — their credibility is compromised by bias, limited knowledge, or dishonesty." },
+  { topic:'GENERAL LITERATURE', q:"A 'round character' is best described as ___", opts:["One-dimensional and predictable","Fully developed, complex, and realistic","Always the protagonist","Only found in novels"], ans:1, exp:"A round character is complex, multi-dimensional, and believably human — capable of surprising the reader." },
+  { topic:'GENERAL LITERATURE', q:"The difference between 'theme' and 'subject' in a literary work is ___", opts:["There is no difference","Subject is the topic; theme is the insight or statement made about that topic","Theme is the topic; subject is the insight","Subject is always stated directly; theme is never implied"], ans:1, exp:"The subject is what the work is about (e.g. love, war), while the theme is the author's insight or statement about that subject." },
+  { topic:'GENERAL LITERATURE', q:"'Chinua Achebe', 'Wole Soyinka', and 'Ngugi wa Thiong'o' are celebrated as ___", opts:["European colonial writers","African literary giants","American novelists","Caribbean playwrights"], ans:1, exp:"Achebe, Soyinka, and Ngugi are among Africa's most celebrated writers, known internationally for their fiction, drama, and essays." },
+
+  // ── TOP-UP LITERATURE QUESTIONS ──────────────────────────────────
+  { topic:'LITERARY DEVICES', q:"The term 'cacophony' in literature refers to ___", opts:["A pleasant combination of sounds","A harsh, discordant combination of sounds used for effect","A form of repetition","A type of rhyme scheme"], ans:1, exp:"Cacophony is the deliberate use of harsh, jarring sounds to create an unpleasant effect, e.g. in describing chaos or war." },
+  { topic:'LITERARY DEVICES', q:"'Euphony' in literature refers to ___", opts:["A harsh arrangement of words","A pleasant, harmonious arrangement of sounds","A type of irony","A moral lesson"], ans:1, exp:"Euphony is the use of melodious, pleasing sounds in language — the opposite of cacophony." },
+  { topic:'LITERARY DEVICES', q:"A 'flat character' in fiction is one who ___", opts:["Is fully developed with many traits","Has only one or two defining traits and does not change","Is always the antagonist","Only appears in drama"], ans:1, exp:"A flat character is simple, one-dimensional, and does not undergo significant change — often a stock character." },
+  { topic:'LITERARY DEVICES', q:"The term 'diction' in literature refers to ___", opts:["The rhythm of a poem","The choice and use of words by a writer","The setting of the story","The narrative point of view"], ans:1, exp:"Diction refers to a writer's word choice — formal, informal, archaic, colloquial, etc. — and how it shapes tone and style." },
+  { topic:'LITERARY DEVICES', q:"In poetry, a 'foot' is ___", opts:["The end of a poem","A basic rhythmic unit of stressed and unstressed syllables","A type of rhyme","A verse paragraph"], ans:1, exp:"A metrical foot is the basic unit of metre in poetry — a specific pattern of stressed and unstressed syllables." },
+  { topic:'DRAMA', q:"The Greek chorus in classical drama served to ___", opts:["Replace the protagonist","Comment on the action, provide context, and represent public opinion","Perform all the roles","Direct the stage lighting"], ans:1, exp:"In classical Greek drama, the chorus chanted or sang commentary on the action, moralised, and represented the community's voice." },
+  { topic:'DRAMA', q:"A morality play is a form of drama that ___", opts:["Focuses on love and romance","Uses allegorical characters to teach a moral or religious lesson","Is always performed without costumes","Deals exclusively with historical events"], ans:1, exp:"Morality plays (medieval drama) featured allegorical figures (Everyman, Death, Vice) to teach Christian moral lessons." },
+  { topic:'DRAMA', q:"'Wole Soyinka's 'The Lion and the Jewel' is set in ___", opts:["A Nigerian city","The fictional Yoruba village of Ilujinle","Johannesburg","Lagos harbour"], ans:1, exp:"'The Lion and the Jewel' is set in Ilujinle, a fictional Yoruba village — the site of conflict between tradition (Baroka) and modernity (Lakunle)." },
+  { topic:'PROSE', q:"The narrative perspective where a character reflects on their past from a future vantage point is ___", opts:["Third-person omniscient","Retrospective first-person narration","Second-person narration","Omniscient third-person narration"], ans:1, exp:"Retrospective narration is a form of first-person narration where the narrator looks back and reflects on past events." },
+  { topic:'PROSE', q:"A 'leitmotif' in a literary work is ___", opts:["A type of flashback","A recurring element (image, phrase, theme) that carries symbolic significance","The opening line","A secondary character"], ans:1, exp:"A leitmotif is a recurring motif — an image, phrase, or theme that accumulates meaning through repetition across a work." },
+  { topic:'PROSE', q:"The theme of colonialism is most directly addressed in ___", opts:["A Midsummer Night's Dream","Things Fall Apart","Animal Farm","Pride and Prejudice"], ans:1, exp:"Achebe's 'Things Fall Apart' directly confronts the impact of British colonialism on Igbo culture and society." },
+  { topic:'POETRY', q:"A 'terza rima' is a verse form using ___", opts:["Four-line stanzas with alternating rhyme","Interlocking three-line stanzas (ABA BCB CDC …)","Six-line stanzas","Couplets throughout"], ans:1, exp:"Terza rima (used famously by Dante in 'The Divine Comedy') is an interlocking rhyme scheme: ABA BCB CDC DED …" },
+  { topic:'POETRY', q:"The word 'stanza' comes from an Italian word meaning ___", opts:["Song","Verse","Room","Pause"], ans:2, exp:"'Stanza' is Italian for 'room' — each stanza is like a room in the house of the poem, containing a unit of thought." },
+  { topic:'GENERAL LITERATURE', q:"The term 'canon' in literature refers to ___", opts:["A type of musical composition","A body of literature considered authoritative or of high artistic merit","The list of characters in a play","The moral of the story"], ans:1, exp:"The literary canon is the body of works considered to be of the highest artistic and cultural value within a tradition." },
+  { topic:'GENERAL LITERATURE', q:"Postcolonial literature primarily explores ___", opts:["Medieval themes of chivalry","The effects of colonisation and the search for cultural identity","Romantic love and nature","Ancient mythology and epics"], ans:1, exp:"Postcolonial literature examines the impacts of colonial rule — cultural identity, hybridity, resistance, and the aftermath of empire." },
+  { topic:'GENERAL LITERATURE', q:"A 'narrative arc' refers to ___", opts:["The shape of a book's spine","The overall structure and development of a story from beginning to end","A type of metaphor","The metre of a poem"], ans:1, exp:"The narrative arc is the overarching structure of a story — the sequence of events from the initial situation through rising action to resolution." },
+  { topic:'GENERAL LITERATURE', q:"Which of the following best defines 'motif' in literature?", opts:["The final resolution of the plot","A recurring element (image, symbol, theme) that appears throughout a work","The author's biography","A type of narrative perspective"], ans:1, exp:"A motif is a recurring structural, thematic, or symbolic element that contributes to the overall meaning of a work." },
+  { topic:'THE LEKKI HEADMASTER', q:"In 'The Lekki Headmaster', the issue of the Head Girl's election application fee reveals ___", opts:["That Stardom Schools had a generous bursary scheme","Tensions between wealth, privilege, and educational fairness","That Mr. Bepo was corrupt","That parents were uninvolved in school affairs"], ans:1, exp:"The ₦50,000 Head Girl application fee highlighted how economic status could disadvantage deserving candidates and compromise school integrity." },
+  { topic:'THE LEKKI HEADMASTER', q:"The relationship between Mr. Bepo and his staff in 'The Lekki Headmaster' is best described as ___", opts:["Adversarial and tense","Collaborative and respectful","Indifferent and distant","Strictly hierarchical"], ans:1, exp:"Bepo cultivated a warm, collaborative relationship with his staff — consulting them, supporting them, and earning their loyalty." },
+  { topic:'ORAL LITERATURE', q:"The praise song (panegyric) in African oral tradition is used to ___", opts:["Mourn the dead","Celebrate and glorify a person, community, or deity","Teach children arithmetic","Record legal disputes"], ans:1, exp:"Praise songs (panegyrics) extol the virtues, achievements, and lineage of rulers, warriors, or communities." },
+  { topic:'ORAL LITERATURE', q:"A trickster figure in oral tradition (like Ananse the spider) typically represents ___", opts:["A purely evil villain","Cunning wit, cleverness, and the ability to subvert social norms","A religious deity","A faithful companion"], ans:1, exp:"Tricksters (Ananse, Tortoise, Brer Rabbit) are clever, subversive figures who use wit rather than strength — often teaching moral lessons through their antics." },
+  { topic:'ORAL LITERATURE', q:"Oral traditions are transmitted across generations through ___", opts:["Written records and printing presses","Memory, performance, and community repetition","Museums and archives","Radio broadcasts only"], ans:1, exp:"Oral traditions survive through active community transmission — storytelling, music, performance, and the deliberate passing on from elders to youth." },
+  { topic:'LITERARY DEVICES', q:"A 'juxtaposition' in literature places two contrasting ideas or images side by side to ___", opts:["Provide comic relief","Highlight the differences and create meaning through contrast","Explain the plot","Develop the setting"], ans:1, exp:"Juxtaposition places contrasting elements alongside each other to highlight their differences and deepen meaning." },
+  { topic:'LITERARY DEVICES', q:"'The Waste Land' by T.S. Eliot is famous for its use of ___", opts:["Regular sonnet structure","Allusion, fragmentation, and multiple voices / stream of consciousness","Simple rhyme schemes","First-person romantic confession"], ans:1, exp:"'The Waste Land' is a modernist masterpiece notable for its use of allusions to world literature, fragmented structure, and multiple languages and voices." },
+  { topic:'DRAMA', q:"Brechtian (epic) theatre deliberately breaks the fourth wall in order to ___", opts:["Entertain the audience with spectacle","Prevent emotional engagement (Verfremdungseffekt) so the audience thinks critically","Create realism","Develop character psychology"], ans:1, exp:"Brecht's epic theatre uses alienation effects (Verfremdungseffekt) — breaking the illusion — to encourage political and critical reflection rather than passive emotional identification." },
+  { topic:'PROSE', q:"The literary term 'omniscient narrator' comes from Latin and means ___", opts:["'All-seeing'","'All-knowing'","'First person'","'Distant observer'"], ans:1, exp:"'Omniscient' comes from Latin 'omnis' (all) + 'sciens' (knowing). An omniscient narrator knows all characters' thoughts and feelings." },
+  { topic:'GENERAL LITERATURE', q:"'Purple Hibiscus' by Chimamanda Ngozi Adichie explores the theme of ___", opts:["War and famine","Religious fanaticism, silence, and the search for freedom","Colonialism and trade","Ancient Igbo mythology"], ans:1, exp:"The novel explores the effects of religious extremism and domestic tyranny on a family, and Kambili's journey toward self-expression and freedom." },
+  { topic:'GENERAL LITERATURE', q:"The term 'pathetic fallacy' (coined by John Ruskin) refers to ___", opts:["A logical fallacy in an argument","The attribution of human emotions to nature or inanimate objects","A type of dramatic irony","An exaggerated statement"], ans:1, exp:"Pathetic fallacy is when natural surroundings reflect or respond to the emotional state of a character, e.g. a storm during a tragic moment." },
+  { topic:'GENERAL LITERATURE', q:"A bildungsroman typically ends with the protagonist ___", opts:["Dying tragically","Achieving self-knowledge, maturity, and a place in society","Returning to their birthplace unchanged","Abandoning society for isolation"], ans:1, exp:"Bildungsroman (coming-of-age novel) traces the protagonist's moral, psychological growth from youth to a settled place in adult society." },
 ];
 
 // =====================================================================
@@ -1915,6 +2163,84 @@ The refractive index of medium M is`, opts:["2/√3","1/√3","2√3","√3"], a
 { topic:'MODERN PHYSICS', q:"For semiconductors to have a negative temperature coefficient of resistance means ___", opts:["They have electrons and holes at high temperatures","Resistance is constantly changing","Resistance increases with temperature","Resistance decreases with temperature"], ans:3, exp:"Negative temperature coefficient means resistance decreases as temperature rises — more electron-hole pairs are thermally generated." },
 
 { topic:'ELECTRICITY', q:"The instrument used for securing a large number of similar charges by induction is called a ___", opts:["Capacitor","Electrophorus","Electroscope","Proof-plane"], ans:1, exp:"The electrophorus is a device that repeatedly generates static charge by induction without discharging the original charged plate." },
+
+// ── ADDITIONAL PHYSICS QUESTIONS ────────────────────────────────────
+
+// MECHANICS (additional)
+{ topic:'MECHANICS', q:"A body is in equilibrium under three coplanar forces. These forces must be ___", opts:["Equal in magnitude","Parallel to each other","Concurrent and form a closed triangle when drawn head to tail","All horizontal"], ans:2, exp:"Lami's theorem / triangle of forces: three forces in equilibrium are concurrent, and when drawn as vectors form a closed triangle." },
+{ topic:'MECHANICS', q:"A stone is thrown horizontally from a cliff. The horizontal component of velocity ___", opts:["increases uniformly","decreases uniformly","remains constant (ignoring air resistance)","is zero throughout"], ans:2, exp:"Ignoring air resistance, no horizontal force acts, so horizontal velocity remains constant throughout projectile flight." },
+{ topic:'MECHANICS', q:"Work done on an object is defined as ___", opts:["Force × time","Force × displacement (in the direction of the force)","Mass × velocity","Power × distance"], ans:1, exp:"W = F·d·cosθ. Work = force multiplied by the displacement in the direction of the force." },
+{ topic:'MECHANICS', q:"The principle of conservation of momentum states that ___", opts:["Momentum is always conserved in any situation","The total momentum of a system remains constant if no external force acts on it","Kinetic energy is always conserved in collisions","Momentum equals force times time"], ans:1, exp:"Conservation of momentum: in a closed system (no net external force), total momentum before = total momentum after any interaction." },
+{ topic:'MECHANICS', q:"A perfectly elastic collision is one in which ___", opts:["Momentum is conserved only","Kinetic energy is lost","Both momentum and kinetic energy are conserved","Objects stick together"], ans:2, exp:"In a perfectly elastic collision, both momentum AND kinetic energy are conserved." },
+{ topic:'MECHANICS', q:"A rocket moves in space by ejecting gas. This is an application of Newton's ___", opts:["First law","Second law","Third law","Law of gravitation"], ans:2, exp:"Newton's third law: the rocket exerts force on exhaust gas backwards; by reaction, gas exerts equal force forwards on rocket." },
+{ topic:'MECHANICS', q:"The moment of a force about a point is calculated as ___", opts:["Force + distance","Force × perpendicular distance","Force / distance","Force² × distance"], ans:1, exp:"Moment (torque) = Force × perpendicular distance from the pivot (F × d)." },
+{ topic:'MECHANICS', q:"When a body moves in a circle at constant speed, the net force is directed ___", opts:["tangentially in the direction of motion","radially outward","radially inward (centripetal)","vertically downward"], ans:2, exp:"Uniform circular motion requires a centripetal (inward) net force to continuously change the direction of velocity." },
+{ topic:'MECHANICS', q:"A 2 kg object accelerates at 5 m/s². The net force on it is ___", opts:["0.4 N","2.5 N","7 N","10 N"], ans:3, exp:"F = ma = 2 × 5 = 10 N." },
+{ topic:'MECHANICS', q:"The escape velocity of an object from the Earth's surface is approximately ___", opts:["7.9 km/s","11.2 km/s","3.0 km/s","8.1 km/s"], ans:1, exp:"The escape velocity from Earth's surface is approximately 11.2 km/s — the minimum speed needed to escape Earth's gravity." },
+
+// SIMPLE HARMONIC MOTION
+{ topic:'SHM', q:"In simple harmonic motion, the acceleration is always ___", opts:["constant","directed away from the equilibrium position","proportional to and directed toward the equilibrium position","in the direction of velocity"], ans:2, exp:"In SHM: a = −ω²x. Acceleration is proportional to displacement and directed toward the equilibrium position (restoring force)." },
+{ topic:'SHM', q:"A simple pendulum of length L has period T = 2π√(L/g). If L is quadrupled, T ___", opts:["doubles","quadruples","is halved","increases by √2"], ans:0, exp:"T ∝ √L. If L → 4L, T → 2T. The period doubles." },
+{ topic:'SHM', q:"At the equilibrium position of a body in SHM, the ___", opts:["velocity is zero and potential energy is maximum","velocity is maximum and kinetic energy is maximum","acceleration is maximum","displacement is maximum"], ans:1, exp:"At equilibrium in SHM, displacement = 0, velocity is at maximum, and kinetic energy is maximum." },
+
+// HEAT & THERMODYNAMICS (additional)
+{ topic:'HEAT', q:"The specific heat capacity of a substance is defined as the heat required to raise the temperature of ___", opts:["1 kg of the substance by 1°C","1 g of the substance by 100°C","1 mole of the substance by 1 K","the whole body by 1°C"], ans:0, exp:"Specific heat capacity c = heat required per unit mass per unit temperature rise (J kg⁻¹ K⁻¹)." },
+{ topic:'HEAT', q:"A thermometer using the property of electrical resistance for temperature measurement is a ___", opts:["Liquid-in-glass thermometer","Thermocouple","Resistance thermometer (thermistor)","Constant-volume gas thermometer"], ans:2, exp:"A resistance thermometer (e.g. platinum resistance thermometer) uses the change in electrical resistance with temperature." },
+{ topic:'HEAT', q:"The zeroth law of thermodynamics states that ___", opts:["Energy cannot be created or destroyed","Heat flows from hot to cold","If A is in thermal equilibrium with B, and B with C, then A is in thermal equilibrium with C","Absolute zero cannot be reached"], ans:2, exp:"The Zeroth Law: if two bodies are each in thermal equilibrium with a third, they are in thermal equilibrium with each other — the basis of temperature measurement." },
+{ topic:'HEAT', q:"In a reversible isothermal expansion of an ideal gas, the internal energy ___", opts:["Increases","Decreases","Remains constant","Doubles"], ans:2, exp:"For an ideal gas, internal energy depends only on temperature. In an isothermal process (constant T), ΔU = 0." },
+{ topic:'HEAT', q:"Which mode of heat transfer does NOT require a medium?", opts:["Conduction","Convection","Radiation","All require a medium"], ans:2, exp:"Radiation transfers heat by electromagnetic waves and requires no material medium — hence heat from the sun reaches Earth through space." },
+{ topic:'HEAT', q:"The process by which a liquid changes to vapour below its boiling point is called ___", opts:["Sublimation","Boiling","Evaporation","Condensation"], ans:2, exp:"Evaporation is the escape of higher-energy molecules from a liquid surface at temperatures below the boiling point." },
+{ topic:'HEAT', q:"A pressure cooker cooks food faster because the increased pressure ___", opts:["reduces the boiling point of water","increases the boiling point of water","increases the atmospheric pressure","reduces heat loss"], ans:1, exp:"Increased pressure raises the boiling point of water above 100°C, enabling food to cook at higher temperatures." },
+{ topic:'HEAT', q:"When a liquid solidifies at constant temperature, it ___", opts:["Absorbs latent heat","Releases latent heat","Undergoes a temperature rise","Changes density only"], ans:1, exp:"Solidification releases the latent heat of fusion — energy is given out as the liquid changes to solid at constant temperature." },
+
+// WAVES (additional)
+{ topic:'WAVES', q:"Which of the following electromagnetic waves has the shortest wavelength?", opts:["Radio waves","Infrared","Ultraviolet","Gamma rays"], ans:3, exp:"Gamma rays have the shortest wavelength (highest frequency) in the electromagnetic spectrum." },
+{ topic:'WAVES', q:"The phenomenon of resonance occurs when ___", opts:["Two waves cancel out","A body vibrates at its natural frequency due to periodic driving force of the same frequency","Amplitude becomes zero","The wave undergoes total internal reflection"], ans:1, exp:"Resonance: when the frequency of an applied periodic force equals the natural frequency of a system, amplitude becomes very large." },
+{ topic:'WAVES', q:"The principle of superposition states that ___", opts:["Waves always cancel each other","The resultant displacement when two waves overlap equals the algebraic sum of their individual displacements","Waves always reinforce each other","Two waves cannot occupy the same space"], ans:1, exp:"Superposition: when two or more waves meet, the resultant displacement is the vector sum of the individual displacements." },
+{ topic:'WAVES', q:"Diffraction of waves is most pronounced when ___", opts:["The obstacle is much larger than the wavelength","The obstacle is much smaller than the wavelength","The wavelength equals the size of the aperture/obstacle","The wave speed is very high"], ans:2, exp:"Diffraction is greatest when the wavelength is comparable to the size of the obstacle or aperture." },
+{ topic:'WAVES', q:"Total internal reflection occurs when ___", opts:["Light travels from a denser to a less dense medium at an angle greater than the critical angle","Light enters a denser medium","The angle of incidence equals the angle of refraction","Light is polarised"], ans:0, exp:"Total internal reflection: when light in a denser medium strikes the boundary at an angle exceeding the critical angle, it is completely reflected back." },
+{ topic:'WAVES', q:"The frequency of a wave is 500 Hz and its speed is 340 m/s. Its wavelength is ___", opts:["0.68 m","1.47 m","170000 m","170 m"], ans:0, exp:"λ = v/f = 340/500 = 0.68 m." },
+{ topic:'WAVES', q:"Polarisation of waves demonstrates that light waves are ___", opts:["Longitudinal","Transverse","Stationary","Compressional"], ans:1, exp:"Only transverse waves can be polarised. Polarisation restricts the vibration to one plane, proving light is transverse." },
+
+// OPTICS (additional)
+{ topic:'OPTICS', q:"A concave mirror with focal length f produces a real, inverted, diminished image when the object is placed ___", opts:["Between f and 2f","Beyond 2f","Between the mirror and f","At f"], ans:1, exp:"For a concave mirror, an object beyond 2f produces a real, inverted, diminished image between f and 2f." },
+{ topic:'OPTICS', q:"A convex lens is used to correct ___", opts:["Long-sightedness (hypermetropia)","Short-sightedness (myopia)","Astigmatism","Colour blindness"], ans:0, exp:"A converging (convex) lens corrects hypermetropia by bringing the focal point forward to the retina." },
+{ topic:'OPTICS', q:"The magnification produced by a lens is defined as ___", opts:["object distance / image distance","image distance / object distance","object height / image height","image height + object height"], ans:1, exp:"Magnification m = image distance / object distance (for thin lenses) = image height / object height." },
+{ topic:'OPTICS', q:"Chromatic aberration in lenses is caused by ___", opts:["The lens being too thick at the centre","Different wavelengths of light refracting by different amounts","The lens surface being uneven","Interference between light waves"], ans:1, exp:"Chromatic aberration occurs because a lens refracts different wavelengths (colours) by different amounts, causing them to focus at different points." },
+{ topic:'OPTICS', q:"The refractive index of a medium is defined as ___", opts:["speed of light in the medium / speed of light in vacuum","speed of light in vacuum / speed of light in the medium","wavelength in medium / wavelength in vacuum","sin r / sin i"], ans:1, exp:"Refractive index n = c/v (speed in vacuum divided by speed in medium). It is always ≥ 1 for real media." },
+
+// ELECTRICITY (additional)
+{ topic:'ELECTRICITY', q:"Three resistors of 6 Ω each are connected in parallel. The effective resistance is ___", opts:["18 Ω","2 Ω","6 Ω","3 Ω"], ans:1, exp:"1/R = 1/6 + 1/6 + 1/6 = 3/6 = 1/2. R = 2 Ω." },
+{ topic:'ELECTRICITY', q:"The power consumed by a resistor R carrying current I is ___", opts:["I²R","IR²","I/R","R/I²"], ans:0, exp:"P = I²R. This can also be written as P = V²/R or P = VI." },
+{ topic:'ELECTRICITY', q:"In a transformer, the ratio of secondary voltage to primary voltage equals ___", opts:["the ratio of primary turns to secondary turns","the ratio of secondary turns to primary turns","the ratio of primary current to secondary current","the ratio of secondary power to primary power"], ans:1, exp:"Vs/Vp = Ns/Np. Transformer equation: voltage ratio = turns ratio." },
+{ topic:'ELECTRICITY', q:"A capacitor stores energy in the form of ___", opts:["Kinetic energy","Magnetic field energy","Electric field energy","Chemical energy"], ans:2, exp:"A capacitor stores energy in the electric field between its plates. Energy = ½CV²." },
+{ topic:'ELECTRICITY', q:"Kirchhoff's Current Law (KCL) states that ___", opts:["Voltage is the same in all branches of a parallel circuit","The sum of currents entering a junction equals the sum of currents leaving it","Voltage around any loop sums to zero","Power is conserved"], ans:1, exp:"KCL: the algebraic sum of all currents at a junction equals zero — currents in = currents out." },
+{ topic:'ELECTRICITY', q:"Alternating current (AC) is preferred for long-distance transmission because ___", opts:["It is safer for household use","Its voltage can be easily stepped up (to reduce I²R losses) using transformers","It has a constant frequency","It does not produce heat losses"], ans:1, exp:"Transformers work only with AC. Stepping up voltage reduces current, which drastically reduces I²R power losses over long distances." },
+{ topic:'ELECTRICITY', q:"The EMF of a cell is best described as ___", opts:["The terminal voltage when current flows","The work done per unit charge by the cell to drive charge around the complete circuit","The internal resistance of the cell","The current delivered by the cell"], ans:1, exp:"EMF (electromotive force) is the work done per unit charge (J/C = V) by the cell source moving charge through the entire circuit including internal resistance." },
+{ topic:'ELECTRICITY', q:"Which of the following is the unit of electrical charge?", opts:["Ampere","Volt","Coulomb","Ohm"], ans:2, exp:"The SI unit of electric charge is the coulomb (C). 1 coulomb = 1 ampere × 1 second." },
+{ topic:'ELECTRICITY', q:"A fuse wire is made of material with a ___", opts:["Very high melting point","Low melting point and high resistance","High melting point and low resistance","Very high conductivity"], ans:1, exp:"Fuse wire has a low melting point and suitable resistance so it melts (breaks the circuit) when current exceeds the safe limit." },
+{ topic:'ELECTRICITY', q:"The unit of capacitance is the ___", opts:["Henry","Ohm","Farad","Coulomb"], ans:2, exp:"Capacitance is measured in farads (F). 1 farad = 1 coulomb per volt." },
+
+// MODERN PHYSICS (additional)
+{ topic:'MODERN PHYSICS', q:"The photoelectric effect is explained by ___", opts:["Wave theory of light","Quantum theory (photon model) of light","Electromagnetic induction","Interference of light"], ans:1, exp:"Einstein's quantum (photon) model explains the photoelectric effect — light consists of discrete photons with energy E = hf." },
+{ topic:'MODERN PHYSICS', q:"In the photoelectric effect, increasing the intensity of light (without changing frequency) ___", opts:["increases the maximum kinetic energy of emitted electrons","increases the number of emitted electrons only","has no effect on electron emission","decreases the work function"], ans:1, exp:"Greater intensity means more photons — more electrons are emitted — but KE max depends only on frequency, not intensity." },
+{ topic:'MODERN PHYSICS', q:"De Broglie's hypothesis states that all matter has a ___", opts:["Constant velocity","Associated wave (wavelength λ = h/mv)","Fixed frequency","Mass dependent on speed"], ans:1, exp:"De Broglie: every moving particle has an associated wavelength λ = h/p = h/(mv), demonstrating wave-particle duality." },
+{ topic:'MODERN PHYSICS', q:"Which particle in the atom has no charge?", opts:["Proton","Electron","Neutron","Positron"], ans:2, exp:"The neutron has zero electric charge, a mass approximately equal to the proton, and is found in the nucleus." },
+{ topic:'MODERN PHYSICS', q:"Nuclear fission involves ___", opts:["Combining light nuclei to form a heavier nucleus with energy release","Splitting a heavy nucleus into lighter nuclei with energy release","The emission of alpha particles only","The absorption of gamma rays"], ans:1, exp:"Nuclear fission: a heavy nucleus (e.g. ²³⁵U) splits into two lighter nuclei plus neutrons, releasing enormous energy (E=mc²)." },
+{ topic:'MODERN PHYSICS', q:"The half-life of a radioactive element is ___", opts:["The time for all atoms to decay","The time for half the atoms to decay","The average life of one atom","The time for activity to drop to zero"], ans:1, exp:"Half-life (T½) is the time taken for half the radioactive nuclei in a sample to undergo decay." },
+{ topic:'MODERN PHYSICS', q:"An n-type semiconductor is formed by doping a pure semiconductor with ___", opts:["A trivalent impurity (e.g. boron)","A pentavalent impurity (e.g. phosphorus)","A divalent impurity","A monovalent impurity"], ans:1, exp:"n-type: doping with pentavalent atoms (5 valence electrons) donates extra electrons as majority charge carriers." },
+{ topic:'MODERN PHYSICS', q:"A p-n junction diode allows current to flow easily in ___", opts:["Both directions","The reverse bias direction only","The forward bias direction only","Neither direction"], ans:2, exp:"A p-n junction diode conducts in forward bias (p connected to positive, n to negative) and blocks in reverse bias." },
+{ topic:'MODERN PHYSICS', q:"The Geiger–Müller tube is used to detect ___", opts:["Sound waves","Electromagnetic fields","Radioactive radiation","Temperature changes"], ans:2, exp:"The Geiger–Müller (GM) tube detects ionising radiation (alpha, beta, and gamma) by the ionisation of gas within the tube." },
+{ topic:'MODERN PHYSICS', q:"In nuclear reactions, Einstein's equation E = mc² shows that ___", opts:["Mass and energy are independent quantities","A small mass loss corresponds to a very large release of energy","Energy can be created from nothing","Speed of light varies in different media"], ans:1, exp:"E = mc²: a small mass (m) annihilated or lost corresponds to a very large energy release because c² (≈ 9×10¹⁶ m²/s²) is enormous." },
+
+// ── PHYSICS TOP-UP ───────────────────────────────────────────────────
+{ topic:'MECHANICS', q:"A ball of mass 2 kg is moving at 4 m/s. Its kinetic energy is ___", opts:["4 J","8 J","16 J","32 J"], ans:2, exp:"KE = ½mv² = ½ × 2 × 4² = ½ × 2 × 16 = 16 J." },
+{ topic:'MECHANICS', q:"The principle of moments states that for equilibrium, the sum of clockwise moments ___", opts:["is greater than anticlockwise moments","equals the sum of anticlockwise moments","is always zero","is less than anticlockwise moments"], ans:1, exp:"Principle of moments: for rotational equilibrium, total clockwise moment = total anticlockwise moment about the same pivot." },
+{ topic:'MECHANICS', q:"The gravitational potential energy of an object is given by ___", opts:["½mv²","mv","mgh","mg/h"], ans:2, exp:"GPE = mgh, where m = mass, g = gravitational field strength, h = height above the reference level." },
+{ topic:'HEAT', q:"The SI unit of heat energy is the ___", opts:["Calorie","Joule","Watt","Newton"], ans:1, exp:"The SI unit of energy (including heat energy) is the joule (J). 1 calorie = 4.18 J." },
+{ topic:'WAVES', q:"Which of the following is NOT a transverse wave?", opts:["Light","Microwaves","Sound waves in air","Water surface waves"], ans:2, exp:"Sound waves are longitudinal (compressions and rarefactions along the direction of travel), not transverse." },
+{ topic:'ELECTRICITY', q:"Ohm's Law states that at constant temperature, current through a conductor is ___", opts:["Inversely proportional to voltage","Directly proportional to voltage across it","Proportional to resistance squared","Independent of voltage"], ans:1, exp:"Ohm's Law: V = IR (at constant temperature). Current I is directly proportional to the applied voltage V." },
+{ topic:'OPTICS', q:"The critical angle for a medium is the angle of incidence (in the denser medium) beyond which ___", opts:["Refraction is complete","Reflection disappears","Total internal reflection occurs","Light slows to zero"], ans:2, exp:"When the angle of incidence exceeds the critical angle, all light is totally internally reflected back into the denser medium." },
 ];
 
 // =====================================================================
@@ -2056,7 +2382,80 @@ const mathQuestionsRaw = [
 
 { topic:'STATISTICS', q:"A container has 30 gold, 22 silver, and 18 bronze medals. Probability of NOT selecting gold is ___", opts:["4/7","3/7","11/35","9/35"], ans:0, exp:"P(not gold) = (22+18)/(30+22+18) = 40/70 = 4/7." },
 
-{ topic:'STATISTICS', q:"If ⁿP₃ − 6(ⁿC₄) = 0, find the value of n.", opts:["6","5","8","7"], ans:3, exp:"ⁿP₃ = n(n−1)(n−2). ⁿC₄ = n(n−1)(n−2)(n−3)/24. Setting equal: n(n−1)(n−2) = 6×n(n−1)(n−2)(n−3)/24 → 24 = 6(n−3) → n−3 = 4 → n = 7." }, 
+{ topic:'STATISTICS', q:"If ⁿP₃ − 6(ⁿC₄) = 0, find the value of n.", opts:["6","5","8","7"], ans:3, exp:"ⁿP₃ = n(n−1)(n−2). ⁿC₄ = n(n−1)(n−2)(n−3)/24. Setting equal: n(n−1)(n−2) = 6×n(n−1)(n−2)(n−3)/24 → 24 = 6(n−3) → n−3 = 4 → n = 7." },
+
+// ── ADDITIONAL MATHEMATICS QUESTIONS ────────────────────────────────
+
+// NUMBER & NUMERATION (additional)
+{ topic:'NUMBER & NUMERATION', q:"Express 0.00562 in standard form.", opts:["5.62×10⁻³","5.62×10⁻²","0.562×10⁻²","56.2×10⁻⁴"], ans:0, exp:"0.00562 = 5.62×10⁻³ in standard form (one digit before the decimal point)." },
+{ topic:'NUMBER & NUMERATION', q:"Evaluate: 27⁻²/³ × 16¹/⁴", opts:["2/3","4/9","1/9","2/9"], ans:3, exp:"27⁻²/³ = (27¹/³)⁻² = 3⁻² = 1/9. 16¹/⁴ = 2. Result = (1/9)×2 = 2/9." },
+{ topic:'NUMBER & NUMERATION', q:"What is the HCF of 36, 48, and 60?", opts:["6","12","4","24"], ans:1, exp:"Prime factorisation: 36=2²×3², 48=2⁴×3, 60=2²×3×5. HCF = 2²×3 = 12." },
+{ topic:'NUMBER & NUMERATION', q:"The LCM of 12, 15, and 20 is ___", opts:["30","60","120","180"], ans:1, exp:"LCM: 12=2²×3, 15=3×5, 20=2²×5. LCM = 2²×3×5 = 60." },
+{ topic:'NUMBER & NUMERATION', q:"Convert 110₂ to base 10.", opts:["4","6","5","8"], ans:1, exp:"110₂ = 1×4 + 1×2 + 0×1 = 4+2+0 = 6₁₀." },
+{ topic:'NUMBER & NUMERATION', q:"If log₁₀(2) = 0.3010 and log₁₀(7) = 0.8451, find log₁₀(14).", opts:["0.8451","1.1461","1.0461","0.5441"], ans:1, exp:"log₁₀(14) = log₁₀(2×7) = log₁₀(2) + log₁₀(7) = 0.3010 + 0.8451 = 1.1461." },
+{ topic:'NUMBER & NUMERATION', q:"Simplify: (2³ × 4²) ÷ 2⁵", opts:["2","4","8","16"], ans:1, exp:"2³ × 4² = 2³ × 2⁴ = 2⁷. 2⁷ ÷ 2⁵ = 2² = 4." },
+{ topic:'NUMBER & NUMERATION', q:"A man earns ₦180,000 per annum. He spends 30% on food. How much does he save annually if he also spends 20% on rent?", opts:["₦54,000","₦90,000","₦36,000","₦72,000"], ans:1, exp:"Spent: 30%+20% = 50%. Saved = 50% of 180,000 = ₦90,000." },
+
+// ALGEBRA (additional)
+{ topic:'ALGEBRA', q:"Solve the equation x² − 7x + 12 = 0.", opts:["x = 3 or x = 4","x = −3 or x = −4","x = 2 or x = 6","x = −2 or x = 6"], ans:0, exp:"Factorise: (x−3)(x−4) = 0 → x = 3 or x = 4." },
+{ topic:'ALGEBRA', q:"Find the sum of the roots of 2x² − 5x + 3 = 0.", opts:["5/2","−5/2","3/2","−3/2"], ans:0, exp:"Sum of roots = −b/a = −(−5)/2 = 5/2." },
+{ topic:'ALGEBRA', q:"Find the product of the roots of 2x² − 5x + 3 = 0.", opts:["5/2","3/2","−3/2","3"], ans:1, exp:"Product of roots = c/a = 3/2." },
+{ topic:'ALGEBRA', q:"If f(x) = x² − 3x + 2, find f(3).", opts:["2","4","0","11"], ans:0, exp:"f(3) = 9 − 9 + 2 = 2." },
+{ topic:'ALGEBRA', q:"Simplify: (a²b)³ / (a³b²)", opts:["a³b","a³b²","a³b³","a⁶b"], ans:0, exp:"(a²b)³ = a⁶b³. Divide: a⁶b³/(a³b²) = a³b." },
+{ topic:'ALGEBRA', q:"The nth term of an AP is 3n + 2. Find the 10th term.", opts:["30","32","28","35"], ans:1, exp:"Tₙ = 3n + 2. T₁₀ = 3(10) + 2 = 32." },
+{ topic:'ALGEBRA', q:"Find the 5th term of the GP 2, 6, 18, …", opts:["162","54","486","324"], ans:0, exp:"a=2, r=3. T₅ = ar⁴ = 2×81 = 162." },
+{ topic:'ALGEBRA', q:"Solve for x: 2ˣ = 32", opts:["4","5","6","3"], ans:1, exp:"2ˣ = 2⁵ → x = 5." },
+{ topic:'ALGEBRA', q:"The discriminant of ax² + bx + c = 0 is ___", opts:["b² − 4ac","4ac − b²","√(b² − 4ac)","b/2a"], ans:0, exp:"The discriminant Δ = b² − 4ac. If Δ > 0, two real roots; Δ = 0, one real root; Δ < 0, no real roots." },
+{ topic:'ALGEBRA', q:"If the 3rd term of an AP is 7 and the 7th term is 19, find the common difference.", opts:["2","3","4","6"], ans:1, exp:"T₃ = a+2d = 7; T₇ = a+6d = 19. Subtracting: 4d = 12 → d = 3." },
+{ topic:'ALGEBRA', q:"Expand (2x + y)².", opts:["4x² + 4xy + y²","4x² + y²","4x² + 2xy + y²","2x² + 4xy + y²"], ans:0, exp:"(2x+y)² = 4x² + 2(2x)(y) + y² = 4x² + 4xy + y²." },
+{ topic:'ALGEBRA', q:"Simplify: (x² − 9) / (x − 3)", opts:["x − 3","x + 3","x² − 3","x(x−3)"], ans:1, exp:"x² − 9 = (x−3)(x+3). Divide by (x−3) → (x+3)." },
+
+// GEOMETRY & TRIGONOMETRY (additional)
+{ topic:'GEOMETRY', q:"The exterior angle of a regular hexagon is ___", opts:["30°","45°","60°","90°"], ans:2, exp:"Exterior angle of a regular polygon = 360°/n. For n=6: 360/6 = 60°." },
+{ topic:'GEOMETRY', q:"Sum of interior angles of a polygon with 8 sides is ___", opts:["720°","900°","1080°","1260°"], ans:2, exp:"Sum of interior angles = (n−2)×180° = (8−2)×180 = 6×180 = 1080°." },
+{ topic:'GEOMETRY', q:"Find the value of sin 30° + cos 60°.", opts:["0","1","√3/2","√2"], ans:1, exp:"sin 30° = 1/2. cos 60° = 1/2. Sum = 1/2 + 1/2 = 1." },
+{ topic:'GEOMETRY', q:"Find the area of a triangle with base 10 cm and height 8 cm.", opts:["40 cm²","80 cm²","18 cm²","20 cm²"], ans:0, exp:"Area = ½ × base × height = ½ × 10 × 8 = 40 cm²." },
+{ topic:'GEOMETRY', q:"The perpendicular from the centre of a circle to a chord ___", opts:["Bisects the chord","Doubles the chord","Is parallel to the chord","Extends the chord"], ans:0, exp:"A perpendicular from the centre to a chord bisects the chord (a standard circle theorem)." },
+{ topic:'GEOMETRY', q:"An angle inscribed in a semicircle is ___", opts:["60°","45°","90°","180°"], ans:2, exp:"By Thales' theorem, any angle inscribed in a semicircle (subtended by a diameter) is a right angle (90°)." },
+{ topic:'GEOMETRY', q:"The distance between points A(1, 2) and B(4, 6) is ___", opts:["3","5","7","4"], ans:1, exp:"d = √((4−1)² + (6−2)²) = √(9+16) = √25 = 5." },
+{ topic:'GEOMETRY', q:"The gradient (slope) of a line passing through (2, 3) and (6, 11) is ___", opts:["1","3","2","4"], ans:2, exp:"m = (11−3)/(6−2) = 8/4 = 2." },
+{ topic:'GEOMETRY', q:"The equation of a line with gradient 3 passing through (0, −2) is ___", opts:["y = 3x + 2","y = 3x − 2","y = −3x + 2","y = 3x"], ans:1, exp:"y = mx + c = 3x + (−2) = 3x − 2." },
+{ topic:'GEOMETRY', q:"If sin θ = 3/5, find cos θ (assuming θ is acute).", opts:["4/5","3/4","5/4","5/3"], ans:0, exp:"Using Pythagoras: cos θ = √(1 − sin²θ) = √(1 − 9/25) = √(16/25) = 4/5." },
+{ topic:'GEOMETRY', q:"Find the area of a circle with radius 7 cm. (Take π = 22/7)", opts:["44 cm²","154 cm²","49 cm²","22 cm²"], ans:1, exp:"A = πr² = (22/7) × 7² = (22/7) × 49 = 22 × 7 = 154 cm²." },
+{ topic:'GEOMETRY', q:"The volume of a cone with radius r and height h is ___", opts:["πr²h","2πrh","(1/3)πr²h","(2/3)πr³"], ans:2, exp:"Volume of cone = (1/3)πr²h." },
+{ topic:'GEOMETRY', q:"A circle has circumference 44 cm. Its radius is ___ (π = 22/7)", opts:["7 cm","14 cm","22 cm","3.5 cm"], ans:0, exp:"C = 2πr → 44 = 2 × (22/7) × r → r = 44 × 7 / 44 = 7 cm." },
+
+// CALCULUS (additional)
+{ topic:'CALCULUS', q:"Find dy/dx if y = 5x³ − 2x² + 7x − 4.", opts:["15x² − 4x + 7","15x² − 4x","5x³ − 2x","15x² + 7"], ans:0, exp:"dy/dx = 15x² − 4x + 7 (differentiating each term)." },
+{ topic:'CALCULUS', q:"The derivative of a constant is ___", opts:["1","0","The constant itself","Undefined"], ans:1, exp:"The derivative of any constant is zero — constants have no rate of change." },
+{ topic:'CALCULUS', q:"Find the maximum value of y = −x² + 4x − 1.", opts:["3","4","5","7"], ans:0, exp:"dy/dx = −2x+4 = 0 → x=2. y(2) = −4+8−1 = 3. (d²y/dx² = −2 < 0 → maximum)." },
+{ topic:'CALCULUS', q:"Evaluate ∫ (3x² + 2x) dx.", opts:["x³ + x² + C","6x + 2 + C","3x³ + 2x + C","x³ + x + C"], ans:0, exp:"∫(3x² + 2x)dx = x³ + x² + C." },
+{ topic:'CALCULUS', q:"Find the value of x at the turning point of y = x² − 6x + 8.", opts:["3","6","2","8"], ans:0, exp:"dy/dx = 2x − 6 = 0 → x = 3." },
+{ topic:'CALCULUS', q:"The gradient function of y = x⁴ − 3x + 5 at x = 1 is ___", opts:["1","4","5","2"], ans:0, exp:"dy/dx = 4x³ − 3. At x=1: 4(1)³ − 3 = 4 − 3 = 1." },
+{ topic:'CALCULUS', q:"Evaluate ∫₀¹ 3x² dx.", opts:["1","3","6","0"], ans:0, exp:"∫₀¹ 3x² dx = [x³]₀¹ = 1³ − 0³ = 1." },
+{ topic:'CALCULUS', q:"The velocity v of a particle is v = 3t² − 2t. Its acceleration at t = 2 is ___", opts:["8","10","12","16"], ans:1, exp:"a = dv/dt = 6t − 2. At t=2: 12 − 2 = 10." },
+
+// STATISTICS (additional)
+{ topic:'STATISTICS', q:"Find the mean of 5, 8, 12, 15, 20.", opts:["12","13","10","15"], ans:0, exp:"Sum = 60. Mean = 60/5 = 12." },
+{ topic:'STATISTICS', q:"Find the median of 3, 7, 5, 9, 11, 2, 8.", opts:["7","5","8","9"], ans:0, exp:"Sort: 2, 3, 5, 7, 8, 9, 11. Median (middle value, n=7) = 7." },
+{ topic:'STATISTICS', q:"The mode of 2, 3, 3, 4, 5, 5, 5, 6, 6 is ___", opts:["3","5","6","4"], ans:1, exp:"5 appears 3 times — more than any other value. Mode = 5." },
+{ topic:'STATISTICS', q:"In a class of 30 students, if the probability of a student being left-handed is 1/5, how many students are left-handed?", opts:["5","6","4","8"], ans:1, exp:"Expected number = 30 × 1/5 = 6 students." },
+{ topic:'STATISTICS', q:"A bag has 4 red and 6 blue balls. The probability of picking a red ball is ___", opts:["2/5","3/5","1/4","4/6"], ans:0, exp:"P(red) = 4/(4+6) = 4/10 = 2/5." },
+{ topic:'STATISTICS', q:"If P(A) = 0.3 and P(B) = 0.5 and A and B are mutually exclusive, find P(A∪B).", opts:["0.15","0.8","0.2","1.0"], ans:1, exp:"P(A∪B) = P(A) + P(B) = 0.3 + 0.5 = 0.8 (since mutually exclusive events have no overlap)." },
+{ topic:'STATISTICS', q:"The variance of a set of data is 16. The standard deviation is ___", opts:["256","8","4","2"], ans:2, exp:"Standard deviation = √variance = √16 = 4." },
+{ topic:'STATISTICS', q:"In how many ways can 4 students be arranged in a row?", opts:["4","8","16","24"], ans:3, exp:"4! = 4 × 3 × 2 × 1 = 24 arrangements." },
+{ topic:'STATISTICS', q:"Find ⁵C₃.", opts:["6","10","15","20"], ans:1, exp:"⁵C₃ = 5!/(3!2!) = (5×4)/(2×1) = 10." },
+{ topic:'STATISTICS', q:"If the mean of x, 2x, 3x is 10, find x.", opts:["2","5","3","10"], ans:1, exp:"Mean = (x+2x+3x)/3 = 6x/3 = 2x = 10 → x = 5." },
+{ topic:'STATISTICS', q:"A pie chart shows that education costs 90°. If total expenditure is ₦240,000, education costs ___", opts:["₦60,000","₦90,000","₦30,000","₦45,000"], ans:0, exp:"Education fraction = 90°/360° = 1/4. Cost = (1/4) × 240,000 = ₦60,000." },
+{ topic:'STATISTICS', q:"The probability that two independent events A and B both occur is ___", opts:["P(A) + P(B)","P(A) × P(B)","P(A) − P(B)","P(A) / P(B)"], ans:1, exp:"For independent events, P(A and B) = P(A) × P(B) (multiplication rule)." },
+
+// ── MATHEMATICS TOP-UP ───────────────────────────────────────────────
+{ topic:'NUMBER & NUMERATION', q:"Simplify: log 8 + log 2 − log 4 (all base 10).", opts:["log 4","log 6","log 2","log 8"], ans:0, exp:"log 8 + log 2 − log 4 = log(8×2/4) = log(4)." },
+{ topic:'ALGEBRA', q:"Find the value of x if 3(2x − 1) = 2(x + 3).", opts:["2","−2","9/4","3/2"], ans:2, exp:"6x − 3 = 2x + 6 → 4x = 9 → x = 9/4." },
+{ topic:'ALGEBRA', q:"The quadratic equation whose roots are 2 and −5 is ___", opts:["x² + 3x − 10 = 0","x² − 3x − 10 = 0","x² + 7x + 10 = 0","x² − 7x − 10 = 0"], ans:0, exp:"(x−2)(x+5) = x² + 5x − 2x − 10 = x² + 3x − 10 = 0." },
+{ topic:'GEOMETRY', q:"Two angles of a triangle are 55° and 85°. The third angle is ___", opts:["40°","45°","50°","60°"], ans:0, exp:"Angle sum in a triangle = 180°. Third angle = 180 − 55 − 85 = 40°." },
+{ topic:'CALCULUS', q:"Find the integral of x⁴ with respect to x.", opts:["4x³","x⁵/5 + C","4x⁵ + C","x³/3 + C"], ans:1, exp:"∫x⁴ dx = x⁵/5 + C (add 1 to the power and divide by the new power)." },
+{ topic:'STATISTICS', q:"The interquartile range of a dataset is ___", opts:["Q3 − Q1","Q2 − Q1","Q3 + Q1","(Q3 − Q1)/2"], ans:0, exp:"Interquartile range (IQR) = upper quartile (Q3) − lower quartile (Q1)." },
 ];
 
 // ═══════════════════════════════════════════════════════════════════
@@ -2126,11 +2525,51 @@ function getResult(subj, set) {
 }
 
 // ═══════════════════════════════════════════════════════════════════
-// SET SPLITTER — Splits a shuffled pool into 3 equal, non-overlapping sets
+// SEEDED PRNG — Mulberry32 (deterministic, fixed seed per subject)
+// This guarantees Set A always contains the SAME questions, Set B the
+// same different questions, and Set C the same third group — forever.
+// The order within each set is still randomised per student session
+// so no two students see questions in the exact same sequence.
 // ═══════════════════════════════════════════════════════════════════
-function splitIntoSets(pool, perSet) {
-  // Deterministic shuffle using subject+date seed so sets are stable per day
-  const shuffled = [...pool].sort(() => Math.random() - 0.5);
+function mulberry32(seed) {
+  return function() {
+    seed |= 0; seed = seed + 0x6D2B79F5 | 0;
+    let t = Math.imul(seed ^ seed >>> 15, 1 | seed);
+    t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t;
+    return ((t ^ t >>> 14) >>> 0) / 4294967296;
+  };
+}
+
+function strToSeed(str) {
+  // FNV-1a 32-bit hash — deterministic string → integer
+  let h = 2166136261;
+  for (let i = 0; i < str.length; i++) {
+    h ^= str.charCodeAt(i);
+    h = Math.imul(h, 16777619);
+  }
+  return h >>> 0;
+}
+
+function seededShuffle(arr, rng) {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(rng() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+// ═══════════════════════════════════════════════════════════════════
+// SET SPLITTER — Fixed, permanent sets using deterministic seeded shuffle.
+// The seed is derived from the subject key + a fixed app salt, so the
+// same subject always produces the same 3 non-overlapping question sets.
+// ═══════════════════════════════════════════════════════════════════
+const APP_SALT = 'SmartPrepCBT_v2_MrsAdesanya';
+
+function splitIntoSets(pool, perSet, subjKey) {
+  const seed = strToSeed(APP_SALT + '_' + subjKey);
+  const rng  = mulberry32(seed);
+  const shuffled = seededShuffle(pool, rng);
   return {
     A: shuffled.slice(0, perSet),
     B: shuffled.slice(perSet, perSet * 2),
@@ -2138,20 +2577,25 @@ function splitIntoSets(pool, perSet) {
   };
 }
 
-// Cache the splits so they don't re-randomise during a session
+// Cache the splits — computed once per page load, always the same result
 const _setCache = {};
 function getSetsForSubject(subjKey) {
   if (!_setCache[subjKey]) {
     const cfg = SUBJECTS[subjKey];
     const pool = cfg.pool();
     const needed = cfg.totalPerSet * 3;
-    // If pool is too small, repeat/cycle to fill
+
+    // If pool is too small, extend it deterministically (same order each time)
     let filled = [...pool];
-    while (filled.length < needed) {
-      filled = filled.concat([...pool].sort(() => Math.random() - 0.5));
+    if (filled.length < needed) {
+      const seed2 = strToSeed(APP_SALT + '_ext_' + subjKey);
+      const rng2  = mulberry32(seed2);
+      const extra = seededShuffle(pool, rng2);
+      filled = filled.concat(extra);
+      filled = filled.slice(0, needed);
     }
-    filled = filled.slice(0, needed);
-    _setCache[subjKey] = splitIntoSets(filled, cfg.totalPerSet);
+
+    _setCache[subjKey] = splitIntoSets(filled, cfg.totalPerSet, subjKey);
   }
   return _setCache[subjKey];
 }
